@@ -23,13 +23,22 @@ public class Gun : MonoBehaviour
     private GameObject impactFX;
 
     private Camera mainCamera;
+    private Animator animator;
     private float nextShootTime = 0f;
     private int currentAmmo;
     private bool isReloading = false;
 
+    private void OnEnable()
+    {
+        //these two fix the bug where if we switch the weapon during reloading you can't shoot anymore
+        isReloading = false;
+        animator.SetBool("isReloadingAnimation", false);
+    }
+
     private void Awake()
     {
         mainCamera = Camera.main;
+        animator = FindObjectOfType<WeaponSwitcher>().gameObject.GetComponent<Animator>();
     }
 
     private void Start()
@@ -58,10 +67,15 @@ public class Gun : MonoBehaviour
 
     private IEnumerator ReloadRoutine()
     {
-        //add animation 5:45 video
         isReloading = true;
-        Debug.Log("Reloading..");
-        yield return new WaitForSeconds(reloadTime);
+        animator.SetBool("isReloadingAnimation", true);
+
+        yield return new WaitForSeconds(reloadTime - .25f);
+
+        animator.SetBool("isReloadingAnimation", false);
+
+        yield return new WaitForSeconds(.25f);
+
         currentAmmo = maxAmmo;
         isReloading = false;
     }
