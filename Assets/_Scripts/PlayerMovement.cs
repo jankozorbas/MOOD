@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private CharacterController characterController;
-    private Vector3 currentVelocity = Vector3.zero;
-    private bool isGrounded;
-
     [Header("Player Stats")]
     [SerializeField]
     private float moveSpeed = 10f;
@@ -22,6 +18,10 @@ public class PlayerMovement : MonoBehaviour
     private float groundRadius = .5f;
     [SerializeField]
     private LayerMask groundMask;
+
+    private CharacterController characterController;
+    private Vector3 currentVelocity = Vector3.zero;
+    private bool isGrounded;
 
     // ADD COYOTE TIME
 
