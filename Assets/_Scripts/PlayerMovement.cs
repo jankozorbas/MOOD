@@ -6,11 +6,16 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Player Stats")]
     [SerializeField]
-    private float moveSpeed = 10f;
+    private float runSpeed = 7f;
+    [SerializeField]
+    private float crouchSpeed = 4f;
     [SerializeField]
     private float jumpHeight = 5f;
     [SerializeField]
     private float gravity = -9.81f;
+    [SerializeField]
+    private float crouchHeight = 1.3f;
+
     [Header("Ground Variables")]
     [SerializeField]
     private Transform groundCheck;
@@ -22,12 +27,17 @@ public class PlayerMovement : MonoBehaviour
     private CharacterController characterController;
     private Vector3 currentVelocity = Vector3.zero;
     private bool isGrounded;
+    private bool isCrouching = false;
+    private float originalHeight;
+    private float moveSpeed;
 
     // ADD COYOTE TIME
 
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
+        originalHeight = characterController.height;
+        moveSpeed = runSpeed;
     }
 
     private void Update()
@@ -36,6 +46,7 @@ public class PlayerMovement : MonoBehaviour
         PlayerMove();
         PlayerJump();
         ApplyGravity();
+        Crouch();
     }
 
     private void CheckIsGrounded()
@@ -70,5 +81,24 @@ public class PlayerMovement : MonoBehaviour
     {
         currentVelocity.y += gravity * Time.deltaTime;
         characterController.Move(currentVelocity * Time.deltaTime); //second deltaTime because of the formula: delta y = 1/2g * t^2
+    }
+
+    private void Crouch()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            isCrouching = !isCrouching;
+
+            if (isCrouching)
+            {
+                characterController.height = crouchHeight;
+                moveSpeed = crouchSpeed;
+            }   
+            else if (!isCrouching)
+            {
+                characterController.height = originalHeight;
+                moveSpeed = runSpeed;
+            }  
+        }
     }
 }

@@ -16,6 +16,9 @@ public class Gun : MonoBehaviour
     private int maxAmmo = 30;
     [SerializeField]
     private float reloadTime = 2f;
+    [SerializeField]
+    private bool isAutomatic = false;
+
     [Header("Visual FX")]
     [SerializeField]
     private ParticleSystem muzzleFlashFX;
@@ -30,7 +33,7 @@ public class Gun : MonoBehaviour
 
     private void OnEnable()
     {
-        //these two fix the bug where if we switch the weapon during reloading you can't shoot anymore
+        // these two fix the bug where if we switch the weapon during reloading you can't shoot anymore
         isReloading = false;
         animator.SetBool("isReloadingAnimation", false);
     }
@@ -43,26 +46,39 @@ public class Gun : MonoBehaviour
 
     private void Start()
     {
-        currentAmmo = maxAmmo; //change this with the ammo you want to start the game with
+        currentAmmo = maxAmmo; // change this with the ammo you want to start the game with
     }
 
     private void Update()
     {
         if (isReloading) return;
 
-        if (currentAmmo <= 0) //can reload only if we don't have ammo, add reloading whenever?
+        if (currentAmmo < maxAmmo) // can reload only if we don't have ammo, add reloading whenever?
         {
             if (Input.GetKeyDown(KeyCode.R))
                 StartCoroutine(ReloadRoutine());
 
-            return;
+            if (currentAmmo <= 0)
+                return;
         }
 
-        if (Input.GetButton("Fire1") && Time.time >= nextShootTime) //getbuttondown for semi automatic getbutton for automatic weapons
+        // SHOOTING BEHAVIOR BASED ON IF THE GUN IS AUTOMATIC OR SEMI AUTOMATIC
+        if (isAutomatic)
         {
-            nextShootTime = Time.time + 1f / fireRate; //the bigger the fire rate the less time between shots
-            Shoot();
+            if (Input.GetButton("Fire1") && Time.time >= nextShootTime) 
+            {
+                nextShootTime = Time.time + 1f / fireRate; // the bigger the fire rate the less time between shots
+                Shoot();
+            }
         }
+        else
+        {
+            if (Input.GetButtonDown("Fire1") && Time.time >= nextShootTime)
+            {
+                nextShootTime = Time.time + 1f / fireRate; // the bigger the fire rate the less time between shots
+                Shoot();
+            }
+        }  
     }
 
     private IEnumerator ReloadRoutine()

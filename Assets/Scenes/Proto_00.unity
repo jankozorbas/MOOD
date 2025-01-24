@@ -956,10 +956,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 5
   range: 50
-  fireRate: 5
+  fireRate: 7.5
   impactForce: 50
   maxAmmo: 15
   reloadTime: 1.3
+  isAutomatic: 0
   muzzleFlashFX: {fileID: 341152319}
   impactFX: {fileID: 7458544018217506191, guid: 716e7bd78d41c5e4aa026e347c5fbc70, type: 3}
 --- !u!1 &963194225
@@ -1143,8 +1144,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e254bbe6ff0570d4684db266c1a2902e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
-  jumpHeight: 2
+  moveSpeed: 7
+  jumpHeight: 1.7
   gravity: -29.43
   groundCheck: {fileID: 225942537}
   groundRadius: 0.5
@@ -2105,6 +2106,7 @@ MonoBehaviour:
   impactForce: 100
   maxAmmo: 30
   reloadTime: 2
+  isAutomatic: 1
   muzzleFlashFX: {fileID: 618830853}
   impactFX: {fileID: 7458544018217506191, guid: 716e7bd78d41c5e4aa026e347c5fbc70, type: 3}
 --- !u!1 &1958317420
