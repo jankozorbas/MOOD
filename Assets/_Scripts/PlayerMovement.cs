@@ -4,32 +4,28 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [Header("Player Stats")]
-    [SerializeField]
-    private float runSpeed = 7f;
-    [SerializeField]
-    private float crouchSpeed = 4f;
-    [SerializeField]
-    private float jumpHeight = 5f;
-    [SerializeField]
-    private float gravity = -9.81f;
-    [SerializeField]
-    private float crouchHeight = 1.3f;
+    [Header("Player Settings")]
+    [Space(10)]
+    [SerializeField] private float runSpeed = 7f;
+    [SerializeField] private float crouchSpeed = 4f;
+    [SerializeField] private float jumpHeight = 5f;
+    [SerializeField] private float gravity = -9.81f;
+    [SerializeField] private float crouchHeight = 1.3f;
 
-    [Header("Ground Variables")]
-    [SerializeField]
-    private Transform groundCheck;
-    [SerializeField]
-    private float groundRadius = .5f;
-    [SerializeField]
-    private LayerMask groundMask;
+    [Header("Ground Settings")]
+    [Space(10)]
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private float groundRadius = .5f;
+    [SerializeField] private LayerMask groundMask;
+
+    [HideInInspector] public bool isGrounded;
+
+    public float moveSpeed;
 
     private CharacterController characterController;
     private Vector3 currentVelocity = Vector3.zero;
-    private bool isGrounded;
     private bool isCrouching = false;
     private float originalHeight;
-    private float moveSpeed;
 
     // ADD COYOTE TIME
 

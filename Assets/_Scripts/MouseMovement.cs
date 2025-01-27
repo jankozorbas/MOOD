@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class MouseMovement : MonoBehaviour
 {
+    [SerializeField] private float mouseSensitivity = 100f;
+
     private Transform player;
     private float cameraRotation = 0f;
-
-    [SerializeField]
-    private float mouseSensitivity = 100f;
 
     private void Awake()
     {

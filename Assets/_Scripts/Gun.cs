@@ -3,27 +3,20 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
-    [Header("Gun Stats")]
-    [SerializeField]
-    private float damage = 10f;
-    [SerializeField]
-    private float range = 100f;
-    [SerializeField]
-    private float fireRate = 10f;
-    [SerializeField]
-    private float impactForce = 100f;
-    [SerializeField]
-    private int maxAmmo = 30;
-    [SerializeField]
-    private float reloadTime = 2f;
-    [SerializeField]
-    private bool isAutomatic = false;
+    [Header("Gun Settings")]
+    [Space(10)]
+    [SerializeField] private float damage = 10f;
+    [SerializeField] private float range = 100f;
+    [SerializeField] private float fireRate = 10f;
+    [SerializeField] private float impactForce = 100f;
+    [SerializeField] private int maxAmmo = 30;
+    [SerializeField] private float reloadTime = 2f;
+    [SerializeField] private bool isAutomatic = false;
 
     [Header("Visual FX")]
-    [SerializeField]
-    private ParticleSystem muzzleFlashFX;
-    [SerializeField]
-    private GameObject impactFX;
+    [Space(10)]
+    [SerializeField] private ParticleSystem muzzleFlashFX;
+    [SerializeField] private GameObject impactFX;
 
     private Camera mainCamera;
     private Animator animator;
@@ -36,12 +29,13 @@ public class Gun : MonoBehaviour
         // these two fix the bug where if we switch the weapon during reloading you can't shoot anymore
         isReloading = false;
         animator.SetBool("isReloadingAnimation", false);
+        animator.enabled = false;
     }
 
     private void Awake()
     {
         mainCamera = Camera.main;
-        animator = FindObjectOfType<WeaponSwitcher>().gameObject.GetComponent<Animator>();
+        animator = FindObjectOfType<GunSwitcher>().gameObject.GetComponent<Animator>();
     }
 
     private void Start()
@@ -84,6 +78,7 @@ public class Gun : MonoBehaviour
     private IEnumerator ReloadRoutine()
     {
         isReloading = true;
+        animator.enabled = true;
         animator.SetBool("isReloadingAnimation", true);
 
         yield return new WaitForSeconds(reloadTime - .25f);
@@ -93,6 +88,7 @@ public class Gun : MonoBehaviour
         yield return new WaitForSeconds(.25f);
 
         currentAmmo = maxAmmo;
+        animator.enabled = false;
         isReloading = false;
     }
 
