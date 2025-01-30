@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GunMovement : MonoBehaviour
 {
+    // https://www.youtube.com/watch?v=DR4fTllQnXg I used this tutorial to make this happen, had to adjust some things but the idea comes from here.
+
     [Header("Settings")]
     [Space(10)]
     [SerializeField] private bool shouldSwing = true;
@@ -16,7 +18,6 @@ public class GunMovement : MonoBehaviour
     [Space(10)]
     [Header("Swing Settings")]
     [Space(10)]
-    [SerializeField] private float swingMultiplier = 1f;
     [SerializeField] private float step = .01f;
     [SerializeField] private float maxStepDistance = .06f;
     private Vector3 swingPosition;

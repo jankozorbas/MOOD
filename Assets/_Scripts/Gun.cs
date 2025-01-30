@@ -45,6 +45,12 @@ public class Gun : MonoBehaviour
 
     private void Update()
     {
+        Reloading();
+        Shooting();
+    }
+
+    private void Reloading()
+    {
         if (isReloading) return;
 
         if (currentAmmo < maxAmmo) // can reload only if we don't have ammo, add reloading whenever?
@@ -55,11 +61,14 @@ public class Gun : MonoBehaviour
             if (currentAmmo <= 0)
                 return;
         }
+    }
 
+    private void Shooting()
+    {
         // SHOOTING BEHAVIOR BASED ON IF THE GUN IS AUTOMATIC OR SEMI AUTOMATIC
         if (isAutomatic)
         {
-            if (Input.GetButton("Fire1") && Time.time >= nextShootTime) 
+            if (Input.GetButton("Fire1") && Time.time >= nextShootTime)
             {
                 nextShootTime = Time.time + 1f / fireRate; // the bigger the fire rate the less time between shots
                 Shoot();
@@ -72,7 +81,7 @@ public class Gun : MonoBehaviour
                 nextShootTime = Time.time + 1f / fireRate; // the bigger the fire rate the less time between shots
                 Shoot();
             }
-        }  
+        }
     }
 
     private IEnumerator ReloadRoutine()
