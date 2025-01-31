@@ -41,6 +41,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private CharacterStance playerStanceCrouching;
     [SerializeField] private Transform feet;
     [SerializeField] private float stanceCheckErrorMargin = .05f;
+    [SerializeField] private bool isToggle = false;
 
     private PlayerStance playerStance;
     
@@ -118,7 +119,34 @@ public class PlayerMovement : MonoBehaviour
 
     private void Crouch()
     {
-        if (Input.GetKeyDown(KeyCode.LeftControl))
+        if (isToggle)
+        {
+            if (Input.GetKeyDown(KeyCode.LeftControl))
+            {
+                if (playerStance == PlayerStance.Standing)
+                {
+                    if (StanceCheck(playerStanceCrouching.stanceCollider.height))
+                        return;
+
+                    playerStance = PlayerStance.Crouching;
+                    canJump = false;
+                    moveSpeed = crouchSpeed;
+                }
+                else if (playerStance == PlayerStance.Crouching)
+                {
+                    if (StanceCheck(playerStanceStanding.stanceCollider.height))
+                        return;
+
+                    playerStance = PlayerStance.Standing;
+                    canJump = true;
+                    moveSpeed = runSpeed;
+                }
+            }
+
+            return;
+        }
+
+        if (Input.GetKey(KeyCode.LeftControl))
         {
             if (playerStance == PlayerStance.Standing)
             {
@@ -129,15 +157,19 @@ public class PlayerMovement : MonoBehaviour
                 canJump = false;
                 moveSpeed = crouchSpeed;
             }
-            else if (playerStance == PlayerStance.Crouching)
+        }
+
+        if (Input.GetKeyUp(KeyCode.LeftControl))
+        {
+            if (playerStance == PlayerStance.Crouching)
             {
                 if (StanceCheck(playerStanceStanding.stanceCollider.height))
                     return;
-                
+
                 playerStance = PlayerStance.Standing;
                 canJump = true;
                 moveSpeed = runSpeed;
-            } 
+            }
         }
     }
 

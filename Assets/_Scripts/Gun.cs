@@ -12,14 +12,32 @@ public class Gun : MonoBehaviour
     [SerializeField] private int maxAmmo = 30;
     [SerializeField] private float reloadTime = 2f;
     [SerializeField] private bool isAutomatic = false;
-
+    [Space(5)]
     [Header("Visual FX")]
     [Space(10)]
     [SerializeField] private ParticleSystem muzzleFlashFX;
     [SerializeField] private GameObject impactFX;
+    [Space(5)]
+    [Header("Recoil Settings")]
+    [Space(10)]
+    public float snappiness;
+    public float returnSpeed;
+    [Space(10)]
+    [Header("Hipfire Recoil")]
+    [Space(5)]
+    public float recoilHipX;
+    public float recoilHipY;
+    public float recoilHipZ;
+    [Space(10)]
+    [Header("ADS Recoil")]
+    [Space(5)]
+    public float recoilAimX;
+    public float recoilAimY;
+    public float recoilAimZ;
 
     private Camera mainCamera;
     private Animator animator;
+    private Recoil recoilScript;
     private float nextShootTime = 0f;
     private int currentAmmo;
     private bool isReloading = false;
@@ -36,6 +54,7 @@ public class Gun : MonoBehaviour
     {
         mainCamera = Camera.main;
         animator = FindObjectOfType<GunSwitcher>().gameObject.GetComponent<Animator>();
+        recoilScript = FindObjectOfType<Recoil>().gameObject.GetComponent<Recoil>();
     }
 
     private void Start()
@@ -68,7 +87,7 @@ public class Gun : MonoBehaviour
         // SHOOTING BEHAVIOR BASED ON IF THE GUN IS AUTOMATIC OR SEMI AUTOMATIC
         if (isAutomatic)
         {
-            if (Input.GetButton("Fire1") && Time.time >= nextShootTime)
+            if (Input.GetButton("Fire1") && Time.time >= nextShootTime && currentAmmo >= 0)
             {
                 nextShootTime = Time.time + 1f / fireRate; // the bigger the fire rate the less time between shots
                 Shoot();
@@ -76,7 +95,7 @@ public class Gun : MonoBehaviour
         }
         else
         {
-            if (Input.GetButtonDown("Fire1") && Time.time >= nextShootTime)
+            if (Input.GetButtonDown("Fire1") && Time.time >= nextShootTime && currentAmmo >= 0)
             {
                 nextShootTime = Time.time + 1f / fireRate; // the bigger the fire rate the less time between shots
                 Shoot();
@@ -104,6 +123,7 @@ public class Gun : MonoBehaviour
     private void Shoot()
     {
         muzzleFlashFX.Play();
+        recoilScript.RecoilOnShoot();
         currentAmmo--;
 
         RaycastHit hit;
