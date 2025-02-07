@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [HideInInspector] public float enemyHealth = 50f;
+    public float enemyHealth = 50f;
 
     public void TakeDamage(float damage)
     {

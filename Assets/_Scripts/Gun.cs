@@ -28,12 +28,6 @@ public class Gun : MonoBehaviour
     public float recoilHipX;
     public float recoilHipY;
     public float recoilHipZ;
-    [Space(10)]
-    [Header("ADS Recoil")]
-    [Space(5)]
-    public float recoilAimX;
-    public float recoilAimY;
-    public float recoilAimZ;
 
     private Camera mainCamera;
     private Animator animator;
@@ -131,7 +125,7 @@ public class Gun : MonoBehaviour
         if (Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hit, range))
         {
             Debug.Log(hit.transform.name);
-            Enemy enemy = hit.transform.gameObject.GetComponent<Enemy>();
+            EnemyBehavior enemy = hit.transform.gameObject.GetComponent<EnemyBehavior>();
 
             if (enemy != null)
                 enemy.TakeDamage(damage);
