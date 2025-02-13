@@ -39,13 +39,13 @@ public class GunMovement : MonoBehaviour
     [SerializeField] private Vector3 multiplier;
     private Vector3 bobEulerRotation;
 
-    private PlayerMovement playerMovement; //for groundchecking and movement speed
+    private PlayerBehavior playerMovement; //for groundchecking and movement speed
     private Vector2 moveInput;
     private Vector2 mouseInput;
 
     private void Awake()
     {
-        playerMovement = FindObjectOfType<PlayerMovement>();
+        playerMovement = FindObjectOfType<PlayerBehavior>();
     }
 
     private void Update()

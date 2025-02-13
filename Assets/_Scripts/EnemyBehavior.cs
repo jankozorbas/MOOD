@@ -38,7 +38,7 @@ public class EnemyBehavior : MonoBehaviour
 
     private void Awake()
     {
-        player = FindObjectOfType<PlayerMovement>().transform;
+        player = FindObjectOfType<PlayerBehavior>().transform;
         agent = GetComponent<NavMeshAgent>();
     }
 
@@ -99,6 +99,7 @@ public class EnemyBehavior : MonoBehaviour
 
     private void Attack()
     {
+        // change which projectile enemy is shooting based on the gun it is shooting (different damage)
         Rigidbody rb = Instantiate(projectile, gunPoint.position, Quaternion.identity).GetComponent<Rigidbody>();
         rb.AddForce(transform.forward * forwardShootForce, ForceMode.Impulse);
         rb.AddForce(transform.up * upwardsShootForce, ForceMode.Impulse);

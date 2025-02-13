@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerBehavior : MonoBehaviour
 {
     [Serializable]
     public class CharacterStance
@@ -23,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float jumpHeight = 5f;
     [SerializeField] private float gravity = -9.81f;
     [SerializeField] private float crouchHeight = 1.3f;
+    [SerializeField] private float playerHealth = 10f;
     [SerializeField] private LayerMask playerMask;
 
     [Header("Ground Settings")]
@@ -208,5 +209,16 @@ public class PlayerMovement : MonoBehaviour
                                     feet.position.z);
 
         return Physics.CheckCapsule(startVector, endVector, characterController.radius, playerMask);
+    }
+
+    public void TakeDamage(float damage)
+    {
+        playerHealth -= damage;
+        if (playerHealth <= 0) Die();
+    }
+
+    private void Die()
+    {
+        Debug.Log("You died.");
     }
 }
