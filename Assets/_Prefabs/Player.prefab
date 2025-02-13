@@ -381,7 +381,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 63
+    m_Bits: 575
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -668,7 +668,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4574041252011133115}
   - component: {fileID: 2407562186427317123}
-  - component: {fileID: 7866875801783108178}
   m_Layer: 7
   m_Name: Minimap Camera
   m_TagString: Untagged
@@ -742,14 +741,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &7866875801783108178
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8427200104025906972}
-  m_Enabled: 1
 --- !u!1001 &495458004117916787
 PrefabInstance:
   m_ObjectHideFlags: 0
