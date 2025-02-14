@@ -1,0 +1,46 @@
+using UnityEngine;
+using TMPro;
+
+public class UIManager : MonoBehaviour
+{
+    public static UIManager Instance {  get; private set; }
+
+    [SerializeField] private TMP_Text keyCountText;
+    [SerializeField] private TMP_Text timerText;
+
+    private void Awake()
+    {
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
+    }
+
+    private void Start()
+    {
+        UpdateKeyUI(GameManager.Instance.GetKeyCount()); 
+    }
+
+    private void UpdateKeyUI(int keyCount)
+    {
+        keyCountText.text = "keys: " + keyCount.ToString();
+    }
+
+    public void UpdateTimer(float currentTime)
+    {
+        currentTime += 1;
+
+        float minutes = Mathf.FloorToInt(currentTime / 60f);
+        float seconds = Mathf.FloorToInt(currentTime % 60f);
+
+        timerText.text = string.Format("{0:00} : {1:00}", minutes, seconds);
+    }
+
+    private void OnEnable()
+    {
+        GameManager.OnKeyCountChanged += UpdateKeyUI;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.OnKeyCountChanged -= UpdateKeyUI;
+    }
+}

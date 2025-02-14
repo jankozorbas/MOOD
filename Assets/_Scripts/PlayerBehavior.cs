@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -22,7 +23,6 @@ public class PlayerBehavior : MonoBehaviour
     [SerializeField] private float crouchSpeed = 4f;
     [SerializeField] private float jumpHeight = 5f;
     [SerializeField] private float gravity = -9.81f;
-    [SerializeField] private float crouchHeight = 1.3f;
     [SerializeField] private float playerHealth = 10f;
     [SerializeField] private LayerMask playerMask;
 
@@ -58,11 +58,17 @@ public class PlayerBehavior : MonoBehaviour
     private CharacterController characterController;
     private Vector3 currentVelocity = Vector3.zero;
     private Camera mainCamera;
-    private bool isCrouching = false;
     private bool canJump = false;
     private float originalHeight;
 
-    // ADD COYOTE TIME
+    //Interactions
+    [Header("Interactions")]
+    [Space(10)]
+    [SerializeField] private float interactionRadius = 1f;
+    [SerializeField] private Transform interactionPoint;
+    [SerializeField] private LayerMask interactableMask;
+
+    private bool isInteractable;
 
     private void Awake()
     {
@@ -82,6 +88,7 @@ public class PlayerBehavior : MonoBehaviour
         ApplyGravity();
         Crouch();
         CalculateStance();
+        Interact();
     }
 
     private void CheckIsGrounded()
@@ -220,5 +227,61 @@ public class PlayerBehavior : MonoBehaviour
     private void Die()
     {
         Debug.Log("You died.");
+    }
+
+    private bool CheckForInteractables()
+    {
+        isInteractable = Physics.CheckSphere(interactionPoint.position, interactionRadius, interactableMask);
+        return isInteractable;
+    }
+
+    private void Interact()
+    {
+        if (!CheckForInteractables()) return;
+
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                Collider[] colliders = Physics.OverlapSphere(interactionPoint.position, interactionRadius, interactableMask);
+
+                foreach (Collider collider in colliders)
+                {
+                    if (collider.gameObject.CompareTag("Key"))
+                    {
+                        CollectKey();
+                        Destroy(collider.gameObject);
+                        break;
+                    }
+                    else if (collider.gameObject.CompareTag("Ammo"))
+                    {
+                        // CollectAmmo();
+                        //ammoCount += a number
+                        Destroy(collider.gameObject);
+                        break;
+                    }
+                    else if (collider.gameObject.CompareTag("HealthPack"))
+                    {
+                        // CollectHealth();
+                        //playerBehavior.health += 10f;
+                        Destroy(collider.gameObject);
+                        break;
+                    }
+                    else
+                        return;
+                }
+            }
+        }
+    }
+
+    private void CollectKey()
+    {
+        GameManager.Instance.AddKey();
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(interactionPoint.position, interactionRadius);
     }
 }

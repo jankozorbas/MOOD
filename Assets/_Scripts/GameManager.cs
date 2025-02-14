@@ -1,74 +1,64 @@
 using UnityEngine;
-using TMPro;
+using System;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private float interactionRadius = 1f;
-    [SerializeField] private Transform interactionPoint;
-    [SerializeField] private LayerMask interactableMask;
-    [SerializeField] private TMP_Text keyCountText;
+    public static GameManager Instance { get; private set; }
 
-    private bool isInteractable;
-    private float keyCount = 0f;
+    public static Action<int> OnKeyCountChanged;
+
+    [SerializeField] private float timePerRound = 300f;
+
+    private int keyCount = 0;
+    private float timeLeft = 0f;
+    private bool isTimerActive;
+
+    private void Awake()
+    {
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
+    }
+
+    private void Start()
+    {
+        InitializeTimer();
+    }
 
     private void Update()
     {
-        Interact();
+        Timer();
     }
 
-    private bool IsInteractable()
+    public void AddKey()
     {
-        isInteractable = Physics.CheckSphere(interactionPoint.position, interactionRadius, interactableMask);
-        return isInteractable;
+        keyCount++;
+        OnKeyCountChanged?.Invoke(keyCount);
     }
 
-    private void Interact()
-    {
-        if (!IsInteractable()) return;
+    public int GetKeyCount() => keyCount;
 
-        else
+    private void InitializeTimer()
+    {
+        isTimerActive = true;
+        timeLeft = timePerRound;
+    }
+
+    private void Timer()
+    {
+        if (isTimerActive)
         {
-            Collider[] colliders = Physics.OverlapSphere(interactionPoint.position, interactionRadius, interactableMask);
-
-            if (Input.GetKeyDown(KeyCode.E))
+            if (timeLeft > 0f)
             {
-                foreach (Collider collider in colliders)
-                {
-                    if (collider.gameObject.CompareTag("Key"))
-                    {
-                        // CollectKey();
-                        // UpdateUI();
-                        keyCount++;
-                        keyCountText.text = "Keys: " + keyCount.ToString();
-                        Destroy(collider.gameObject);
-                    }
-                    else if (collider.gameObject.CompareTag("Ammo"))
-                    {
-                        // CollectAmmo();
-                        //ammoCount += a number
-                        Destroy(collider.gameObject);
-                    }
-                    else if (collider.gameObject.CompareTag("HealthPack"))
-                    {
-                        // CollectHealth();
-                        //playerBehavior.health += 10f;
-                        Destroy(collider.gameObject);
-                    }
-                    else
-                        return;
-                }
+                timeLeft -= Time.deltaTime;
+                UIManager.Instance.UpdateTimer(timeLeft);
+            }
+            else
+            {
+                timeLeft = 0f;
+                isTimerActive = false;
+                Debug.Log("You died.");
+                //subscribe to death event
             }
         }
-    }
-
-    private void TimerCountdown()
-    {
-
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(interactionPoint.position, interactionRadius);
     }
 }
