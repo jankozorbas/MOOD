@@ -638,10 +638,10 @@ MonoBehaviour:
   crouchSpeed: 4
   jumpHeight: 1
   gravity: -29.43
-  playerHealth: 10
   playerMask:
     serializedVersion: 2
     m_Bits: 127
+  playerHealth: 10
   groundCheck: {fileID: 5468139728388433834}
   groundRadius: 0.2
   groundMask:
@@ -872,6 +872,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 5d46ae4190405a44ea6ca35e7a7c8c32, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5d46ae4190405a44ea6ca35e7a7c8c32, type: 3}
+      propertyPath: m_TagString
+      value: Rifle
       objectReference: {fileID: 0}
     - target: {fileID: 1074077702232710739, guid: 5d46ae4190405a44ea6ca35e7a7c8c32, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1118,6 +1122,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: e74982a3110568c4795cbe1868fc97f4, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e74982a3110568c4795cbe1868fc97f4, type: 3}
+      propertyPath: m_TagString
+      value: Pistol
       objectReference: {fileID: 0}
     - target: {fileID: 2141286803456775505, guid: e74982a3110568c4795cbe1868fc97f4, type: 3}
       propertyPath: m_Layer

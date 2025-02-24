@@ -5,11 +5,9 @@ using UnityEngine;
 
 public class HealthPack : MonoBehaviour
 {
-    [SerializeField] private float healthPackIncrease = 10f;
-
     private PlayerBehavior playerBehavior;
 
-    public static Action<float> OnHealthPackPickedUp;
+    public static Action<int> OnHealthPackPickedUp;
 
     private void Awake()
     {

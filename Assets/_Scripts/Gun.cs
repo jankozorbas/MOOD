@@ -33,8 +33,9 @@ public class Gun : MonoBehaviour
     private Animator animator;
     private Recoil recoilScript;
     private float nextShootTime = 0f;
-    private int currentAmmo;
     private bool isReloading = false;
+
+    public int currentAmmo;
 
     private void OnEnable()
     {
@@ -137,4 +138,11 @@ public class Gun : MonoBehaviour
             Destroy(impactObj, 1f);
         }
     }
+
+    private void AddAmmo(int amount)
+    {
+        currentAmmo = Mathf.Clamp(currentAmmo + amount, 0, maxAmmo);   
+    }
+
+    public int GetAmmoCount() { return currentAmmo; }  
 }

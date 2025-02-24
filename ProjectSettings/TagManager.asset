@@ -7,6 +7,9 @@ TagManager:
   - Key
   - Bomb
   - HealthPack
+  - Ammo
+  - Pistol
+  - Rifle
   layers:
   - Default
   - TransparentFX

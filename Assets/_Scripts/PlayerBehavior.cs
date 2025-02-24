@@ -71,7 +71,7 @@ public class PlayerBehavior : MonoBehaviour
 
     private bool isInteractable;
 
-    public static Action<float> OnDamageTaken;
+    public static Action<int> OnDamageTaken;
 
     private void Awake()
     {
@@ -259,8 +259,7 @@ public class PlayerBehavior : MonoBehaviour
                     }
                     else if (collider.gameObject.CompareTag("Ammo"))
                     {
-                        // CollectAmmo();
-                        //ammoCount += a number
+                        CollectAmmo();
                         Destroy(collider.gameObject);
                         break;
                     }
@@ -295,7 +294,7 @@ public class PlayerBehavior : MonoBehaviour
 
     private void CollectAmmo()
     {
-
+        FindObjectOfType<AmmoPack>().GetComponent < AmmoPack>().AddAmmoPack();
     }
 
     private void OnDrawGizmos()

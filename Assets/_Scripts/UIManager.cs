@@ -26,9 +26,14 @@ public class UIManager : MonoBehaviour
         keyCountText.text = "keys: " + keyCount.ToString();
     }
 
-    private void UpdateHealthUI(float health)
+    private void UpdateHealthUI(int health)
     {
         healthText.text = "health: " + health.ToString();
+    }
+
+    private void UpdateAmmoUI(int ammo)
+    {
+        
     }
 
     public void UpdateTimer(float currentTime)
