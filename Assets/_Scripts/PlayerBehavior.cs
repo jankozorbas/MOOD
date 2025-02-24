@@ -294,7 +294,8 @@ public class PlayerBehavior : MonoBehaviour
 
     private void CollectAmmo()
     {
-        FindObjectOfType<AmmoPack>().GetComponent < AmmoPack>().AddAmmoPack();
+        int ammoAmount = 10;
+        FindObjectOfType<Gun>().GetComponent <Gun>().AddAmmo(ammoAmount);
     }
 
     private void OnDrawGizmos()
