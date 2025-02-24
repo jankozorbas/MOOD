@@ -23,8 +23,9 @@ public class PlayerBehavior : MonoBehaviour
     [SerializeField] private float crouchSpeed = 4f;
     [SerializeField] private float jumpHeight = 5f;
     [SerializeField] private float gravity = -9.81f;
-    [SerializeField] private float playerHealth = 10f;
     [SerializeField] private LayerMask playerMask;
+
+    public int playerHealth = 10;
 
     [Header("Ground Settings")]
     [Space(10)]
@@ -69,6 +70,8 @@ public class PlayerBehavior : MonoBehaviour
     [SerializeField] private LayerMask interactableMask;
 
     private bool isInteractable;
+
+    public static Action<int> OnDamageTaken;
 
     private void Awake()
     {
@@ -218,9 +221,10 @@ public class PlayerBehavior : MonoBehaviour
         return Physics.CheckCapsule(startVector, endVector, characterController.radius, playerMask);
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(int damage)
     {
         playerHealth -= damage;
+        OnDamageTaken?.Invoke(playerHealth);
         if (playerHealth <= 0) Die();
     }
 
@@ -255,15 +259,19 @@ public class PlayerBehavior : MonoBehaviour
                     }
                     else if (collider.gameObject.CompareTag("Ammo"))
                     {
-                        // CollectAmmo();
-                        //ammoCount += a number
+                        CollectAmmo();
                         Destroy(collider.gameObject);
                         break;
                     }
                     else if (collider.gameObject.CompareTag("HealthPack"))
                     {
-                        // CollectHealth();
-                        //playerBehavior.health += 10f;
+                        CollectHealth();
+                        Destroy(collider.gameObject);
+                        break;
+                    }
+                    else if (collider.gameObject.CompareTag("Bomb"))
+                    {
+                        GameManager.Instance.WinGame();
                         Destroy(collider.gameObject);
                         break;
                     }
@@ -277,6 +285,17 @@ public class PlayerBehavior : MonoBehaviour
     private void CollectKey()
     {
         GameManager.Instance.AddKey();
+    }
+
+    private void CollectHealth()
+    {
+        FindObjectOfType<HealthPack>().GetComponent<HealthPack>().RegenerateHealth();
+    }
+
+    private void CollectAmmo()
+    {
+        int ammoAmount = 10;
+        FindObjectOfType<Gun>().GetComponent <Gun>().AddAmmo(ammoAmount);
     }
 
     private void OnDrawGizmos()

@@ -61,4 +61,12 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+
+    public void WinGame()
+    {
+        isTimerActive = false;
+        Debug.Log("You Win.");
+
+        //something happens
+    }
 }

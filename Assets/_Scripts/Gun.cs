@@ -33,8 +33,11 @@ public class Gun : MonoBehaviour
     private Animator animator;
     private Recoil recoilScript;
     private float nextShootTime = 0f;
-    private int currentAmmo;
     private bool isReloading = false;
+    private bool isPistol;
+    private bool isRifle;
+
+    public int currentAmmo;
 
     private void OnEnable()
     {
@@ -49,6 +52,7 @@ public class Gun : MonoBehaviour
         mainCamera = Camera.main;
         animator = FindObjectOfType<GunSwitcher>().gameObject.GetComponent<Animator>();
         recoilScript = FindObjectOfType<Recoil>().gameObject.GetComponent<Recoil>();
+        //CheckAndSetGunType();
     }
 
     private void Start()
@@ -66,7 +70,7 @@ public class Gun : MonoBehaviour
     {
         if (isReloading) return;
 
-        if (currentAmmo < maxAmmo) // can reload only if we don't have ammo, add reloading whenever?
+        if (currentAmmo < maxAmmo)
         {
             if (Input.GetKeyDown(KeyCode.R))
                 StartCoroutine(ReloadRoutine());
@@ -137,4 +141,25 @@ public class Gun : MonoBehaviour
             Destroy(impactObj, 1f);
         }
     }
+
+    public void AddAmmo(int amount)
+    {
+        currentAmmo = Mathf.Clamp(currentAmmo + amount, 0, maxAmmo);
+    }
+
+    public int GetAmmoCount() { return currentAmmo; }
+
+    /*private void CheckAndSetGunType()
+    {
+        if (gameObject.CompareTag("Pistol"))
+        {
+            isRifle = false;
+            isPistol = true;
+        }
+        else if (gameObject.CompareTag("Rifle"))
+        {
+            isPistol = false;
+            isRifle = true;
+        }
+    }*/
 }

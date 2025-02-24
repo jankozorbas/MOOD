@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    [SerializeField] private float pistolDamage = 3.5f;
-    [SerializeField] private float rifleDamage = 5f;
+    [SerializeField] private int pistolDamage = 2;
+    [SerializeField] private int rifleDamage = 5;
 
     private PlayerBehavior playerBehavior;
 

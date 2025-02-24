@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Key
+  - Bomb
+  - HealthPack
+  - Ammo
+  - Pistol
+  - Rifle
   layers:
   - Default
   - TransparentFX
