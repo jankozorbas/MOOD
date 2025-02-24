@@ -6,6 +6,7 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance {  get; private set; }
 
     [SerializeField] private TMP_Text keyCountText;
+    [SerializeField] private TMP_Text healthText;
     [SerializeField] private TMP_Text timerText;
 
     private void Awake()
@@ -17,11 +18,17 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         UpdateKeyUI(GameManager.Instance.GetKeyCount()); 
+        UpdateHealthUI(FindObjectOfType<PlayerBehavior>().GetComponent<PlayerBehavior>().playerHealth);
     }
 
     private void UpdateKeyUI(int keyCount)
     {
         keyCountText.text = "keys: " + keyCount.ToString();
+    }
+
+    private void UpdateHealthUI(float health)
+    {
+        healthText.text = "health: " + health.ToString();
     }
 
     public void UpdateTimer(float currentTime)
@@ -37,10 +44,14 @@ public class UIManager : MonoBehaviour
     private void OnEnable()
     {
         GameManager.OnKeyCountChanged += UpdateKeyUI;
+        HealthPack.OnHealthPackPickedUp += UpdateHealthUI;
+        PlayerBehavior.OnDamageTaken += UpdateHealthUI;
     }
 
     private void OnDisable()
     {
         GameManager.OnKeyCountChanged -= UpdateKeyUI;
+        HealthPack.OnHealthPackPickedUp -= UpdateHealthUI;
+        PlayerBehavior.OnDamageTaken -= UpdateHealthUI;
     }
 }

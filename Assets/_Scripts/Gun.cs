@@ -66,7 +66,7 @@ public class Gun : MonoBehaviour
     {
         if (isReloading) return;
 
-        if (currentAmmo < maxAmmo) // can reload only if we don't have ammo, add reloading whenever?
+        if (currentAmmo < maxAmmo)
         {
             if (Input.GetKeyDown(KeyCode.R))
                 StartCoroutine(ReloadRoutine());
