@@ -16,8 +16,8 @@ public class HealthPack : MonoBehaviour
 
     public void RegenerateHealth()
     {
-        int healthPackIncrease = UnityEngine.Random.Range(8, 13);
-        playerBehavior.playerHealth += healthPackIncrease;
+        int healthPackIncrease = UnityEngine.Random.Range(4, 7);
+        playerBehavior.playerHealth = Mathf.Clamp(playerBehavior.playerHealth + healthPackIncrease, 0, playerBehavior.maxHealth);
         OnHealthPackPickedUp?.Invoke(playerBehavior.playerHealth);
     }
 }

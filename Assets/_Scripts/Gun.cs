@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -9,9 +10,16 @@ public class Gun : MonoBehaviour
     [SerializeField] private float range = 100f;
     [SerializeField] private float fireRate = 10f;
     [SerializeField] private float impactForce = 100f;
-    [SerializeField] private int maxAmmo = 30;
     [SerializeField] private float reloadTime = 2f;
     [SerializeField] private bool isAutomatic = false;
+
+    public int startAmmo = 30;
+    public int currentAmmo;
+    public int maxAmmo = 90;
+    public int maxCurrentAmmo = 15;
+    public int maxReserveAmmo = 90;
+    public int currentReserveAmmo = 30;
+    
     [Space(5)]
     [Header("Visual FX")]
     [Space(10)]
@@ -37,7 +45,7 @@ public class Gun : MonoBehaviour
     private bool isPistol;
     private bool isRifle;
 
-    public int currentAmmo;
+    public static event Action<int, int> OnAmmoChanged;
 
     private void OnEnable()
     {
@@ -52,12 +60,12 @@ public class Gun : MonoBehaviour
         mainCamera = Camera.main;
         animator = FindObjectOfType<GunSwitcher>().gameObject.GetComponent<Animator>();
         recoilScript = FindObjectOfType<Recoil>().gameObject.GetComponent<Recoil>();
-        //CheckAndSetGunType();
     }
 
     private void Start()
     {
-        currentAmmo = maxAmmo; // change this with the ammo you want to start the game with
+        currentAmmo = startAmmo; // change this with the ammo you want to start the game with
+        OnAmmoChanged?.Invoke(currentAmmo, currentReserveAmmo);
     }
 
     private void Update()
@@ -103,6 +111,8 @@ public class Gun : MonoBehaviour
 
     private IEnumerator ReloadRoutine()
     {
+        if (isReloading || currentAmmo == maxCurrentAmmo) yield break;
+        
         isReloading = true;
         animator.enabled = true;
         animator.SetBool("isReloadingAnimation", true);
@@ -113,9 +123,17 @@ public class Gun : MonoBehaviour
 
         yield return new WaitForSeconds(.25f);
 
-        currentAmmo = maxAmmo;
+        int ammoNeeded = maxCurrentAmmo - currentAmmo;
+        int ammoToLoad = Mathf.Min(ammoNeeded, currentReserveAmmo);
+
+        currentAmmo = Mathf.Clamp(currentAmmo + ammoToLoad, 0, maxCurrentAmmo);
+        currentReserveAmmo -= ammoToLoad;
+        currentReserveAmmo = Mathf.Clamp(currentReserveAmmo, 0, maxReserveAmmo);
+
         animator.enabled = false;
         isReloading = false;
+
+        OnAmmoChanged?.Invoke(currentAmmo, currentReserveAmmo);
     }
 
     private void Shoot()
@@ -123,6 +141,8 @@ public class Gun : MonoBehaviour
         muzzleFlashFX.Play();
         recoilScript.RecoilOnShoot();
         currentAmmo--;
+
+        OnAmmoChanged?.Invoke(currentAmmo, currentReserveAmmo);
 
         RaycastHit hit;
 
@@ -144,22 +164,9 @@ public class Gun : MonoBehaviour
 
     public void AddAmmo(int amount)
     {
-        currentAmmo = Mathf.Clamp(currentAmmo + amount, 0, maxAmmo);
+        currentReserveAmmo = Mathf.Clamp(currentReserveAmmo + amount, 0, maxReserveAmmo);
+        OnAmmoChanged?.Invoke(currentAmmo, currentReserveAmmo);
     }
 
     public int GetAmmoCount() { return currentAmmo; }
-
-    /*private void CheckAndSetGunType()
-    {
-        if (gameObject.CompareTag("Pistol"))
-        {
-            isRifle = false;
-            isPistol = true;
-        }
-        else if (gameObject.CompareTag("Rifle"))
-        {
-            isPistol = false;
-            isRifle = true;
-        }
-    }*/
 }

@@ -642,6 +642,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 127
   playerHealth: 10
+  maxHealth: 10
   groundCheck: {fileID: 5468139728388433834}
   groundRadius: 0.2
   groundMask:
@@ -942,9 +943,14 @@ MonoBehaviour:
   range: 100
   fireRate: 10
   impactForce: 100
-  maxAmmo: 30
   reloadTime: 2
   isAutomatic: 1
+  startAmmo: 30
+  currentAmmo: 0
+  maxAmmo: 90
+  maxCurrentAmmo: 30
+  maxReserveAmmo: 90
+  currentReserveAmmo: 30
   muzzleFlashFX: {fileID: 4103815858468827302}
   impactFX: {fileID: 7458544018217506191, guid: 716e7bd78d41c5e4aa026e347c5fbc70, type: 3}
   snappiness: 4
@@ -1180,9 +1186,14 @@ MonoBehaviour:
   range: 50
   fireRate: 7.5
   impactForce: 50
-  maxAmmo: 15
   reloadTime: 1.3
   isAutomatic: 0
+  startAmmo: 15
+  currentAmmo: 0
+  maxAmmo: 45
+  maxCurrentAmmo: 15
+  maxReserveAmmo: 45
+  currentReserveAmmo: 30
   muzzleFlashFX: {fileID: 6660191185195355716}
   impactFX: {fileID: 7458544018217506191, guid: 716e7bd78d41c5e4aa026e347c5fbc70, type: 3}
   snappiness: 3

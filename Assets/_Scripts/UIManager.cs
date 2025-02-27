@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text keyCountText;
     [SerializeField] private TMP_Text healthText;
     [SerializeField] private TMP_Text timerText;
+    [SerializeField] private TMP_Text ammoText;
 
     private void Awake()
     {
@@ -31,9 +32,9 @@ public class UIManager : MonoBehaviour
         healthText.text = "health: " + health.ToString();
     }
 
-    private void UpdateAmmoUI(int ammo)
+    private void UpdateAmmoUI(int currentAmmo, int reserveAmmo)
     {
-        
+        ammoText.text = $"{currentAmmo} / {reserveAmmo}";
     }
 
     public void UpdateTimer(float currentTime)
@@ -51,6 +52,7 @@ public class UIManager : MonoBehaviour
         GameManager.OnKeyCountChanged += UpdateKeyUI;
         HealthPack.OnHealthPackPickedUp += UpdateHealthUI;
         PlayerBehavior.OnDamageTaken += UpdateHealthUI;
+        Gun.OnAmmoChanged += UpdateAmmoUI;
     }
 
     private void OnDisable()
@@ -58,5 +60,6 @@ public class UIManager : MonoBehaviour
         GameManager.OnKeyCountChanged -= UpdateKeyUI;
         HealthPack.OnHealthPackPickedUp -= UpdateHealthUI;
         PlayerBehavior.OnDamageTaken -= UpdateHealthUI;
+        Gun.OnAmmoChanged -= UpdateAmmoUI;
     }
 }
