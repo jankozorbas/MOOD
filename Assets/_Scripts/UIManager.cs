@@ -9,6 +9,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text healthText;
     [SerializeField] private TMP_Text timerText;
     [SerializeField] private TMP_Text ammoText;
+    
+    public TMP_Text interactionText;
 
     private void Awake()
     {
@@ -20,6 +22,8 @@ public class UIManager : MonoBehaviour
     {
         UpdateKeyUI(GameManager.Instance.GetKeyCount()); 
         UpdateHealthUI(FindObjectOfType<PlayerBehavior>().GetComponent<PlayerBehavior>().playerHealth);
+
+        interactionText.gameObject.SetActive(false);
     }
 
     private void UpdateKeyUI(int keyCount)

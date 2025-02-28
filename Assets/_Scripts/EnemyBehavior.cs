@@ -10,6 +10,7 @@ public class EnemyBehavior : MonoBehaviour
     
     private NavMeshAgent agent;
     private Transform player;
+    //private Animator animator;
 
     [Header("Stats")]
     [Space(10)]
@@ -20,7 +21,17 @@ public class EnemyBehavior : MonoBehaviour
 
     [Header("Patrolling")]
     [Space(10)]
-    [SerializeField] private float walkPointRange;
+    //[SerializeField] private float walkPointRange;
+    [SerializeField] private bool isCircuit = false;
+    [SerializeField] private float closeEnough = 1f;
+    [SerializeField] private float stopTime = 2f;
+    [SerializeField] private Transform[] patrolPoints;
+
+    private bool isWaiting = false;
+    private bool isMovingForward = true;
+    private int currentTargetIndex = 0;
+    private float stopTimer = 0f;
+
      
     private Vector3 walkPoint;
     private bool walkPointSet;
@@ -59,15 +70,73 @@ public class EnemyBehavior : MonoBehaviour
 
     private void Patrolling()
     {
+        if (!isWaiting)
+        {
+            agent.SetDestination(patrolPoints[currentTargetIndex].position);
+            //animator.SetFloat("Speed", agent.velocity.magnitude);
+
+            Vector3 distanceFromTarget = transform.position - patrolPoints[currentTargetIndex].position;
+
+            if (distanceFromTarget.magnitude < closeEnough)
+            {
+                isWaiting = true;
+                stopTimer = 0f;
+                agent.isStopped = true;
+                //animator.SetFloat("Speed", 0f);
+            }
+        }
+        else
+        {
+            stopTimer += Time.deltaTime;
+
+            if (stopTimer >= stopTime)
+            {
+                if (isCircuit)
+                {
+                    currentTargetIndex++;
+
+                    if (currentTargetIndex >= patrolPoints.Length) currentTargetIndex = 0;
+                }
+                else
+                {
+                    if (isMovingForward)
+                    {
+                        currentTargetIndex++;
+
+                        if (currentTargetIndex == patrolPoints.Length - 1) isMovingForward = false;
+                    }
+                    else
+                    {
+                        currentTargetIndex--;
+
+                        if (currentTargetIndex == 0) isMovingForward = true;
+                    }
+                }
+
+                agent.isStopped = false;
+                isWaiting = false;
+                //animator.SetFloat("Speed", agent.velocity.magnitude);
+            }
+        }
+    }
+
+    /*private void UpdateAnimation()
+    {
+        if (!isWaiting && agent.velocity.magnitude > 0.1f) animator.SetFloat("Speed", agent.velocity.magnitude);
+        else if (isWaiting) animator.SetFloat("Speed", 0f);
+    }*/
+
+    /*private void Patrolling()
+    {
         if (!walkPointSet) SearchForWalkPoint();
         else agent.SetDestination(walkPoint);
 
         Vector3 distanceFromWalkPoint = transform.position - walkPoint;
 
         if (distanceFromWalkPoint.magnitude < 1f) walkPointSet = false;
-    }
+    }*/
 
-    private void SearchForWalkPoint()
+    /*private void SearchForWalkPoint()
     {
         // how to stop spawn walk points from being set inside of things?
         float randomX = Random.Range(-walkPointRange, walkPointRange);
@@ -76,7 +145,7 @@ public class EnemyBehavior : MonoBehaviour
         walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
         
         if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround)) walkPointSet = true;
-    }
+    }*/
 
     private void Chasing()
     {
