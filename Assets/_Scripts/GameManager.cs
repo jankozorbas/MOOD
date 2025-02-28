@@ -9,10 +9,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private float timePerRound = 300f;
 
+    private int keyCount = 0;
     private float timeLeft = 0f;
     private bool isTimerActive;
-
-    public int keyCount = 0;
 
     private void Awake()
     {

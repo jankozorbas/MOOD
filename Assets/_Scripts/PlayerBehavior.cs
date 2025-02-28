@@ -270,14 +270,9 @@ public class PlayerBehavior : MonoBehaviour
                     }
                     else if (collider.gameObject.CompareTag("Bomb"))
                     {
-                        if (GameManager.Instance.keyCount >= 3)
-                        {
-                            GameManager.Instance.WinGame();
-                            Destroy(collider.gameObject);
-                            break;
-                        }
-
-                        return;
+                        GameManager.Instance.WinGame();
+                        Destroy(collider.gameObject);
+                        break;
                     }
                     else
                         return;
