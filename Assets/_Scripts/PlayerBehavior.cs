@@ -26,6 +26,7 @@ public class PlayerBehavior : MonoBehaviour
     [SerializeField] private LayerMask playerMask;
 
     public int playerHealth = 10;
+    public int maxHealth = 10;
 
     [Header("Ground Settings")]
     [Space(10)]
@@ -259,21 +260,24 @@ public class PlayerBehavior : MonoBehaviour
                     }
                     else if (collider.gameObject.CompareTag("Ammo"))
                     {
-                        CollectAmmo();
-                        Destroy(collider.gameObject);
+                        if (CollectAmmo()) Destroy(collider.gameObject);
                         break;
                     }
                     else if (collider.gameObject.CompareTag("HealthPack"))
                     {
-                        CollectHealth();
-                        Destroy(collider.gameObject);
+                        if (CollectHealth()) Destroy(collider.gameObject);
                         break;
                     }
                     else if (collider.gameObject.CompareTag("Bomb"))
                     {
-                        GameManager.Instance.WinGame();
-                        Destroy(collider.gameObject);
-                        break;
+                        if (GameManager.Instance.keyCount >= 3)
+                        {
+                            GameManager.Instance.WinGame();
+                            Destroy(collider.gameObject);
+                            break;
+                        }
+
+                        return;
                     }
                     else
                         return;
@@ -287,15 +291,25 @@ public class PlayerBehavior : MonoBehaviour
         GameManager.Instance.AddKey();
     }
 
-    private void CollectHealth()
+    private bool CollectHealth()
     {
-        FindObjectOfType<HealthPack>().GetComponent<HealthPack>().RegenerateHealth();
+        HealthPack healthPack = FindObjectOfType<HealthPack>().GetComponent<HealthPack>();
+
+        if (playerHealth == maxHealth) return false;
+
+        healthPack.RegenerateHealth();
+        return true;
     }
 
-    private void CollectAmmo()
+    private bool CollectAmmo()
     {
-        int ammoAmount = 10;
-        FindObjectOfType<Gun>().GetComponent <Gun>().AddAmmo(ammoAmount);
+        Gun gun = FindObjectOfType<Gun>().GetComponent<Gun>();
+
+        if (gun.currentReserveAmmo == gun.maxAmmo) return false;
+
+        int ammoAmount = 7;
+        gun.AddAmmo(ammoAmount);
+        return true;
     }
 
     private void OnDrawGizmos()
