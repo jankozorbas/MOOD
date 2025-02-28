@@ -1,10 +1,19 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GunSwitcher : MonoBehaviour
 {
+    private Gun gun;
     private int selectedWeapon = 0;
+
+    public static Action<int, int> OnWeaponChanged;
+
+    private void Awake()
+    {
+        gun = FindObjectOfType<Gun>();
+    }
 
     private void Start()
     {
@@ -38,6 +47,9 @@ public class GunSwitcher : MonoBehaviour
 
         if (previousSelectedWeapon != selectedWeapon) 
             SelectWeapon();
+
+        gun = FindObjectOfType<Gun>();
+        OnWeaponChanged?.Invoke(gun.currentAmmo, gun.currentReserveAmmo);
     }
 
     private void NumberWeaponChange()
@@ -51,6 +63,9 @@ public class GunSwitcher : MonoBehaviour
 
         if (previousSelectedWeapon != selectedWeapon)
             SelectWeapon();
+
+        gun = FindObjectOfType<Gun>();
+        OnWeaponChanged?.Invoke(gun.currentAmmo, gun.currentReserveAmmo);
     }
 
     private void SelectWeapon()

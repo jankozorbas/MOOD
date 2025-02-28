@@ -93,7 +93,7 @@ public class Gun : MonoBehaviour
         // SHOOTING BEHAVIOR BASED ON IF THE GUN IS AUTOMATIC OR SEMI AUTOMATIC
         if (isAutomatic)
         {
-            if (Input.GetButton("Fire1") && Time.time >= nextShootTime && currentAmmo >= 0)
+            if (Input.GetButton("Fire1") && Time.time >= nextShootTime && currentAmmo > 0)
             {
                 nextShootTime = Time.time + 1f / fireRate; // the bigger the fire rate the less time between shots
                 Shoot();
@@ -101,7 +101,7 @@ public class Gun : MonoBehaviour
         }
         else
         {
-            if (Input.GetButtonDown("Fire1") && Time.time >= nextShootTime && currentAmmo >= 0)
+            if (Input.GetButtonDown("Fire1") && Time.time >= nextShootTime && currentAmmo > 0)
             {
                 nextShootTime = Time.time + 1f / fireRate; // the bigger the fire rate the less time between shots
                 Shoot();

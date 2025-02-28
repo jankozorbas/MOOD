@@ -53,6 +53,7 @@ public class UIManager : MonoBehaviour
         HealthPack.OnHealthPackPickedUp += UpdateHealthUI;
         PlayerBehavior.OnDamageTaken += UpdateHealthUI;
         Gun.OnAmmoChanged += UpdateAmmoUI;
+        GunSwitcher.OnWeaponChanged += UpdateAmmoUI;
     }
 
     private void OnDisable()
@@ -61,5 +62,6 @@ public class UIManager : MonoBehaviour
         HealthPack.OnHealthPackPickedUp -= UpdateHealthUI;
         PlayerBehavior.OnDamageTaken -= UpdateHealthUI;
         Gun.OnAmmoChanged -= UpdateAmmoUI;
+        GunSwitcher.OnWeaponChanged -= UpdateAmmoUI;
     }
 }
