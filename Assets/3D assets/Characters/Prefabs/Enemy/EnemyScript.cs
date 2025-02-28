@@ -10,7 +10,7 @@ public class EnemyBehavior : MonoBehaviour
 
     private NavMeshAgent agent;
     private Transform player;
-    private Animator animator;  // Reference to the Animator
+    private Animator animator;
 
     [Header("Stats")]
     [Space(10)]
@@ -21,15 +21,16 @@ public class EnemyBehavior : MonoBehaviour
 
     [Header("Patrolling")]
     [Space(10)]
-    [SerializeField] private bool isCircuit = true;  // Toggle between Circuit or Ping-Pong
-    [SerializeField] private float stopDuration = 2f;  // Duration to stop at each point
-    [SerializeField] private Transform[] patrolPoints; // Array of patrol points (objects in the scene)
-    private int currentTargetIndex = 0;  // Current target for the enemy to move to
-    private bool isWaiting = false;  // Flag to check if the enemy is waiting at a point
-    private float stopTimer = 0f;  // Timer to control the stop duration
+    //Dan >>
+    [SerializeField] private bool isCircuit = true; 
+    [SerializeField] private float stopDuration = 2f;
+    [SerializeField] private Transform[] patrolPoints;
+    private int currentTargetIndex = 0; 
+    private bool isWaiting = false;  
+    private float stopTimer = 0f;  
 
-    private bool isMovingForward = true;  // Variable to track movement direction (for Ping-Pong behavior)
-
+    private bool isMovingForward = true; 
+    //Dan <<
     [Header("Attacking")]
     [Space(10)]
     [SerializeField] private float timeBetweenAttacks;
@@ -46,7 +47,7 @@ public class EnemyBehavior : MonoBehaviour
     {
         player = FindObjectOfType<PlayerBehavior>().transform;
         agent = GetComponent<NavMeshAgent>();
-        animator = GetComponentInChildren<Animator>();  // Get the Animator component
+        animator = GetComponentInChildren<Animator>();  
     }
 
     private void Update()
@@ -67,11 +68,11 @@ public class EnemyBehavior : MonoBehaviour
         if (isPlayerInSightRange && isPlayerInAttackRange) Attacking();
     }
 
+    //Dan >>
     private void Patrolling()
     {
         if (!isWaiting)
         {
-            // Move to the current target point
             agent.SetDestination(patrolPoints[currentTargetIndex].position);
             animator.SetFloat("Speed", agent.velocity.magnitude);
 
@@ -79,68 +80,61 @@ public class EnemyBehavior : MonoBehaviour
 
             if (distanceFromTarget.magnitude < 1f)
             {
-                // Start waiting after reaching the target
                 isWaiting = true;
-                stopTimer = 0f;  // Reset the stop timer
-                agent.isStopped = true;  // Stop the agent at the target
-                animator.SetFloat("Speed", 0f);  // Set the idle animation (speed = 0)
+                stopTimer = 0f;  
+                agent.isStopped = true;  
+                animator.SetFloat("Speed", 0f); 
             }
         }
         else
         {
-            // Increment the stop timer
             stopTimer += Time.deltaTime;
 
-            // If the timer exceeds the stop duration, move to the next target point
             if (stopTimer >= stopDuration)
             {
                 if (isCircuit)
                 {
-                    // Circuit behavior: Go through points in sequence
                     currentTargetIndex++;
 
                     if (currentTargetIndex >= patrolPoints.Length)
                     {
-                        currentTargetIndex = 0;  // Loop back to the start
+                        currentTargetIndex = 0; 
                     }
                 }
                 else
                 {
-                    // Ping-Pong behavior: Move back and forth between points
                     if (isMovingForward)
                     {
                         currentTargetIndex++;
 
-                        // Check if we've reached the last point
                         if (currentTargetIndex == patrolPoints.Length - 1)
                         {
-                            isMovingForward = false;  // Reverse the direction
+                            isMovingForward = false;
                         }
                     }
                     else
                     {
                         currentTargetIndex--;
-
-                        // Check if we've reached the first point
+ 
                         if (currentTargetIndex == 0)
                         {
-                            isMovingForward = true;  // Reverse the direction
+                            isMovingForward = true;  
                         }
                     }
                 }
 
-                // Resume movement and set the next target
                 agent.isStopped = false;
                 isWaiting = false;
-                animator.SetFloat("Speed", agent.velocity.magnitude);  // Resume walking animation
+                animator.SetFloat("Speed", agent.velocity.magnitude);  
             }
         }
     }
+    //Dan <<
 
     private void Chasing()
     {
         agent.SetDestination(player.position);
-        animator.SetFloat("Speed", agent.velocity.magnitude); // Set chasing animation speed
+        animator.SetFloat("Speed", agent.velocity.magnitude); 
     }
 
     private void Attacking()
@@ -185,18 +179,20 @@ public class EnemyBehavior : MonoBehaviour
         Destroy(gameObject);
     }
 
+    //Dan >>
     private void UpdateAnimation()
     {
-        // This method updates the animation based on the agent's velocity
+        
         if (!isWaiting && agent.velocity.magnitude > 0.1f)
         {
-            animator.SetFloat("Speed", agent.velocity.magnitude); // Walking or running
+            animator.SetFloat("Speed", agent.velocity.magnitude); 
         }
         else if (isWaiting)
         {
-            animator.SetFloat("Speed", 0f); // Idle animation while waiting
+            animator.SetFloat("Speed", 0f); 
         }
     }
+    //Dan <<
 
     private void OnDrawGizmos()
     {
