@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.ProBuilder;
 
 public class Gun : MonoBehaviour
 {
@@ -36,10 +37,29 @@ public class Gun : MonoBehaviour
     public float recoilHipX;
     public float recoilHipY;
     public float recoilHipZ;
+    [Space(5)]
+
+    [Header("ADS")]
+    [Space(10)]
+    [SerializeField] private float aimDistanceX = -.2f;
+    [SerializeField] private float aimDistanceY = -.1f;
+    [SerializeField] private float aimDistanceZ = -.3f;
+    [SerializeField] private float normalFOV = 60f;
+    [SerializeField] private float aimFOV = 30f;
+    [SerializeField] private float aimSpeed = 8f;
+    [SerializeField] private float fovSpeed = 5f;
+    [SerializeField] private float aimSmoothing = .3f;
+    [SerializeField] private float aimSmoothRotation = .3f;
+    [SerializeField] private float normalSmoothing = 10f;
+    [SerializeField] private float normalSmoothRotation = 12f;
+
+    private Vector3 originalAimPosition;
+    private bool isAiming = false;
 
     private Camera mainCamera;
     private Animator animator;
     private Recoil recoilScript;
+    private GunMovement gunMovement;
     private float nextShootTime = 0f;
     private bool isReloading = false;
     private bool isPistol;
@@ -66,18 +86,21 @@ public class Gun : MonoBehaviour
         mainCamera = Camera.main;
         animator = FindObjectOfType<GunSwitcher>().gameObject.GetComponent<Animator>();
         recoilScript = FindObjectOfType<Recoil>().gameObject.GetComponent<Recoil>();
+        gunMovement = FindObjectOfType<GunMovement>().gameObject.GetComponent<GunMovement>();
     }
 
     private void Start()
     {
         currentAmmo = startAmmo; // change this with the ammo you want to start the game with
         OnAmmoChanged?.Invoke(currentAmmo, currentReserveAmmo);
+        originalAimPosition = transform.localPosition;
     }
 
     private void Update()
     {
         Reloading();
         Shooting();
+        Aim();
     }
 
     private void Reloading()
@@ -180,4 +203,43 @@ public class Gun : MonoBehaviour
     }
 
     public int GetAmmoCount() { return currentAmmo; }
+
+    private void Aim()
+    {
+        if (Input.GetMouseButton(1)) isAiming = true;
+        else isAiming = false;
+
+        if (isAiming)
+        {
+            gunMovement.Smoothing = aimSmoothing;
+            gunMovement.SmoothRotation = aimSmoothRotation;
+            MoveGunDuringAim();
+            AdjustFOV(aimFOV);
+        }
+        else
+        {
+            gunMovement.Smoothing = normalSmoothing;
+            gunMovement.SmoothRotation = normalSmoothRotation;
+            MoveGunBack();
+            AdjustFOV(normalFOV);
+        }
+    }
+
+    private void MoveGunDuringAim()
+    {
+        Vector3 aimDistance = new Vector3(aimDistanceX, aimDistanceY, aimDistanceZ);
+        Vector3 targetPosition = originalAimPosition + aimDistance;
+
+        transform.localPosition = Vector3.Lerp(transform.localPosition, targetPosition, Time.deltaTime * aimSpeed);
+    }
+
+    private void MoveGunBack()
+    {
+        transform.localPosition = Vector3.Lerp(transform.localPosition, originalAimPosition, Time.deltaTime * aimSpeed);
+    }
+
+    private void AdjustFOV(float targetFOV)
+    {
+        mainCamera.fieldOfView = Mathf.Lerp(mainCamera.fieldOfView, targetFOV, Time.deltaTime * fovSpeed);
+    }
 }
