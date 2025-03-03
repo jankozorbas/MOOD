@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.ProBuilder;
 
 public class GunMovement : MonoBehaviour
 {
@@ -42,6 +43,10 @@ public class GunMovement : MonoBehaviour
     private PlayerBehavior playerMovement; //for groundchecking and movement speed
     private Vector2 moveInput;
     private Vector2 mouseInput;
+
+    public float Smoothing { get { return smoothing; } set { smoothing = value; } }
+
+    public float SmoothRotation { get { return smoothRotation; } set { smoothRotation = value; } }
 
     private void Awake()
     {

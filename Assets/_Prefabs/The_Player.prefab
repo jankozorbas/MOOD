@@ -839,12 +839,28 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1948602425107289516, guid: 86bc6ee62c2a531429043cc7209823ca, type: 3}
+      propertyPath: aimDistanceY
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1948602425107289516, guid: 86bc6ee62c2a531429043cc7209823ca, type: 3}
+      propertyPath: aimDistanceZ
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1948602425107289516, guid: 86bc6ee62c2a531429043cc7209823ca, type: 3}
       propertyPath: muzzleFlashFX
       value: 
       objectReference: {fileID: 7833391539564379057}
     - target: {fileID: 1948602425107289516, guid: 86bc6ee62c2a531429043cc7209823ca, type: 3}
       propertyPath: maxReserveAmmo
       value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 1948602425107289516, guid: 86bc6ee62c2a531429043cc7209823ca, type: 3}
+      propertyPath: normalSmoothing
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1948602425107289516, guid: 86bc6ee62c2a531429043cc7209823ca, type: 3}
+      propertyPath: normalSmoothRotation
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 3446801981109599813, guid: 86bc6ee62c2a531429043cc7209823ca, type: 3}
       propertyPath: m_CastShadows
@@ -1030,6 +1046,10 @@ PrefabInstance:
       value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 3939917723211062072, guid: 61e18b09d0110604b9ffee7b751ab873, type: 3}
+      propertyPath: fovSpeed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3939917723211062072, guid: 61e18b09d0110604b9ffee7b751ab873, type: 3}
       propertyPath: recoilHipX
       value: -1.5
       objectReference: {fileID: 0}
@@ -1050,12 +1070,32 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3939917723211062072, guid: 61e18b09d0110604b9ffee7b751ab873, type: 3}
+      propertyPath: aimDistanceX
+      value: -0.226
+      objectReference: {fileID: 0}
+    - target: {fileID: 3939917723211062072, guid: 61e18b09d0110604b9ffee7b751ab873, type: 3}
+      propertyPath: aimDistanceY
+      value: 0.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 3939917723211062072, guid: 61e18b09d0110604b9ffee7b751ab873, type: 3}
+      propertyPath: aimDistanceZ
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3939917723211062072, guid: 61e18b09d0110604b9ffee7b751ab873, type: 3}
       propertyPath: muzzleFlashFX
       value: 
       objectReference: {fileID: 5281221234029211629}
     - target: {fileID: 3939917723211062072, guid: 61e18b09d0110604b9ffee7b751ab873, type: 3}
       propertyPath: maxCurrentAmmo
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3939917723211062072, guid: 61e18b09d0110604b9ffee7b751ab873, type: 3}
+      propertyPath: normalSmoothing
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3939917723211062072, guid: 61e18b09d0110604b9ffee7b751ab873, type: 3}
+      propertyPath: normalSmoothRotation
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 3956281761325903955, guid: 61e18b09d0110604b9ffee7b751ab873, type: 3}
       propertyPath: m_CastShadows
