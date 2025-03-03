@@ -79,6 +79,9 @@ public class EnemyBehavior : MonoBehaviour
 
     private void Patrolling()
     {
+        animator.SetBool("isShooting", false);
+        animator.SetBool("isChasing", false);
+
         agent.speed = patrolSpeed;
         
         if (!isWaiting)
