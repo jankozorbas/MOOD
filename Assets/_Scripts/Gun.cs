@@ -22,10 +22,11 @@ public class Gun : MonoBehaviour
     public int currentReserveAmmo = 30;
     
     [Space(5)]
-    [Header("Visual FX")]
+    [Header("Visuals")]
     [Space(10)]
     [SerializeField] private ParticleSystem muzzleFlashFX;
     [SerializeField] private GameObject impactFX;
+    [SerializeField] private Canvas crosshairUI;
     [Space(5)]
     [Header("Recoil Settings")]
     [Space(10)]
@@ -60,10 +61,9 @@ public class Gun : MonoBehaviour
     private Animator animator;
     private Recoil recoilScript;
     private GunMovement gunMovement;
+    private PlayerBehavior playerBehavior;
     private float nextShootTime = 0f;
     private bool isReloading = false;
-    private bool isPistol;
-    private bool isRifle;
 
     public static event Action<int, int> OnAmmoChanged;
 
@@ -71,7 +71,7 @@ public class Gun : MonoBehaviour
     {
         // these two fix the bug where if we switch the weapon during reloading you can't shoot anymore
         isReloading = false;
-        animator.SetBool("isReloadingAnimation", false);
+        //animator.SetBool("isReloading", false);
         animator.enabled = false;
         GunSwitcher.OnWeaponChanged += FindCorrectAnimator;
     }
@@ -84,9 +84,10 @@ public class Gun : MonoBehaviour
     private void Awake()
     {
         mainCamera = Camera.main;
-        animator = FindObjectOfType<GunSwitcher>().gameObject.GetComponent<Animator>();
+        animator = FindObjectOfType<GunSwitcher>().gameObject.GetComponentInChildren<Animator>();
         recoilScript = FindObjectOfType<Recoil>().gameObject.GetComponent<Recoil>();
         gunMovement = FindObjectOfType<GunMovement>().gameObject.GetComponent<GunMovement>();
+        playerBehavior = FindObjectOfType<PlayerBehavior>().gameObject.GetComponent<PlayerBehavior>();
     }
 
     private void Start()
@@ -100,7 +101,7 @@ public class Gun : MonoBehaviour
     {
         Reloading();
         Shooting();
-        Aim();
+        AimDownSight();
     }
 
     private void Reloading()
@@ -109,11 +110,8 @@ public class Gun : MonoBehaviour
 
         if (currentAmmo < maxAmmo)
         {
-            if (Input.GetKeyDown(KeyCode.R))
+            if (Input.GetKeyDown(KeyCode.R) && currentReserveAmmo > 0)
                 StartCoroutine(ReloadRoutine());
-
-            if (currentAmmo <= 0)
-                return;
         }
     }
 
@@ -172,6 +170,8 @@ public class Gun : MonoBehaviour
 
     private void Shoot()
     {
+        if (isReloading) return;
+
         muzzleFlashFX.Play();
         recoilScript.RecoilOnShoot();
         currentAmmo--;
@@ -207,22 +207,44 @@ public class Gun : MonoBehaviour
 
     public int GetAmmoCount() { return currentAmmo; }
 
-    private void Aim()
+    private void AimDownSight()
     {
         if (Input.GetMouseButton(1)) isAiming = true;
         else isAiming = false;
 
         if (isAiming)
         {
+            // Set the correct speed
+            if (playerBehavior.PlayerStanceGetter == PlayerBehavior.PlayerStance.Standing)
+                playerBehavior.moveSpeed = playerBehavior.AimStandSpeed;
+            else if (playerBehavior.PlayerStanceGetter == PlayerBehavior.PlayerStance.Crouching)
+                playerBehavior.moveSpeed = playerBehavior.AimCrouchSpeed;
+
+            // Set the correct smoothing of the gun
             gunMovement.Smoothing = aimSmoothing;
             gunMovement.SmoothRotation = aimSmoothRotation;
+
+            // Disable the crosshair
+            crosshairUI.gameObject.SetActive(false);
+
             MoveGunDuringAim();
             AdjustFOV(aimFOV);
         }
         else
         {
+            // Set the correct speed
+            if (playerBehavior.PlayerStanceGetter == PlayerBehavior.PlayerStance.Standing)
+                playerBehavior.moveSpeed = playerBehavior.RunSpeed;
+            else if (playerBehavior.PlayerStanceGetter == PlayerBehavior.PlayerStance.Crouching)
+                playerBehavior.moveSpeed = playerBehavior.CrouchSpeed;
+
+            // Set the correct smoothing of the gun
             gunMovement.Smoothing = normalSmoothing;
             gunMovement.SmoothRotation = normalSmoothRotation;
+
+            // Enable the crosshair
+            crosshairUI.gameObject.SetActive(true);
+
             MoveGunBack();
             AdjustFOV(normalFOV);
         }

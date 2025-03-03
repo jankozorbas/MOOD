@@ -21,6 +21,8 @@ public class PlayerBehavior : MonoBehaviour
     public float moveSpeed;
     [SerializeField] private float runSpeed = 7f;
     [SerializeField] private float crouchSpeed = 4f;
+    [SerializeField] private float aimStandSpeed = 3f;
+    [SerializeField] private float aimCrouchSpeed = 1f;
     [SerializeField] private float jumpHeight = 5f;
     [SerializeField] private float gravity = -9.81f;
     [SerializeField] private LayerMask playerMask;
@@ -74,6 +76,14 @@ public class PlayerBehavior : MonoBehaviour
     private bool messageDisplayed = false;
 
     public static Action<int> OnDamageTaken;
+
+    //Getters
+    public float RunSpeed => runSpeed;
+    public float CrouchSpeed => crouchSpeed;
+    public float AimStandSpeed => aimStandSpeed;
+    public float AimCrouchSpeed => aimCrouchSpeed;
+
+    public PlayerStance PlayerStanceGetter => playerStance;
 
     private void Awake()
     {
