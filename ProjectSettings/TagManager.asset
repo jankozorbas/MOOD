@@ -10,6 +10,7 @@ TagManager:
   - Ammo
   - Pistol
   - Rifle
+  - Enemy
   layers:
   - Default
   - TransparentFX
