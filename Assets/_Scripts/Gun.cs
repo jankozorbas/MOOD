@@ -183,13 +183,17 @@ public class Gun : MonoBehaviour
         if (Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hit, range))
         {
             Debug.Log(hit.transform.name);
-            EnemyBehavior enemy = hit.transform.gameObject.GetComponent<EnemyBehavior>();
 
-            if (enemy != null && !enemy.IsDead)
-                enemy.TakeDamage(damage);
+            if (hit.collider.CompareTag("Enemy"))
+            {
+                EnemyBehavior enemy = hit.transform.gameObject.GetComponent<EnemyBehavior>();
+                if (enemy != null && !enemy.IsDead)
 
-            if (hit.rigidbody != null)
-                hit.rigidbody.AddForce(-hit.normal * impactForce);
+                    enemy.TakeDamage(damage);
+            }
+
+            /*if (hit.rigidbody != null)
+                hit.rigidbody.AddForce(-hit.normal * impactForce);*/
 
             GameObject impactObj = Instantiate(impactFX, hit.point, Quaternion.LookRotation(hit.normal));
             Destroy(impactObj, 1f);
