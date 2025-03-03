@@ -11,6 +11,7 @@ public class EnemyBehavior : MonoBehaviour
     private NavMeshAgent agent;
     private Transform player;
     private Animator animator;
+    private Rigidbody rb;
 
     [Header("Stats")]
     [Space(10)]
@@ -48,13 +49,17 @@ public class EnemyBehavior : MonoBehaviour
     private bool isPlayerInSightRange;
     private bool isPlayerInAttackRange;
 
+    private bool canAttack = true;
     private bool isDead = false;
+
+    public bool IsDead => isDead;
 
     private void Awake()
     {
         player = FindObjectOfType<PlayerBehavior>().transform;
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponentInChildren<Animator>();
+        rb = GetComponent<Rigidbody>();
     }
 
     private void Update()
@@ -156,6 +161,7 @@ public class EnemyBehavior : MonoBehaviour
     private void Chasing()
     {
         agent.speed = chaseSpeed;
+        agent.isStopped = false;
         agent.SetDestination(player.position);
         animator.SetBool("isShooting", false);
         animator.SetBool("isChasing", true);
@@ -181,9 +187,9 @@ public class EnemyBehavior : MonoBehaviour
     private void Attack()
     {
         // change which projectile enemy is shooting based on the gun it is shooting (different damage)
-        Rigidbody rb = Instantiate(projectile, gunPoint.position, Quaternion.identity).GetComponent<Rigidbody>();
-        rb.AddForce(transform.forward * forwardShootForce, ForceMode.Impulse);
-        rb.AddForce(transform.up * upwardsShootForce, ForceMode.Impulse);
+        Rigidbody projectileRB = Instantiate(projectile, gunPoint.position, Quaternion.identity).GetComponent<Rigidbody>();
+        projectileRB.AddForce(transform.forward * forwardShootForce, ForceMode.Impulse);
+        projectileRB.AddForce(transform.up * upwardsShootForce, ForceMode.Impulse);
     }
 
     private void ResetAttack()
@@ -206,6 +212,7 @@ public class EnemyBehavior : MonoBehaviour
         animator.SetTrigger("Death");
         isDead = true;
         agent.isStopped = true;
+        rb.isKinematic = true;
         Destroy(gameObject, 6f);
     }
 
