@@ -10,6 +10,7 @@ public class EnemyBehavior : MonoBehaviour
     
     private NavMeshAgent agent;
     private Transform player;
+    private Animator animator;
 
     [Header("Stats")]
     [Space(10)]
@@ -17,10 +18,22 @@ public class EnemyBehavior : MonoBehaviour
 
     [SerializeField] private float sightRange;
     [SerializeField] private float attackRange;
+    [SerializeField] private float patrolSpeed = 2f;
+    [SerializeField] private float chaseSpeed = 4f;
 
     [Header("Patrolling")]
     [Space(10)]
-    [SerializeField] private float walkPointRange;
+    //[SerializeField] private float walkPointRange;
+    [SerializeField] private bool isCircuit = false;
+    [SerializeField] private float closeEnough = 1f;
+    [SerializeField] private float stopTime = 2f;
+    [SerializeField] private Transform[] patrolPoints;
+
+    private bool isWaiting = false;
+    private bool isMovingForward = true;
+    private int currentTargetIndex = 0;
+    private float stopTimer = 0f;
+
      
     private Vector3 walkPoint;
     private bool walkPointSet;
@@ -32,14 +45,16 @@ public class EnemyBehavior : MonoBehaviour
     [SerializeField] private float upwardsShootForce = 2f;
 
     private bool hasAttacked;
-
     private bool isPlayerInSightRange;
     private bool isPlayerInAttackRange;
+
+    private bool isDead = false;
 
     private void Awake()
     {
         player = FindObjectOfType<PlayerBehavior>().transform;
         agent = GetComponent<NavMeshAgent>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     private void Update()
@@ -52,12 +67,72 @@ public class EnemyBehavior : MonoBehaviour
         isPlayerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         isPlayerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
-        if (!isPlayerInSightRange && !isPlayerInAttackRange) Patrolling();
-        if (isPlayerInSightRange && !isPlayerInAttackRange) Chasing();
-        if (isPlayerInSightRange && isPlayerInAttackRange) Attacking();
+        if (!isPlayerInSightRange && !isPlayerInAttackRange && !isDead) Patrolling();
+        if (isPlayerInSightRange && !isPlayerInAttackRange && !isDead) Chasing();
+        if (isPlayerInSightRange && isPlayerInAttackRange && !isDead) Attacking();
     }
 
     private void Patrolling()
+    {
+        agent.speed = patrolSpeed;
+        
+        if (!isWaiting)
+        {
+            agent.SetDestination(patrolPoints[currentTargetIndex].position);
+            animator.SetFloat("Speed", agent.velocity.magnitude);
+
+            Vector3 distanceFromTarget = transform.position - patrolPoints[currentTargetIndex].position;
+
+            if (distanceFromTarget.magnitude < closeEnough)
+            {
+                isWaiting = true;
+                stopTimer = 0f;
+                agent.isStopped = true;
+                animator.SetFloat("Speed", 0f);
+            }
+        }
+        else
+        {
+            stopTimer += Time.deltaTime;
+
+            if (stopTimer >= stopTime)
+            {
+                if (isCircuit)
+                {
+                    currentTargetIndex++;
+
+                    if (currentTargetIndex >= patrolPoints.Length) currentTargetIndex = 0;
+                }
+                else
+                {
+                    if (isMovingForward)
+                    {
+                        currentTargetIndex++;
+
+                        if (currentTargetIndex == patrolPoints.Length - 1) isMovingForward = false;
+                    }
+                    else
+                    {
+                        currentTargetIndex--;
+
+                        if (currentTargetIndex == 0) isMovingForward = true;
+                    }
+                }
+
+                agent.isStopped = false;
+                isWaiting = false;
+                animator.SetFloat("Speed", agent.velocity.magnitude);
+            }
+        }
+    }
+
+    private void UpdateAnimation()
+    {
+        if (!isWaiting && agent.velocity.magnitude > 0.1f) animator.SetFloat("Speed", agent.velocity.magnitude);
+        else if (isWaiting) animator.SetFloat("Speed", 0f);
+    }
+
+    /*private void Patrolling()
     {
         if (!walkPointSet) SearchForWalkPoint();
         else agent.SetDestination(walkPoint);
@@ -65,9 +140,9 @@ public class EnemyBehavior : MonoBehaviour
         Vector3 distanceFromWalkPoint = transform.position - walkPoint;
 
         if (distanceFromWalkPoint.magnitude < 1f) walkPointSet = false;
-    }
+    }*/
 
-    private void SearchForWalkPoint()
+    /*private void SearchForWalkPoint()
     {
         // how to stop spawn walk points from being set inside of things?
         float randomX = Random.Range(-walkPointRange, walkPointRange);
@@ -76,15 +151,21 @@ public class EnemyBehavior : MonoBehaviour
         walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
         
         if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround)) walkPointSet = true;
-    }
+    }*/
 
     private void Chasing()
     {
+        agent.speed = chaseSpeed;
         agent.SetDestination(player.position);
+        animator.SetBool("isShooting", false);
+        animator.SetBool("isChasing", true);
     }
 
     private void Attacking()
     {
+        animator.SetBool("isChasing", false);
+        animator.SetBool("isShooting", true);
+
         agent.SetDestination(transform.position);
         transform.LookAt(player);
 
@@ -122,7 +203,10 @@ public class EnemyBehavior : MonoBehaviour
 
     private void Die()
     {
-        Destroy(gameObject);
+        animator.SetTrigger("Death");
+        isDead = true;
+        agent.isStopped = true;
+        Destroy(gameObject, 6f);
     }
 
     private void OnDrawGizmos()

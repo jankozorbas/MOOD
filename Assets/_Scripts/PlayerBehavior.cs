@@ -71,6 +71,7 @@ public class PlayerBehavior : MonoBehaviour
     [SerializeField] private LayerMask interactableMask;
 
     private bool isInteractable;
+    private bool messageDisplayed = false;
 
     public static Action<int> OnDamageTaken;
 
@@ -240,12 +241,24 @@ public class PlayerBehavior : MonoBehaviour
         return isInteractable;
     }
 
+    private void InvokeSetActiveFalse()
+    {
+        UIManager.Instance.interactionText.gameObject.SetActive(false);
+    }
+
     private void Interact()
     {
         if (!CheckForInteractables()) return;
 
         else
         {
+            if (!messageDisplayed)
+            {
+                UIManager.Instance.interactionText.gameObject.SetActive(true);
+                Invoke("InvokeSetActiveFalse", 3f);
+                messageDisplayed = true;
+            }
+
             if (Input.GetKeyDown(KeyCode.E))
             {
                 Collider[] colliders = Physics.OverlapSphere(interactionPoint.position, interactionRadius, interactableMask);
