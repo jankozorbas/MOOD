@@ -53,6 +53,12 @@ public class Gun : MonoBehaviour
         isReloading = false;
         animator.SetBool("isReloadingAnimation", false);
         animator.enabled = false;
+        GunSwitcher.OnWeaponChanged += FindCorrectAnimator;
+    }
+
+    private void OnDisable()
+    {
+        GunSwitcher.OnWeaponChanged -= FindCorrectAnimator;
     }
 
     private void Awake()
@@ -109,17 +115,22 @@ public class Gun : MonoBehaviour
         }
     }
 
+    private void FindCorrectAnimator(int one, int two)
+    {
+        animator = GetComponentInChildren<Animator>();
+    }
+
     private IEnumerator ReloadRoutine()
     {
         if (isReloading || currentAmmo == maxCurrentAmmo) yield break;
         
         isReloading = true;
         animator.enabled = true;
-        animator.SetBool("isReloadingAnimation", true);
+        animator.SetBool("isReloading", true);
 
         yield return new WaitForSeconds(reloadTime - .25f);
 
-        animator.SetBool("isReloadingAnimation", false);
+        animator.SetBool("isReloading", false);
 
         yield return new WaitForSeconds(.25f);
 
@@ -151,7 +162,7 @@ public class Gun : MonoBehaviour
             Debug.Log(hit.transform.name);
             EnemyBehavior enemy = hit.transform.gameObject.GetComponent<EnemyBehavior>();
 
-            if (enemy != null)
+            if (enemy != null && !enemy.IsDead)
                 enemy.TakeDamage(damage);
 
             if (hit.rigidbody != null)
