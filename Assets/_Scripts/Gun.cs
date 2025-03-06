@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.ProBuilder;
 
 public class Gun : MonoBehaviour
 {
@@ -35,9 +34,16 @@ public class Gun : MonoBehaviour
     [Space(10)]
     [Header("Hipfire Recoil")]
     [Space(5)]
-    public float recoilHipX;
-    public float recoilHipY;
-    public float recoilHipZ;
+    [SerializeField] private float recoilHipX = -2f;
+    [SerializeField] private float recoilHipY = 2f;
+    [SerializeField] private float recoilHipZ = .35f;
+    [SerializeField] private float adsRecoilX = -1f;
+    [SerializeField] private float adsRecoilY = -1f;
+    [SerializeField] private float adsRecoilZ = .35f;
+
+    public float recoilX;
+    public float recoilY;
+    public float recoilZ;
     [Space(5)]
 
     [Header("ADS")]
@@ -67,13 +73,15 @@ public class Gun : MonoBehaviour
 
     public static event Action<int, int> OnAmmoChanged;
 
+    public bool IsAiming => isAiming;
+
     private void OnEnable()
     {
         // these two fix the bug where if we switch the weapon during reloading you can't shoot anymore
         isReloading = false;
-        //animator.SetBool("isReloading", false);
-        animator.enabled = false;
         GunSwitcher.OnWeaponChanged += FindCorrectAnimator;
+        //animator.SetBool("isReloading", false);
+        animator.enabled = true;
     }
 
     private void OnDisable()
@@ -138,7 +146,7 @@ public class Gun : MonoBehaviour
 
     private void FindCorrectAnimator(int one, int two)
     {
-        animator = GetComponentInChildren<Animator>();
+        animator = GetComponent<Animator>();
     }
 
     private IEnumerator ReloadRoutine()
@@ -224,6 +232,12 @@ public class Gun : MonoBehaviour
             gunMovement.Smoothing = aimSmoothing;
             gunMovement.SmoothRotation = aimSmoothRotation;
 
+            // Set the proper recoil amount
+
+            recoilX = adsRecoilX;
+            recoilY = adsRecoilY;
+            recoilZ = adsRecoilZ;
+
             // Disable the crosshair
             crosshairUI.gameObject.SetActive(false);
 
@@ -241,6 +255,12 @@ public class Gun : MonoBehaviour
             // Set the correct smoothing of the gun
             gunMovement.Smoothing = normalSmoothing;
             gunMovement.SmoothRotation = normalSmoothRotation;
+
+            // Set the proper recoil amount
+
+            recoilX = recoilHipX;
+            recoilY = recoilHipY;
+            recoilZ = recoilHipZ;
 
             // Enable the crosshair
             crosshairUI.gameObject.SetActive(true);

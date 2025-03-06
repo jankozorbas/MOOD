@@ -1,8 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerBehavior : MonoBehaviour
@@ -179,6 +176,18 @@ public class PlayerBehavior : MonoBehaviour
                 playerStance = PlayerStance.Crouching;
                 canJump = false;
                 moveSpeed = crouchSpeed;
+            }
+        }
+
+        // Make sure to go back up if you are below something but have already let go of the key and then moved out of the way
+
+        if (Input.GetKey(KeyCode.LeftControl) == false && playerStance == PlayerStance.Crouching)
+        {
+            if (!StanceCheck(playerStanceStanding.stanceCollider.height))
+            {
+                playerStance = PlayerStance.Standing;
+                canJump = true;
+                moveSpeed = runSpeed;
             }
         }
 

@@ -3287,6 +3287,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2148742358626862499, guid: 6a05eab096bc50640b17c719d465e922, type: 3}
+      propertyPath: reloadTime
+      value: 1.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2148742358626862499, guid: 6a05eab096bc50640b17c719d465e922, type: 3}
       propertyPath: crosshairUI
       value: 
       objectReference: {fileID: 1680518105}
@@ -3333,6 +3337,18 @@ PrefabInstance:
     - target: {fileID: 5985156838044053180, guid: 6a05eab096bc50640b17c719d465e922, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6947574371196025396, guid: 6a05eab096bc50640b17c719d465e922, type: 3}
+      propertyPath: adsRecoilX
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6947574371196025396, guid: 6a05eab096bc50640b17c719d465e922, type: 3}
+      propertyPath: adsRecoilY
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6947574371196025396, guid: 6a05eab096bc50640b17c719d465e922, type: 3}
+      propertyPath: reloadTime
+      value: 1.8
       objectReference: {fileID: 0}
     - target: {fileID: 6947574371196025396, guid: 6a05eab096bc50640b17c719d465e922, type: 3}
       propertyPath: crosshairUI

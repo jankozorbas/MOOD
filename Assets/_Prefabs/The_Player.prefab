@@ -495,7 +495,7 @@ MonoBehaviour:
     stanceCollider: {fileID: 4327590910695936397}
   feet: {fileID: 4449222773104035997}
   stanceCheckErrorMargin: 0.05
-  isToggle: 1
+  isToggle: 0
   interactionRadius: 1
   interactionPoint: {fileID: 3631416728232245464}
   interactableMask:
@@ -618,7 +618,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5885000061768733303}
-  - component: {fileID: 158495703729558782}
   - component: {fileID: 4277595845360246007}
   - component: {fileID: 7886891515922114936}
   m_Layer: 6
@@ -645,27 +644,6 @@ Transform:
   - {fileID: 4479466618509573769}
   m_Father: {fileID: 7594837453537062903}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &158495703729558782
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6751711122846997700}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 5b391a5ab56dec64db3734f55cc8ef29, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &4277595845360246007
 MonoBehaviour:
   m_ObjectHideFlags: 0
