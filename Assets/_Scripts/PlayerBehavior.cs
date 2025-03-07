@@ -71,8 +71,12 @@ public class PlayerBehavior : MonoBehaviour
 
     private bool isInteractable;
     private bool messageDisplayed = false;
+    private bool canMove = true;
+    private bool isDead = false;
 
     public static Action<int> OnDamageTaken;
+
+    public bool CanMove { get { return canMove; }  set { canMove = value; } }
 
     //Getters
     public float RunSpeed => runSpeed;
@@ -88,7 +92,9 @@ public class PlayerBehavior : MonoBehaviour
         mainCamera = Camera.main;
         originalHeight = characterController.height;
         moveSpeed = runSpeed;
+        canMove = true;
         canJump = true;
+        isDead = false;
         cameraHeight = mainCamera.transform.localPosition.y;
     }
 
@@ -115,6 +121,8 @@ public class PlayerBehavior : MonoBehaviour
 
     private void PlayerMove()
     {
+        if (!canMove) return;
+
         float horizontalAxis = Input.GetAxisRaw("Horizontal");
         float verticalAxis = Input.GetAxisRaw("Vertical");
 
@@ -125,6 +133,8 @@ public class PlayerBehavior : MonoBehaviour
 
     private void PlayerJump()
     {
+        if (!canMove) return;
+        
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded && canJump)
         {
             currentVelocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity); // v = sqrt(h * -2 * g)
@@ -139,6 +149,8 @@ public class PlayerBehavior : MonoBehaviour
 
     private void Crouch()
     {
+        if (!canMove) return;
+
         if (isToggle)
         {
             if (Input.GetKeyDown(KeyCode.LeftControl))
@@ -244,6 +256,8 @@ public class PlayerBehavior : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        if (isDead) return;
+
         playerHealth -= damage;
         OnDamageTaken?.Invoke(playerHealth);
         if (playerHealth <= 0) Die();
@@ -251,6 +265,7 @@ public class PlayerBehavior : MonoBehaviour
 
     private void Die()
     {
+        Lose();
         Debug.Log("You died.");
     }
 
@@ -302,7 +317,7 @@ public class PlayerBehavior : MonoBehaviour
                     }
                     else if (collider.gameObject.CompareTag("Bomb"))
                     {
-                        GameManager.Instance.WinGame();
+                        Win();
                         Destroy(collider.gameObject);
                         break;
                     }
@@ -337,6 +352,19 @@ public class PlayerBehavior : MonoBehaviour
         int ammoAmount = 7;
         gun.AddAmmo(ammoAmount);
         return true;
+    }
+
+    private void Win()
+    {
+        canMove = false;
+        GameManager.Instance.WinGame();
+    }
+
+    private void Lose()
+    {
+        canMove = false;
+        isDead = true;
+        GameManager.Instance.LoseGame();
     }
 
     private void OnDrawGizmos()

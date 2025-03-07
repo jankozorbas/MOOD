@@ -1,5 +1,9 @@
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
+using System.Collections;
+using UnityEngine.UI;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,6 +12,10 @@ public class GameManager : MonoBehaviour
     public static Action<int> OnKeyCountChanged;
 
     [SerializeField] private float timePerRound = 300f;
+    [SerializeField] private float fadeDuration = 1f;
+    [SerializeField] private Image fadeImage;
+    [SerializeField] private GameObject winTextObject;
+    [SerializeField] private GameObject loseTextObject;
 
     private int keyCount = 0;
     private float timeLeft = 0f;
@@ -22,6 +30,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         InitializeTimer();
+        StartCoroutine(FadeIn());
     }
 
     private void Update()
@@ -55,8 +64,8 @@ public class GameManager : MonoBehaviour
             else
             {
                 timeLeft = 0f;
-                isTimerActive = false;
-                Debug.Log("You died.");
+                FindObjectOfType<PlayerBehavior>().GetComponent<PlayerBehavior>().CanMove = false; // do it in a better way
+                LoseGame(); 
                 //subscribe to death event
             }
         }
@@ -64,9 +73,71 @@ public class GameManager : MonoBehaviour
 
     public void WinGame()
     {
+        // Stop timer
         isTimerActive = false;
+        // Fade to black
+        StartCoroutine(FadeOut());
+        // UI says you win
+        StartCoroutine(WinLoseText(winTextObject, 1.2f));
+        // Reset the game after 5 seconds
+        Invoke("ReloadScene", 5f);
+        // Later Voice Over will be added and sound effects of stopping the bomb etc.
         Debug.Log("You Win.");
+    }
 
-        //something happens
+    public void LoseGame()
+    {
+        // Stop timer
+        isTimerActive = false;
+        // Fade to black
+        StartCoroutine(FadeOut());
+        // UI says you lose
+        StartCoroutine(WinLoseText(loseTextObject, 1.2f));
+        // Reset the game after 5 seconds
+        Invoke("ReloadScene", 5f);
+        // Later Voice Over will be added and sound effects of stopping the bomb animation of the bomb leaving the silo etc.
+    }
+
+    private void ReloadScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    private void ShowWinLoseText(GameObject textToDisplay)
+    {
+        textToDisplay.SetActive(true);
+    }
+
+    private IEnumerator WinLoseText(GameObject winLoseText, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        ShowWinLoseText(winLoseText);
+    }
+
+    private IEnumerator FadeIn()
+    {
+        yield return Fade(1, 0);
+    }
+    
+    private IEnumerator FadeOut()
+    {
+        yield return Fade(0, 1);
+    }
+
+    private IEnumerator Fade(float startAlpha, float endAlpha)
+    {
+        float elapsedTime = 0f;
+        Color color = fadeImage.color;
+
+        while (elapsedTime < fadeDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            color.a = Mathf.Lerp(startAlpha, endAlpha, elapsedTime / fadeDuration);
+            fadeImage.color = color;
+            yield return null;
+        }
+
+        color.a = endAlpha;
+        fadeImage.color = color;
     }
 }

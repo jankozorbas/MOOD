@@ -40,7 +40,7 @@ public class GunMovement : MonoBehaviour
     [SerializeField] private Vector3 multiplier;
     private Vector3 bobEulerRotation;
 
-    private PlayerBehavior playerMovement; //for groundchecking and movement speed
+    private PlayerBehavior playerBehavior; //for groundchecking and movement speed
     private Vector2 moveInput;
     private Vector2 mouseInput;
 
@@ -50,7 +50,7 @@ public class GunMovement : MonoBehaviour
 
     private void Awake()
     {
-        playerMovement = FindObjectOfType<PlayerBehavior>();
+        playerBehavior = FindObjectOfType<PlayerBehavior>();
     }
 
     private void Update()
@@ -66,6 +66,8 @@ public class GunMovement : MonoBehaviour
 
     private void GetInput()
     {
+        if (!playerBehavior.CanMove) return;
+
         float horizontalAxis = Input.GetAxisRaw("Horizontal");
         float verticalAxis = Input.GetAxisRaw("Vertical");
 
@@ -100,11 +102,11 @@ public class GunMovement : MonoBehaviour
 
     private void BobOffset()
     {
-        speedCurve += Time.deltaTime * (playerMovement.isGrounded ? playerMovement.moveSpeed : 1f) + 0.01f;
+        speedCurve += Time.deltaTime * (playerBehavior.isGrounded ? playerBehavior.moveSpeed : 1f) + 0.01f;
 
         if (!shouldBobOffset) { bobPosition = Vector3.zero; return; }
 
-        bobPosition.x = (curveCos * bobLimit.x * (playerMovement.isGrounded ? 1 : 0)) - (moveInput.x * moveLimit.x);
+        bobPosition.x = (curveCos * bobLimit.x * (playerBehavior.isGrounded ? 1 : 0)) - (moveInput.x * moveLimit.x);
         bobPosition.y = (curveSin * bobLimit.y) - (moveInput.y * moveLimit.y);
         bobPosition.z = -(moveInput.y * moveLimit.z); 
     }
