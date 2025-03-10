@@ -380,7 +380,7 @@ public class PlayerBehavior : MonoBehaviour
 
         if (gun.currentReserveAmmo == gun.maxAmmo) return false;
 
-        int ammoAmount = 7;
+        int ammoAmount = 9;
         gun.AddAmmo(ammoAmount);
         return true;
     }
