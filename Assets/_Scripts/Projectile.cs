@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    [SerializeField] private int pistolDamage = 2;
-    [SerializeField] private int rifleDamage = 5;
+    [SerializeField] private int minDamage = 15;
+    [SerializeField] private int maxDamage = 21;
 
     private PlayerBehavior playerBehavior;
 
@@ -16,7 +16,7 @@ public class Projectile : MonoBehaviour
     {
         if (collision.collider.CompareTag("Player"))
         {
-            playerBehavior.TakeDamage(pistolDamage);
+            playerBehavior.TakeDamage(Random.Range(minDamage, maxDamage));
             Destroy(gameObject);
         }
         else if (collision != null)

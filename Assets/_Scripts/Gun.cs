@@ -12,6 +12,7 @@ public class Gun : MonoBehaviour
     [SerializeField] private float impactForce = 100f;
     [SerializeField] private float reloadTime = 2f;
     [SerializeField] private bool isAutomatic = false;
+    [SerializeField] private LayerMask shootMask;
 
     public int startAmmo = 30;
     public int currentAmmo;
@@ -60,7 +61,7 @@ public class Gun : MonoBehaviour
     [SerializeField] private float normalSmoothing = 10f;
     [SerializeField] private float normalSmoothRotation = 12f;
 
-    private Vector3 originalAimPosition;
+    private Vector3 originalPosition;
     private bool isAiming = false;
 
     private Camera mainCamera;
@@ -82,6 +83,7 @@ public class Gun : MonoBehaviour
         GunSwitcher.OnWeaponChanged += FindCorrectAnimator;
         //animator.SetBool("isReloading", false);
         animator.enabled = true;
+        originalPosition = transform.localPosition;
     }
 
     private void OnDisable()
@@ -102,7 +104,6 @@ public class Gun : MonoBehaviour
     {
         currentAmmo = startAmmo; // change this with the ammo you want to start the game with
         OnAmmoChanged?.Invoke(currentAmmo, currentReserveAmmo);
-        originalAimPosition = transform.localPosition;
     }
 
     private void Update()
@@ -110,6 +111,7 @@ public class Gun : MonoBehaviour
         Reloading();
         Shooting();
         AimDownSight();
+        Debug.Log(originalPosition);
     }
 
     private void Reloading()
@@ -188,7 +190,7 @@ public class Gun : MonoBehaviour
 
         RaycastHit hit;
 
-        if (Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hit, range))
+        if (Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hit, range, shootMask))
         {
             Debug.Log(hit.transform.name);
 
@@ -224,9 +226,9 @@ public class Gun : MonoBehaviour
         {
             // Set the correct speed
             if (playerBehavior.PlayerStanceGetter == PlayerBehavior.PlayerStance.Standing)
-                playerBehavior.moveSpeed = playerBehavior.AimStandSpeed;
+                playerBehavior.moveSpeed = playerBehavior.AimStandSpeed * playerBehavior.SpeedMultiplier;
             else if (playerBehavior.PlayerStanceGetter == PlayerBehavior.PlayerStance.Crouching)
-                playerBehavior.moveSpeed = playerBehavior.AimCrouchSpeed;
+                playerBehavior.moveSpeed = playerBehavior.AimCrouchSpeed * playerBehavior.SpeedMultiplier;
 
             // Set the correct smoothing of the gun
             gunMovement.Smoothing = aimSmoothing;
@@ -248,9 +250,9 @@ public class Gun : MonoBehaviour
         {
             // Set the correct speed
             if (playerBehavior.PlayerStanceGetter == PlayerBehavior.PlayerStance.Standing)
-                playerBehavior.moveSpeed = playerBehavior.RunSpeed;
+                playerBehavior.moveSpeed = playerBehavior.RunSpeed * playerBehavior.SpeedMultiplier;
             else if (playerBehavior.PlayerStanceGetter == PlayerBehavior.PlayerStance.Crouching)
-                playerBehavior.moveSpeed = playerBehavior.CrouchSpeed;
+                playerBehavior.moveSpeed = playerBehavior.CrouchSpeed * playerBehavior.SpeedMultiplier;
 
             // Set the correct smoothing of the gun
             gunMovement.Smoothing = normalSmoothing;
@@ -273,14 +275,14 @@ public class Gun : MonoBehaviour
     private void MoveGunDuringAim()
     {
         Vector3 aimDistance = new Vector3(aimDistanceX, aimDistanceY, aimDistanceZ);
-        Vector3 targetPosition = originalAimPosition + aimDistance;
+        Vector3 targetPosition = originalPosition + aimDistance;
 
         transform.localPosition = Vector3.Lerp(transform.localPosition, targetPosition, Time.deltaTime * aimSpeed);
     }
 
     private void MoveGunBack()
     {
-        transform.localPosition = Vector3.Lerp(transform.localPosition, originalAimPosition, Time.deltaTime * aimSpeed);
+        transform.localPosition = Vector3.Lerp(transform.localPosition, originalPosition, Time.deltaTime * aimSpeed);
     }
 
     private void AdjustFOV(float targetFOV)

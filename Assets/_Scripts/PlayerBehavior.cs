@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -20,6 +21,9 @@ public class PlayerBehavior : MonoBehaviour
     [SerializeField] private float crouchSpeed = 4f;
     [SerializeField] private float aimStandSpeed = 3f;
     [SerializeField] private float aimCrouchSpeed = 1f;
+    [SerializeField] private float speedMultiplier = 1f;
+    [SerializeField] private float hitSpeedMultiplier = .35f;
+    [SerializeField] private float hitSpeedTime = .3f;
     [SerializeField] private float jumpHeight = 5f;
     [SerializeField] private float gravity = -9.81f;
     [SerializeField] private LayerMask playerMask;
@@ -83,6 +87,8 @@ public class PlayerBehavior : MonoBehaviour
     public float CrouchSpeed => crouchSpeed;
     public float AimStandSpeed => aimStandSpeed;
     public float AimCrouchSpeed => aimCrouchSpeed;
+
+    public float SpeedMultiplier => speedMultiplier;
 
     public PlayerStance PlayerStanceGetter => playerStance;
 
@@ -259,8 +265,33 @@ public class PlayerBehavior : MonoBehaviour
         if (isDead) return;
 
         playerHealth -= damage;
+
+        StartCoroutine(SlowDown());
+
         OnDamageTaken?.Invoke(playerHealth);
+
         if (playerHealth <= 0) Die();
+    }
+
+    private IEnumerator SlowDown()
+    {
+        speedMultiplier = hitSpeedMultiplier;
+        UpdateSpeed();
+        yield return new WaitForSeconds(hitSpeedTime);
+        speedMultiplier = 1f;
+        UpdateSpeed();
+    }
+
+    private void UpdateSpeed()
+    {
+        if (playerStance == PlayerStance.Standing)
+        {
+            moveSpeed = runSpeed * speedMultiplier;
+        }
+        else if (playerStance == PlayerStance.Crouching)
+        {
+            moveSpeed = crouchSpeed * speedMultiplier;
+        }
     }
 
     private void Die()
@@ -315,7 +346,7 @@ public class PlayerBehavior : MonoBehaviour
                         if (CollectHealth()) Destroy(collider.gameObject);
                         break;
                     }
-                    else if (collider.gameObject.CompareTag("Bomb"))
+                    else if (collider.gameObject.CompareTag("Bomb") && GameManager.Instance.GetKeyCount() >= GameManager.Instance.KeysNeeded)
                     {
                         Win();
                         Destroy(collider.gameObject);

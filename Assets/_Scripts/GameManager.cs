@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private float timePerRound = 300f;
     [SerializeField] private float fadeDuration = 1f;
+    [SerializeField] private int keysNeeded = 4;
     [SerializeField] private Image fadeImage;
     [SerializeField] private GameObject winTextObject;
     [SerializeField] private GameObject loseTextObject;
@@ -20,6 +21,8 @@ public class GameManager : MonoBehaviour
     private int keyCount = 0;
     private float timeLeft = 0f;
     private bool isTimerActive;
+
+    public int KeysNeeded => keysNeeded;
 
     private void Awake()
     {

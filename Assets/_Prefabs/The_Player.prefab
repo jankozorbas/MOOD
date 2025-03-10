@@ -244,7 +244,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 25
+  orthographic size: 35
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -287,8 +287,8 @@ Transform:
   m_GameObject: {fileID: 4039702235381281418}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 5, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: 0, y: 9, z: 0}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5985156838044053180}
@@ -406,7 +406,7 @@ CharacterController:
   m_Height: 2
   m_Radius: 0.5
   m_SlopeLimit: 50
-  m_StepOffset: 0.5
+  m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
@@ -473,13 +473,16 @@ MonoBehaviour:
   crouchSpeed: 4
   aimStandSpeed: 3
   aimCrouchSpeed: 1
+  speedMultiplier: 1
+  hitSpeedMultiplier: 0.35
+  hitSpeedTime: 0.2
   jumpHeight: 1
   gravity: -29.43
   playerMask:
     serializedVersion: 2
     m_Bits: 127
-  playerHealth: 10
-  maxHealth: 10
+  playerHealth: 94
+  maxHealth: 100
   groundCheck: {fileID: 7998897707612239693}
   groundRadius: 0.2
   groundMask:
@@ -496,7 +499,7 @@ MonoBehaviour:
   feet: {fileID: 4449222773104035997}
   stanceCheckErrorMargin: 0.05
   isToggle: 0
-  interactionRadius: 1
+  interactionRadius: 2
   interactionPoint: {fileID: 3631416728232245464}
   interactableMask:
     serializedVersion: 2
@@ -576,7 +579,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 575
+    m_Bits: 1599
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -772,11 +775,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1948602425107289516, guid: 86bc6ee62c2a531429043cc7209823ca, type: 3}
       propertyPath: range
-      value: 50
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 1948602425107289516, guid: 86bc6ee62c2a531429043cc7209823ca, type: 3}
       propertyPath: damage
-      value: 5
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1948602425107289516, guid: 86bc6ee62c2a531429043cc7209823ca, type: 3}
       propertyPath: maxAmmo
@@ -784,7 +787,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1948602425107289516, guid: 86bc6ee62c2a531429043cc7209823ca, type: 3}
       propertyPath: fireRate
-      value: 7.5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1948602425107289516, guid: 86bc6ee62c2a531429043cc7209823ca, type: 3}
       propertyPath: startAmmo
@@ -804,7 +807,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1948602425107289516, guid: 86bc6ee62c2a531429043cc7209823ca, type: 3}
       propertyPath: reloadTime
-      value: 2
+      value: 1.4
       objectReference: {fileID: 0}
     - target: {fileID: 1948602425107289516, guid: 86bc6ee62c2a531429043cc7209823ca, type: 3}
       propertyPath: snappiness
@@ -813,7 +816,7 @@ PrefabInstance:
     - target: {fileID: 1948602425107289516, guid: 86bc6ee62c2a531429043cc7209823ca, type: 3}
       propertyPath: crosshairUI
       value: 
-      objectReference: {fileID: 2749423320827198397, guid: ecc790622773b1648a5218ab352451c6, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 1948602425107289516, guid: 86bc6ee62c2a531429043cc7209823ca, type: 3}
       propertyPath: impactForce
       value: 50
@@ -823,8 +826,12 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1948602425107289516, guid: 86bc6ee62c2a531429043cc7209823ca, type: 3}
+      propertyPath: aimDistanceX
+      value: -0.205
+      objectReference: {fileID: 0}
+    - target: {fileID: 1948602425107289516, guid: 86bc6ee62c2a531429043cc7209823ca, type: 3}
       propertyPath: aimDistanceY
-      value: 0
+      value: 0.06
       objectReference: {fileID: 0}
     - target: {fileID: 1948602425107289516, guid: 86bc6ee62c2a531429043cc7209823ca, type: 3}
       propertyPath: aimDistanceZ
@@ -840,11 +847,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1948602425107289516, guid: 86bc6ee62c2a531429043cc7209823ca, type: 3}
       propertyPath: normalSmoothing
-      value: 10
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1948602425107289516, guid: 86bc6ee62c2a531429043cc7209823ca, type: 3}
       propertyPath: normalSmoothRotation
-      value: 12
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3446801981109599813, guid: 86bc6ee62c2a531429043cc7209823ca, type: 3}
       propertyPath: m_CastShadows
@@ -1062,8 +1069,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3939917723211062072, guid: 61e18b09d0110604b9ffee7b751ab873, type: 3}
+      propertyPath: range
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 3939917723211062072, guid: 61e18b09d0110604b9ffee7b751ab873, type: 3}
       propertyPath: damage
-      value: 20
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 3939917723211062072, guid: 61e18b09d0110604b9ffee7b751ab873, type: 3}
       propertyPath: maxAmmo
@@ -1072,6 +1083,14 @@ PrefabInstance:
     - target: {fileID: 3939917723211062072, guid: 61e18b09d0110604b9ffee7b751ab873, type: 3}
       propertyPath: fovSpeed
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3939917723211062072, guid: 61e18b09d0110604b9ffee7b751ab873, type: 3}
+      propertyPath: adsRecoilX
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3939917723211062072, guid: 61e18b09d0110604b9ffee7b751ab873, type: 3}
+      propertyPath: adsRecoilY
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3939917723211062072, guid: 61e18b09d0110604b9ffee7b751ab873, type: 3}
       propertyPath: recoilHipX
@@ -1086,13 +1105,17 @@ PrefabInstance:
       value: 0.35
       objectReference: {fileID: 0}
     - target: {fileID: 3939917723211062072, guid: 61e18b09d0110604b9ffee7b751ab873, type: 3}
+      propertyPath: reloadTime
+      value: 1.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3939917723211062072, guid: 61e18b09d0110604b9ffee7b751ab873, type: 3}
       propertyPath: snappiness
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3939917723211062072, guid: 61e18b09d0110604b9ffee7b751ab873, type: 3}
       propertyPath: crosshairUI
       value: 
-      objectReference: {fileID: 2749423320827198397, guid: ecc790622773b1648a5218ab352451c6, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 3939917723211062072, guid: 61e18b09d0110604b9ffee7b751ab873, type: 3}
       propertyPath: returnSpeed
       value: 3
@@ -1103,11 +1126,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3939917723211062072, guid: 61e18b09d0110604b9ffee7b751ab873, type: 3}
       propertyPath: aimDistanceY
-      value: 0.06
+      value: 0.075
       objectReference: {fileID: 0}
     - target: {fileID: 3939917723211062072, guid: 61e18b09d0110604b9ffee7b751ab873, type: 3}
       propertyPath: aimDistanceZ
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3939917723211062072, guid: 61e18b09d0110604b9ffee7b751ab873, type: 3}
+      propertyPath: aimSmoothing
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 3939917723211062072, guid: 61e18b09d0110604b9ffee7b751ab873, type: 3}
       propertyPath: muzzleFlashFX
@@ -1119,11 +1146,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3939917723211062072, guid: 61e18b09d0110604b9ffee7b751ab873, type: 3}
       propertyPath: normalSmoothing
-      value: 10
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3939917723211062072, guid: 61e18b09d0110604b9ffee7b751ab873, type: 3}
+      propertyPath: shootMask.m_Bits
+      value: 1023
+      objectReference: {fileID: 0}
+    - target: {fileID: 3939917723211062072, guid: 61e18b09d0110604b9ffee7b751ab873, type: 3}
+      propertyPath: aimSmoothRotation
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 3939917723211062072, guid: 61e18b09d0110604b9ffee7b751ab873, type: 3}
       propertyPath: normalSmoothRotation
-      value: 12
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3956281761325903955, guid: 61e18b09d0110604b9ffee7b751ab873, type: 3}
       propertyPath: m_CastShadows

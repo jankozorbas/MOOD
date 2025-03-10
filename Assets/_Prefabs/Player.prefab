@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1399886637581054263}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 5, z: 0}
+  m_LocalPosition: {x: 0, y: 9, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -636,6 +636,8 @@ MonoBehaviour:
   moveSpeed: 0
   runSpeed: 7
   crouchSpeed: 4
+  aimStandSpeed: 3
+  aimCrouchSpeed: 1
   jumpHeight: 1
   gravity: -29.43
   playerMask:
@@ -953,11 +955,29 @@ MonoBehaviour:
   currentReserveAmmo: 30
   muzzleFlashFX: {fileID: 4103815858468827302}
   impactFX: {fileID: 7458544018217506191, guid: 716e7bd78d41c5e4aa026e347c5fbc70, type: 3}
+  crosshairUI: {fileID: 0}
   snappiness: 4
   returnSpeed: 3
   recoilHipX: -1.5
   recoilHipY: 1
   recoilHipZ: 0.35
+  adsRecoilX: -1
+  adsRecoilY: -1
+  adsRecoilZ: 0.35
+  recoilX: 0
+  recoilY: 0
+  recoilZ: 0
+  aimDistanceX: -0.2
+  aimDistanceY: -0.1
+  aimDistanceZ: -0.3
+  normalFOV: 60
+  aimFOV: 30
+  aimSpeed: 8
+  fovSpeed: 5
+  aimSmoothing: 0.3
+  aimSmoothRotation: 0.3
+  normalSmoothing: 10
+  normalSmoothRotation: 12
 --- !u!1001 &4247713072751899173
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1196,11 +1216,29 @@ MonoBehaviour:
   currentReserveAmmo: 30
   muzzleFlashFX: {fileID: 6660191185195355716}
   impactFX: {fileID: 7458544018217506191, guid: 716e7bd78d41c5e4aa026e347c5fbc70, type: 3}
+  crosshairUI: {fileID: 0}
   snappiness: 3
   returnSpeed: 5
   recoilHipX: -2
   recoilHipY: 2
   recoilHipZ: 0.35
+  adsRecoilX: -1
+  adsRecoilY: -1
+  adsRecoilZ: 0.35
+  recoilX: 0
+  recoilY: 0
+  recoilZ: 0
+  aimDistanceX: -0.2
+  aimDistanceY: -0.1
+  aimDistanceZ: -0.3
+  normalFOV: 60
+  aimFOV: 30
+  aimSpeed: 8
+  fovSpeed: 5
+  aimSmoothing: 0.3
+  aimSmoothRotation: 0.3
+  normalSmoothing: 10
+  normalSmoothRotation: 12
 --- !u!4 &5751666522406633338 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e74982a3110568c4795cbe1868fc97f4, type: 3}

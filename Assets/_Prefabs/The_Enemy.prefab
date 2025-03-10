@@ -27,8 +27,8 @@ Transform:
   m_GameObject: {fileID: 2158374540770984835}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 5, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: 0, y: 9, z: 0}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 437576383849903583}
@@ -371,11 +371,13 @@ MonoBehaviour:
     m_Bits: 128
   projectile: {fileID: 6669453121560277326, guid: c8382125768442345a9e3237133b2d01, type: 3}
   gunPoint: {fileID: 3915116237502303670}
-  enemyHealth: 50
+  enemyHealth: 100
   sightRange: 20
   attackRange: 12
   patrolSpeed: 2
-  chaseSpeed: 4
+  chaseSpeed: 6
+  hitSpeedMultiplier: 0.35
+  hitSpeedTime: 0.2
   isCircuit: 0
   closeEnough: 1.5
   stopTime: 2
@@ -383,7 +385,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  timeBetweenAttacks: 0.2
+  timeBetweenAttacks: 0.8
   forwardShootForce: 32
   upwardsShootForce: 2
 --- !u!1 &6717644173300159299

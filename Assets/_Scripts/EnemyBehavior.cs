@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -21,6 +22,8 @@ public class EnemyBehavior : MonoBehaviour
     [SerializeField] private float attackRange;
     [SerializeField] private float patrolSpeed = 2f;
     [SerializeField] private float chaseSpeed = 4f;
+    [SerializeField] private float hitSpeedMultiplier = .35f;
+    [SerializeField] private float hitSpeedTime = 1f;
 
     [Header("Patrolling")]
     [Space(10)]
@@ -35,7 +38,6 @@ public class EnemyBehavior : MonoBehaviour
     private int currentTargetIndex = 0;
     private float stopTimer = 0f;
 
-     
     private Vector3 walkPoint;
     private bool walkPointSet;
 
@@ -51,6 +53,9 @@ public class EnemyBehavior : MonoBehaviour
 
     private bool canAttack = true;
     private bool isDead = false;
+    private bool isPatrolling = true;
+    private bool isChasing = false;
+    private float speedMultiplier = 1f;
 
     public bool IsDead => isDead;
 
@@ -72,8 +77,18 @@ public class EnemyBehavior : MonoBehaviour
         isPlayerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         isPlayerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
-        if (!isPlayerInSightRange && !isPlayerInAttackRange && !isDead) Patrolling();
-        if (isPlayerInSightRange && !isPlayerInAttackRange && !isDead) Chasing();
+        if (!isPlayerInSightRange && !isPlayerInAttackRange && !isDead)
+        {
+            Patrolling();
+            UpdateSpeed();
+        }
+
+        if (isPlayerInSightRange && !isPlayerInAttackRange && !isDead)
+        {
+            Chasing();
+            UpdateSpeed();
+        }
+
         if (isPlayerInSightRange && isPlayerInAttackRange && !isDead) Attacking();
     }
 
@@ -81,6 +96,8 @@ public class EnemyBehavior : MonoBehaviour
     {
         animator.SetBool("isShooting", false);
         animator.SetBool("isChasing", false);
+        isPatrolling = true;
+        isChasing = false;
 
         agent.speed = patrolSpeed;
         
@@ -163,6 +180,9 @@ public class EnemyBehavior : MonoBehaviour
 
     private void Chasing()
     {
+        isPatrolling = false;
+        isChasing = true;
+
         agent.speed = chaseSpeed;
         agent.isStopped = false;
         agent.SetDestination(player.position);
@@ -172,6 +192,9 @@ public class EnemyBehavior : MonoBehaviour
 
     private void Attacking()
     {
+        isPatrolling = false;
+        isChasing = false;
+
         animator.SetBool("isChasing", false);
         animator.SetBool("isShooting", true);
 
@@ -204,10 +227,27 @@ public class EnemyBehavior : MonoBehaviour
     {
         enemyHealth -= damage;
 
+        StartCoroutine(SlowDown());
+
         if (enemyHealth <= 0)
         {
             Die();
         }
+    }
+
+    private IEnumerator SlowDown()
+    {
+        speedMultiplier = hitSpeedMultiplier;
+        UpdateSpeed();
+        yield return new WaitForSeconds(hitSpeedTime);
+        speedMultiplier = 1f;
+        UpdateSpeed();
+    }
+
+    private void UpdateSpeed()
+    {
+        if (isPatrolling) agent.speed = patrolSpeed * speedMultiplier;
+        if (isChasing) agent.speed = chaseSpeed * speedMultiplier;
     }
 
     private void Die()
@@ -216,7 +256,8 @@ public class EnemyBehavior : MonoBehaviour
         isDead = true;
         agent.isStopped = true;
         rb.isKinematic = true;
-        Destroy(gameObject, 6f);
+        GetComponent<CapsuleCollider>().enabled = false;
+        Destroy(gameObject, 5f);
     }
 
     private void OnDrawGizmos()
