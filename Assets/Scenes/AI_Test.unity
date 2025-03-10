@@ -6657,14 +6657,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9b5207602f68e84c9bad66956f0dcd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCamera: {fileID: 1867479221}
-  aimDistanceX: -0.2
-  aimDistanceY: 0
-  aimDistanceZ: 0
-  normalFOV: 60
-  aimFOV: 30
-  aimSpeed: 8
-  fovSpeed: 5
 --- !u!1001 &861275538
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6894,7 +6886,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7180510061003146559, guid: 61e18b09d0110604b9ffee7b751ab873, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7560870288561692549, guid: 61e18b09d0110604b9ffee7b751ab873, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7276,6 +7268,46 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1494583843}
     m_Modifications:
+    - target: {fileID: 3467743585090375949, guid: 86bc6ee62c2a531429043cc7209823ca, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.107
+      objectReference: {fileID: 0}
+    - target: {fileID: 3467743585090375949, guid: 86bc6ee62c2a531429043cc7209823ca, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.103
+      objectReference: {fileID: 0}
+    - target: {fileID: 3467743585090375949, guid: 86bc6ee62c2a531429043cc7209823ca, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.1234
+      objectReference: {fileID: 0}
+    - target: {fileID: 3467743585090375949, guid: 86bc6ee62c2a531429043cc7209823ca, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.29374027
+      objectReference: {fileID: 0}
+    - target: {fileID: 3467743585090375949, guid: 86bc6ee62c2a531429043cc7209823ca, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.6067008
+      objectReference: {fileID: 0}
+    - target: {fileID: 3467743585090375949, guid: 86bc6ee62c2a531429043cc7209823ca, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.35125893
+      objectReference: {fileID: 0}
+    - target: {fileID: 3467743585090375949, guid: 86bc6ee62c2a531429043cc7209823ca, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.6498062
+      objectReference: {fileID: 0}
+    - target: {fileID: 3467743585090375949, guid: 86bc6ee62c2a531429043cc7209823ca, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -125.617004
+      objectReference: {fileID: 0}
+    - target: {fileID: 3467743585090375949, guid: 86bc6ee62c2a531429043cc7209823ca, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -91.679016
+      objectReference: {fileID: 0}
+    - target: {fileID: 3467743585090375949, guid: 86bc6ee62c2a531429043cc7209823ca, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -4.378998
+      objectReference: {fileID: 0}
     - target: {fileID: 7430035214289994593, guid: 86bc6ee62c2a531429043cc7209823ca, type: 3}
       propertyPath: m_Name
       value: Pistol_reload
@@ -8472,14 +8504,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9b5207602f68e84c9bad66956f0dcd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCamera: {fileID: 1867479221}
-  aimDistanceX: -0.226
-  aimDistanceY: 0.06
-  aimDistanceZ: 0
-  normalFOV: 60
-  aimFOV: 30
-  aimSpeed: 8
-  fovSpeed: 7
 --- !u!1001 &1060587609
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9433,11 +9457,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000013041734426, guid: d803e729730d97a4e89edf13b602b3f4, type: 3}
   m_PrefabInstance: {fileID: 1155569518}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1157790275 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5181899194764123408, guid: 0ac2e4de28d02a24da48d994ae3810e5, type: 3}
-  m_PrefabInstance: {fileID: 3584141151494685389}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1158907277
 PrefabInstance:
@@ -13655,26 +13674,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 746052c3a87fa6845a6c6b1e89d438ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 8
-  whatIsPlayer:
-    serializedVersion: 2
-    m_Bits: 128
-  projectile: {fileID: 6669453121560277326, guid: c8382125768442345a9e3237133b2d01, type: 3}
-  gunPoint: {fileID: 1157790275}
-  enemyHealth: 50
-  sightRange: 20
-  attackRange: 10
-  isCircuit: 0
-  stopDuration: 8.5
-  patrolPoints:
-  - {fileID: 143417774}
-  - {fileID: 2055796202}
-  - {fileID: 481543508}
-  timeBetweenAttacks: 0.5
-  forwardShootForce: 32
-  upwardsShootForce: 2
 --- !u!1001 &1711719191
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14738,11 +14737,6 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000010053503894, guid: b050e4362d66a254db6b52450e0b1ea2, type: 3}
   m_PrefabInstance: {fileID: 1640598320}
-  m_PrefabAsset: {fileID: 0}
---- !u!20 &1867479221 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 5770429942386966462, guid: adb957999c255fc45bac8cdb2b17beca, type: 3}
-  m_PrefabInstance: {fileID: 994724022}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1867508717
 PrefabInstance:
