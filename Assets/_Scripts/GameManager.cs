@@ -47,6 +47,12 @@ public class GameManager : MonoBehaviour
         OnKeyCountChanged?.Invoke(keyCount);
     }
 
+    public void RemoveKey()
+    {
+        keyCount--;
+        OnKeyCountChanged?.Invoke(keyCount);
+    }
+
     public int GetKeyCount() => keyCount;
 
     private void InitializeTimer()

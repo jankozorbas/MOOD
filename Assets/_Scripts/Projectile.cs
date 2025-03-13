@@ -16,8 +16,11 @@ public class Projectile : MonoBehaviour
     {
         if (collision.collider.CompareTag("Player"))
         {
-            playerBehavior.TakeDamage(Random.Range(minDamage, maxDamage));
-            Destroy(gameObject);
+            if (playerBehavior.playerHealth > 0)
+            {
+                playerBehavior.TakeDamage(Random.Range(minDamage, maxDamage));
+                Destroy(gameObject);
+            }
         }
         else if (collision != null)
             Destroy(gameObject);

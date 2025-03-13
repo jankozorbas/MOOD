@@ -111,7 +111,6 @@ public class Gun : MonoBehaviour
         Reloading();
         Shooting();
         AimDownSight();
-        Debug.Log(originalPosition);
     }
 
     private void Reloading()

@@ -117,6 +117,9 @@ public class PlayerBehavior : MonoBehaviour
 
     private void CheckIsGrounded()
     {
+        //Vector3 groundBox = new Vector3(.9f, .35f, .75f);
+        //isGrounded = Physics.CheckBox(groundCheck.position, groundBox, Quaternion.identity, groundMask);
+
         isGrounded = Physics.CheckSphere(groundCheck.position, groundRadius, groundMask);
 
         if (isGrounded && currentVelocity.y < 0f)
@@ -268,9 +271,13 @@ public class PlayerBehavior : MonoBehaviour
 
         StartCoroutine(SlowDown());
 
-        OnDamageTaken?.Invoke(playerHealth);
+        if (playerHealth <= 0)
+        {
+            playerHealth = 0;
+            Die();
+        }
 
-        if (playerHealth <= 0) Die();
+        OnDamageTaken?.Invoke(playerHealth);
     }
 
     private IEnumerator SlowDown()
@@ -346,7 +353,7 @@ public class PlayerBehavior : MonoBehaviour
                         if (CollectHealth()) Destroy(collider.gameObject);
                         break;
                     }
-                    else if (collider.gameObject.CompareTag("Bomb") && GameManager.Instance.GetKeyCount() >= GameManager.Instance.KeysNeeded)
+                    else if (collider.gameObject.CompareTag("Bomb")) //&& GameManager.Instance.GetKeyCount() >= GameManager.Instance.KeysNeeded)
                     {
                         Win();
                         Destroy(collider.gameObject);
@@ -393,6 +400,7 @@ public class PlayerBehavior : MonoBehaviour
 
     private void Lose()
     {
+        playerHealth = 0;
         canMove = false;
         isDead = true;
         GameManager.Instance.LoseGame();
@@ -402,5 +410,9 @@ public class PlayerBehavior : MonoBehaviour
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(interactionPoint.position, interactionRadius);
+
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(groundCheck.position, groundRadius);
+        //Gizmos.DrawCube(groundCheck.position, new Vector3(.9f, .35f, .75f));
     }
 }
