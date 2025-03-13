@@ -1023,10 +1023,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Crosshair Canvas
       objectReference: {fileID: 0}
-    - target: {fileID: 8643087105696007404, guid: ecc790622773b1648a5218ab352451c6, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1439,8 +1435,8 @@ SceneRoots:
   - {fileID: 1265061970}
   - {fileID: 268945401}
   - {fileID: 199871511}
-  - {fileID: 5660039736067714192}
   - {fileID: 1885227391521911662}
   - {fileID: 8285608122757339265}
   - {fileID: 7271603916006049537}
   - {fileID: 274263125}
+  - {fileID: 5660039736067714192}
