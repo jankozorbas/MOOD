@@ -4,38 +4,18 @@ using UnityEngine;
 
 public class Keypad : MonoBehaviour
 {
-    [SerializeField] private Transform gatePivot;
+    [SerializeField] private List<Transform> gatePivots;
     [SerializeField] private float openAngle = -90f;
     [SerializeField] private float openDuration = 1.5f;
 
     private bool isOpen = false;
-    private Quaternion closedRotation;
-    private Quaternion openRotation;
+    private bool playerInRange = false;
 
-    private void Start()
+    private void Update()
     {
-        closedRotation = gatePivot.rotation;
-        openRotation = Quaternion.Euler(gatePivot.eulerAngles.x + openAngle, gatePivot.eulerAngles.y, gatePivot.eulerAngles.z);
-    }
+        if (!playerInRange) return;
 
-    private IEnumerator OpenGate()
-    {
-        float elapsedTime = 0f;
-
-        while (elapsedTime < openDuration)
-        {
-            float lerpProgress = elapsedTime / openDuration;
-            gatePivot.rotation = Quaternion.Lerp(closedRotation, openRotation, lerpProgress);
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-
-        gatePivot.rotation = openRotation;
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.CompareTag("Player") && Input.GetKeyDown(KeyCode.E) && !isOpen)
+        if (Input.GetKeyDown(KeyCode.E) && !isOpen)
         {
             if (GameManager.Instance.GetKeyCount() > 0)
             {
@@ -49,6 +29,55 @@ public class Keypad : MonoBehaviour
                 //UI KEY NEEDED
                 Debug.Log("Key needed");
             }
+        }
+    }
+
+    private IEnumerator OpenGate()
+    {
+        float elapsedTime = 0f;
+        Dictionary<Transform, Quaternion> closedRotations = new();
+        Dictionary<Transform, Quaternion> openRotations = new();
+
+        for (int i = 0; i < gatePivots.Count; i++)
+        {
+            Transform gate = gatePivots[i];
+            float adjustedAngle = i % 2  == 0 ? openAngle : -openAngle;
+            closedRotations[gate] = gate.rotation;
+            openRotations[gate] = Quaternion.Euler(gate.eulerAngles.x + adjustedAngle, gate.eulerAngles.y, gate.eulerAngles.z);
+        }
+
+        while (elapsedTime < openDuration)
+        {
+            float lerpProgress = elapsedTime / openDuration;
+            
+            foreach (Transform gate in gatePivots)
+            {
+                gate.rotation = Quaternion.Lerp(closedRotations[gate], openRotations[gate], lerpProgress);
+            }
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        foreach (Transform gate in gatePivots)
+        {
+            gate.rotation = openRotations[gate];
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerInRange = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerInRange = false;
         }
     }
 }
