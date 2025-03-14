@@ -303,9 +303,37 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 225582819}
     - target: {fileID: 6181146104263891998, guid: 9f7ac38da823672479cf3c4fc1065c30, type: 3}
+      propertyPath: keypad
+      value: 
+      objectReference: {fileID: 225582821}
+    - target: {fileID: 6181146104263891998, guid: 9f7ac38da823672479cf3c4fc1065c30, type: 3}
       propertyPath: gatePivot
       value: 
       objectReference: {fileID: 225582820}
+    - target: {fileID: 6181146104263891998, guid: 9f7ac38da823672479cf3c4fc1065c30, type: 3}
+      propertyPath: openColor.b
+      value: 0.21800104
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181146104263891998, guid: 9f7ac38da823672479cf3c4fc1065c30, type: 3}
+      propertyPath: openColor.g
+      value: 0.754717
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181146104263891998, guid: 9f7ac38da823672479cf3c4fc1065c30, type: 3}
+      propertyPath: openColor.r
+      value: 0.16731933
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181146104263891998, guid: 9f7ac38da823672479cf3c4fc1065c30, type: 3}
+      propertyPath: closedColor.b
+      value: 0.13007298
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181146104263891998, guid: 9f7ac38da823672479cf3c4fc1065c30, type: 3}
+      propertyPath: closedColor.g
+      value: 0.13007298
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181146104263891998, guid: 9f7ac38da823672479cf3c4fc1065c30, type: 3}
+      propertyPath: closedColor.r
+      value: 0.745283
+      objectReference: {fileID: 0}
     - target: {fileID: 6181146104263891998, guid: 9f7ac38da823672479cf3c4fc1065c30, type: 3}
       propertyPath: gatePivots.Array.size
       value: 2
@@ -336,6 +364,11 @@ GameObject:
 --- !u!4 &225582820 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 381320136275147294, guid: 9f7ac38da823672479cf3c4fc1065c30, type: 3}
+  m_PrefabInstance: {fileID: 225582817}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &225582821 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1824192520468053100, guid: 9f7ac38da823672479cf3c4fc1065c30, type: 3}
   m_PrefabInstance: {fileID: 225582817}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &268945400
@@ -792,6 +825,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 527789168132508722, guid: 9f7ac38da823672479cf3c4fc1065c30, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1824192520468053100, guid: 9f7ac38da823672479cf3c4fc1065c30, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4405132607323484235, guid: 9f7ac38da823672479cf3c4fc1065c30, type: 3}

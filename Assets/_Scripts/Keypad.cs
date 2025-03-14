@@ -5,11 +5,26 @@ using UnityEngine;
 public class Keypad : MonoBehaviour
 {
     [SerializeField] private List<Transform> gatePivots;
+    [SerializeField] private Color closedColor;
+    [SerializeField] private Color openColor;
+    [SerializeField] private GameObject keypad;
     [SerializeField] private float openAngle = -90f;
     [SerializeField] private float openDuration = 1.5f;
 
     private bool isOpen = false;
     private bool playerInRange = false;
+    private Light keypadLight;
+
+    private void Awake()
+    {
+        keypadLight = keypad.GetComponentInChildren<Light>();
+        keypadLight.type = LightType.Point;
+    }
+
+    private void Start()
+    {
+        keypadLight.color = closedColor;
+    }
 
     private void Update()
     {
@@ -22,6 +37,7 @@ public class Keypad : MonoBehaviour
                 GameManager.Instance.RemoveKey();
                 StartCoroutine(OpenGate());
                 isOpen = true;
+                keypadLight.color = openColor;
                 Debug.Log("Opened");
             }
             else

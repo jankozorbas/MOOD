@@ -11,6 +11,7 @@ TagManager:
   - Pistol
   - Rifle
   - Enemy
+  - Keypad
   layers:
   - Default
   - TransparentFX
