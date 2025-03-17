@@ -834,6 +834,10 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1948602425107289516, guid: 86bc6ee62c2a531429043cc7209823ca, type: 3}
+      propertyPath: impactFX
+      value: 
+      objectReference: {fileID: 1000010355441670, guid: 02a509a7fa70ed740ba4197e20c5d32d, type: 3}
+    - target: {fileID: 1948602425107289516, guid: 86bc6ee62c2a531429043cc7209823ca, type: 3}
       propertyPath: startAmmo
       value: 15
       objectReference: {fileID: 0}
@@ -1208,6 +1212,10 @@ PrefabInstance:
       propertyPath: fovSpeed
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 3939917723211062072, guid: 61e18b09d0110604b9ffee7b751ab873, type: 3}
+      propertyPath: impactFX
+      value: 
+      objectReference: {fileID: 1000010355441670, guid: 02a509a7fa70ed740ba4197e20c5d32d, type: 3}
     - target: {fileID: 3939917723211062072, guid: 61e18b09d0110604b9ffee7b751ab873, type: 3}
       propertyPath: adsRecoilX
       value: -0.5
