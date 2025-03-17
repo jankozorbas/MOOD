@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     private bool isTimerActive;
 
     public int KeysNeeded => keysNeeded;
+    public bool IsTimerActive { get { return isTimerActive; } set { isTimerActive = value; } }
 
     private void Awake()
     {

@@ -50,6 +50,11 @@ public class Keypad : MonoBehaviour
 
     private IEnumerator OpenGate()
     {
+        foreach (Transform gate in gatePivots)
+        {
+            gate.GetComponentInChildren<BoxCollider>().enabled = false;
+        }
+        
         float elapsedTime = 0f;
         Dictionary<Transform, Quaternion> closedRotations = new();
         Dictionary<Transform, Quaternion> openRotations = new();
@@ -67,7 +72,7 @@ public class Keypad : MonoBehaviour
             float lerpProgress = elapsedTime / openDuration;
             
             foreach (Transform gate in gatePivots)
-            {
+            { 
                 gate.rotation = Quaternion.Lerp(closedRotations[gate], openRotations[gate], lerpProgress);
             }
 

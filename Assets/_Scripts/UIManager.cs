@@ -1,5 +1,7 @@
 using UnityEngine;
 using TMPro;
+using System.Collections;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -9,6 +11,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text healthText;
     [SerializeField] private TMP_Text timerText;
     [SerializeField] private TMP_Text ammoText;
+    [SerializeField] private Image damageIndicator;
     
     public TMP_Text interactionText;
 
@@ -51,11 +54,36 @@ public class UIManager : MonoBehaviour
         timerText.text = string.Format("{0:00} : {1:00}", minutes, seconds);
     }
 
+    public void ShowDamageIndicator(int timeDisplayed)
+    {
+        StartCoroutine(FlashRed());
+    }
+
+    private IEnumerator FlashRed()
+    {
+        float maxAlpha = .5f;
+        float fadeDuration = .5f;
+        
+        Color color = damageIndicator.color;
+        color.a = maxAlpha;
+        damageIndicator.color = color;
+
+        float elapsedTime = 0f;
+        while (elapsedTime < fadeDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            color.a = Mathf.Lerp(maxAlpha, 0, elapsedTime / fadeDuration);
+            damageIndicator.color = color;
+            yield return null;
+        }
+    }
+
     private void OnEnable()
     {
         GameManager.OnKeyCountChanged += UpdateKeyUI;
         HealthPack.OnHealthPackPickedUp += UpdateHealthUI;
         PlayerBehavior.OnDamageTaken += UpdateHealthUI;
+        PlayerBehavior.OnDamageTaken += ShowDamageIndicator;
         Gun.OnAmmoChanged += UpdateAmmoUI;
         GunSwitcher.OnWeaponChanged += UpdateAmmoUI;
     }
@@ -65,6 +93,7 @@ public class UIManager : MonoBehaviour
         GameManager.OnKeyCountChanged -= UpdateKeyUI;
         HealthPack.OnHealthPackPickedUp -= UpdateHealthUI;
         PlayerBehavior.OnDamageTaken -= UpdateHealthUI;
+        PlayerBehavior.OnDamageTaken -= ShowDamageIndicator;
         Gun.OnAmmoChanged -= UpdateAmmoUI;
         GunSwitcher.OnWeaponChanged -= UpdateAmmoUI;
     }
