@@ -68,6 +68,7 @@ public class Gun : MonoBehaviour
     private Animator animator;
     private Recoil recoilScript;
     private GunMovement gunMovement;
+    private GunSwitcher gunSwitcher;
     private PlayerBehavior playerBehavior;
     private float nextShootTime = 0f;
     private bool isReloading = false;
@@ -97,6 +98,7 @@ public class Gun : MonoBehaviour
         animator = FindObjectOfType<GunSwitcher>().gameObject.GetComponentInChildren<Animator>();
         recoilScript = FindObjectOfType<Recoil>().gameObject.GetComponent<Recoil>();
         gunMovement = FindObjectOfType<GunMovement>().gameObject.GetComponent<GunMovement>();
+        gunSwitcher = FindObjectOfType<GunSwitcher>().GetComponent<GunSwitcher>();
         playerBehavior = FindObjectOfType<PlayerBehavior>().gameObject.GetComponent<PlayerBehavior>();
     }
 
@@ -277,11 +279,17 @@ public class Gun : MonoBehaviour
         Vector3 targetPosition = originalPosition + aimDistance;
 
         transform.localPosition = Vector3.Lerp(transform.localPosition, targetPosition, Time.deltaTime * aimSpeed);
+
+        // fixes the weird positioning of the gun if you switch the weapon before it finishes lerping
+        if (Vector3.Distance(transform.localPosition, targetPosition) < 0.01f) gunSwitcher.enabled = false;
     }
 
     private void MoveGunBack()
     {
         transform.localPosition = Vector3.Lerp(transform.localPosition, originalPosition, Time.deltaTime * aimSpeed);
+
+        // fixes the weird positioning of the gun if you switch the weapon before it finishes lerping
+        if (Vector3.Distance(transform.localPosition, originalPosition) < 0.01f) gunSwitcher.enabled = true;
     }
 
     private void AdjustFOV(float targetFOV)
