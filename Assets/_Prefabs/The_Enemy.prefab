@@ -471,6 +471,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Soldier_idle
       objectReference: {fileID: 0}
+    - target: {fileID: 3329501774882081321, guid: 60bc97206ead6dd45b13a553d86ec49a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0822153ddf62059428f5206a0e0a5d96, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
