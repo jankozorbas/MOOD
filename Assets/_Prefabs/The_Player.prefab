@@ -851,7 +851,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1948602425107289516, guid: 86bc6ee62c2a531429043cc7209823ca, type: 3}
       propertyPath: reloadTime
-      value: 1.4
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 1948602425107289516, guid: 86bc6ee62c2a531429043cc7209823ca, type: 3}
       propertyPath: snappiness
