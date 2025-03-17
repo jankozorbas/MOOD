@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class MouseMovement : MonoBehaviour
 {
-    [SerializeField] private float mouseSensitivity = 100f;
+    [SerializeField] [Range(.1f, 3f)] private float mouseSensitivity = 1f;
 
     private Transform player;
     private float cameraRotation = 0f;
+
+    public float MouseSensitivity { get { return mouseSensitivity; } set { mouseSensitivity = value; } }
 
     private void Awake()
     {
@@ -23,8 +25,8 @@ public class MouseMovement : MonoBehaviour
 
     private void RotateMouse()
     {
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * 100f * Time.deltaTime;
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * 100f * Time.deltaTime;
 
         cameraRotation -= mouseY;
         cameraRotation = Mathf.Clamp(cameraRotation, -90f, 90f);

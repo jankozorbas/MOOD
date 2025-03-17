@@ -199,7 +199,11 @@ public class Gun : MonoBehaviour
             {
                 EnemyBehavior enemy = hit.transform.gameObject.GetComponent<EnemyBehavior>();
                 if (enemy != null && !enemy.IsDead)
+                {
                     enemy.TakeDamage(damage);
+                    return;
+                }
+                    
             }
 
             /*if (hit.rigidbody != null)

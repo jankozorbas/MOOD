@@ -2,23 +2,31 @@ using UnityEngine;
 using TMPro;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance {  get; private set; }
 
+    [SerializeField] private GameObject pauseMenu;
     [SerializeField] private TMP_Text keyCountText;
     [SerializeField] private TMP_Text healthText;
     [SerializeField] private TMP_Text timerText;
     [SerializeField] private TMP_Text ammoText;
     [SerializeField] private Image damageIndicator;
-    
+    [SerializeField] private Slider sensitivitySlider;
+
+    private MouseMovement mouseMovement;
+    private bool isPaused = false;
+
     public TMP_Text interactionText;
 
     private void Awake()
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
+
+        mouseMovement = FindObjectOfType<MouseMovement>();
     }
 
     private void Start()
@@ -27,6 +35,55 @@ public class UIManager : MonoBehaviour
         UpdateHealthUI(FindObjectOfType<PlayerBehavior>().GetComponent<PlayerBehavior>().playerHealth);
 
         interactionText.gameObject.SetActive(false);
+
+        mouseMovement.MouseSensitivity = sensitivitySlider.value;
+
+        sensitivitySlider.onValueChanged.AddListener(UpdateSliderValue);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (!isPaused) PauseGame();
+            else ResumeGame();
+        }
+    }
+
+    private void PauseGame()
+    {
+        pauseMenu.SetActive(true);
+        isPaused = true;
+        AudioListener.pause = true;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        Time.timeScale = 0f;
+    }
+
+    private void ResumeGame()
+    {
+        pauseMenu.SetActive(false);
+        isPaused = false;
+        AudioListener.pause = false;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Time.timeScale = 1f;
+    }
+
+    public void RestartGame()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
+    private void UpdateSliderValue(float newValue)
+    {
+        mouseMovement.MouseSensitivity = newValue;
     }
 
     private void UpdateKeyUI(int keyCount)
