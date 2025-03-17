@@ -74,22 +74,24 @@ public class EnemyBehavior : MonoBehaviour
 
     private void SetState()
     {
+        if (isDead) return;
+        
         isPlayerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         isPlayerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
-        if (!isPlayerInSightRange && !isPlayerInAttackRange && !isDead)
+        if (!isPlayerInSightRange && !isPlayerInAttackRange)
         {
             Patrolling();
             UpdateSpeed();
         }
 
-        if (isPlayerInSightRange && !isPlayerInAttackRange && !isDead)
+        if (isPlayerInSightRange && !isPlayerInAttackRange)
         {
             Chasing();
             UpdateSpeed();
         }
 
-        if (isPlayerInSightRange && isPlayerInAttackRange && !isDead) Attacking();
+        if (isPlayerInSightRange && isPlayerInAttackRange) Attacking();
     }
 
     private void Patrolling()
@@ -233,6 +235,9 @@ public class EnemyBehavior : MonoBehaviour
         {
             Die();
         }
+
+        sightRange = 60f; 
+        Attacking();
     }
 
     private IEnumerator SlowDown()
