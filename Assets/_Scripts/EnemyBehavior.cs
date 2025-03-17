@@ -4,6 +4,17 @@ using UnityEngine.AI;
 
 public class EnemyBehavior : MonoBehaviour
 {
+    public enum EnemyState
+    {
+        Patrolling,
+        Chasing,
+        Attacking,
+        Alerted,
+        Dead
+    }
+
+    private EnemyState currentState = EnemyState.Patrolling;
+
     [SerializeField] private LayerMask whatIsGround;
     [SerializeField] private LayerMask whatIsPlayer;
     [SerializeField] private GameObject projectile;
@@ -72,7 +83,49 @@ public class EnemyBehavior : MonoBehaviour
         SetState();
     }
 
+    void ChangeState(EnemyState newState)
+    {
+        if (currentState == EnemyState.Dead) return;
+        
+        currentState = newState;
+    }
+
     private void SetState()
+    {
+        if (currentState == EnemyState.Dead) return;
+
+        isPlayerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
+        isPlayerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
+
+        switch (currentState)
+        {
+            case EnemyState.Patrolling:
+                if (isPlayerInSightRange) ChangeState(EnemyState.Chasing);
+                Patrolling();
+                break;
+
+            case EnemyState.Chasing:
+                if (isPlayerInAttackRange) ChangeState(EnemyState.Attacking);
+                else if (!isPlayerInSightRange) ChangeState(EnemyState.Patrolling);
+                Chasing();
+                break;
+
+            case EnemyState.Attacking:
+                if (!isPlayerInAttackRange) ChangeState(EnemyState.Chasing);
+                Attacking();
+                break;
+
+            case EnemyState.Alerted:
+                if (isPlayerInSightRange) ChangeState(EnemyState.Chasing);
+                break;
+
+            case EnemyState.Dead:
+                Die();
+                break;
+        }
+    }
+
+    /*private void SetState()
     {
         if (isDead) return;
         
@@ -92,7 +145,28 @@ public class EnemyBehavior : MonoBehaviour
         }
 
         if (isPlayerInSightRange && isPlayerInAttackRange) Attacking();
-    }
+    }*/
+
+    /*private void Patrolling()
+    {
+        if (!walkPointSet) SearchForWalkPoint();
+        else agent.SetDestination(walkPoint);
+
+        Vector3 distanceFromWalkPoint = transform.position - walkPoint;
+
+        if (distanceFromWalkPoint.magnitude < 1f) walkPointSet = false;
+    }*/
+
+    /*private void SearchForWalkPoint()
+    {
+        // how to stop spawn walk points from being set inside of things?
+        float randomX = Random.Range(-walkPointRange, walkPointRange);
+        float randomZ = Random.Range(-walkPointRange, walkPointRange);
+
+        walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
+        
+        if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround)) walkPointSet = true;
+    }*/
 
     private void Patrolling()
     {
@@ -159,27 +233,6 @@ public class EnemyBehavior : MonoBehaviour
         else if (isWaiting) animator.SetFloat("Speed", 0f);
     }
 
-    /*private void Patrolling()
-    {
-        if (!walkPointSet) SearchForWalkPoint();
-        else agent.SetDestination(walkPoint);
-
-        Vector3 distanceFromWalkPoint = transform.position - walkPoint;
-
-        if (distanceFromWalkPoint.magnitude < 1f) walkPointSet = false;
-    }*/
-
-    /*private void SearchForWalkPoint()
-    {
-        // how to stop spawn walk points from being set inside of things?
-        float randomX = Random.Range(-walkPointRange, walkPointRange);
-        float randomZ = Random.Range(-walkPointRange, walkPointRange);
-
-        walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
-        
-        if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround)) walkPointSet = true;
-    }*/
-
     private void Chasing()
     {
         isPatrolling = false;
@@ -193,7 +246,7 @@ public class EnemyBehavior : MonoBehaviour
     }
 
     private void Attacking()
-    {
+    {   
         isPatrolling = false;
         isChasing = false;
 
@@ -233,11 +286,12 @@ public class EnemyBehavior : MonoBehaviour
 
         if (enemyHealth <= 0)
         {
+            ChangeState(EnemyState.Dead);
             Die();
         }
 
-        sightRange = 60f; 
-        Attacking();
+        sightRange *= 3f;
+        ChangeState(EnemyState.Alerted);
     }
 
     private IEnumerator SlowDown()
@@ -256,7 +310,7 @@ public class EnemyBehavior : MonoBehaviour
     }
 
     private void Die()
-    {
+    {  
         animator.SetTrigger("Death");
         isDead = true;
         agent.isStopped = true;
