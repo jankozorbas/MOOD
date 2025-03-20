@@ -67,6 +67,7 @@ public class EnemyBehavior : MonoBehaviour
     private bool hasAttacked;
     private bool isPlayerInSightRange;
     private bool isPlayerInAttackRange;
+    private float stateTransitionCooldown = 5f;
 
     private bool canAttack = true;
     private bool isDead = false;
@@ -112,7 +113,18 @@ public class EnemyBehavior : MonoBehaviour
 
             case EnemyState.Chasing:
                 if (isPlayerInAttackRange) ChangeState(EnemyState.Attacking);
-                else if (!isPlayerInSightRange) ChangeState(EnemyState.Patrolling);
+                else if (!isPlayerInSightRange)
+                {
+                    stateTransitionCooldown -= Time.deltaTime;
+
+                    if (stateTransitionCooldown <= 0f)
+                    {
+                        ChangeState(EnemyState.Patrolling);
+                        stateTransitionCooldown = 5f;
+                    }
+                }
+                else stateTransitionCooldown = 5f;
+
                 Chasing();
                 break;
 
