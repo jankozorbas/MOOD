@@ -3,24 +3,24 @@ using TMPro;
 
 public class TutorialPopup : MonoBehaviour
 {
-    public TextMeshProUGUI tutorialText; // Assign in Inspector
-    public Transform checkPosition; // Empty object for detection position
-    public Vector3 boxSize = new Vector3(2f, 2f, 2f); // Detection area size
-    public LayerMask playerLayer; // Assign "Player" layer in Inspector
-    public float displayTime = 2f; // Time in seconds before text disappears
+    public TextMeshProUGUI tutorialText;  // Assign the UI Text in Inspector
+    public Transform checkPosition;  // Empty object for detection area
+    public Vector3 boxSize = new Vector3(2f, 2f, 2f); // Adjust area size per trigger
+    public LayerMask playerLayer;  // Assign "Player" layer in Inspector
+    public float displayTime = 2f; // Time text stays visible
 
-    private bool hasTriggered = false; // Prevents text from showing again
+    private bool hasTriggered = false;  // Ensures the text appears only once
 
     void Update()
     {
-        if (hasTriggered) return; // If already triggered, do nothing
+        if (hasTriggered) return; // If triggered, don't run again
 
         Collider[] colliders = Physics.OverlapBox(checkPosition.position, boxSize / 2, Quaternion.identity, playerLayer);
-        if (colliders.Length > 0) // Player enters trigger area
+        if (colliders.Length > 0)
         {
             tutorialText.gameObject.SetActive(true);
-            hasTriggered = true; // Mark as triggered
-            Invoke("HideText", displayTime); // Hide after displayTime seconds
+            hasTriggered = true; // Mark this popup as "used"
+            Invoke("HideText", displayTime); // Hide after set time
         }
     }
 
@@ -31,7 +31,7 @@ public class TutorialPopup : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
+        Gizmos.color = Color.blue;
         Gizmos.DrawWireCube(checkPosition.position, boxSize);
     }
 }

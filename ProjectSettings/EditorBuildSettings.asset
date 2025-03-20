@@ -5,7 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Prototype.unity
     guid: df27e4543fdbb55498a565cfb2ef07dd
+  - enabled: 1
+    path: Assets/Scenes/Toby_Capstone_Level/Main_Level_Toby.unity
+    guid: 23a234a7e0b10eb4fa3fbbdacf1baa59
   m_configObjects: {}
