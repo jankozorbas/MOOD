@@ -57,6 +57,12 @@ public class EnemyBehavior : MonoBehaviour
     [SerializeField] private float timeBetweenAttacks;
     [SerializeField] private float forwardShootForce = 32f;
     [SerializeField] private float upwardsShootForce = 2f;
+    [Space(10)]
+
+    [Header("FX")]
+    [Space(10)]
+    [SerializeField] private GameObject hitParticlesPrefab;
+    [SerializeField] private GameObject bloodParticlesPrefab;
 
     private bool hasAttacked;
     private bool isPlayerInSightRange;
@@ -281,6 +287,8 @@ public class EnemyBehavior : MonoBehaviour
     public void TakeDamage(float damage)
     {
         enemyHealth -= damage;
+        GameObject hitParticlesObj = Instantiate(hitParticlesPrefab, transform.position, Quaternion.identity);
+        Destroy(hitParticlesObj, 2f);
 
         StartCoroutine(SlowDown());
 
@@ -316,6 +324,8 @@ public class EnemyBehavior : MonoBehaviour
         agent.isStopped = true;
         rb.isKinematic = true;
         GetComponent<CapsuleCollider>().enabled = false;
+        GameObject bloodParticlesObj = Instantiate(bloodParticlesPrefab, transform.position, Quaternion.identity);
+        Destroy(bloodParticlesObj, 5f);
         Destroy(gameObject, 5f);
     }
 
