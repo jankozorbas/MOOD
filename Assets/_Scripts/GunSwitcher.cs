@@ -28,6 +28,8 @@ public class GunSwitcher : MonoBehaviour
 
     private void ScrollWeapons()
     {
+        if (gun.IsAiming) return;
+        
         int previousSelectedWeapon = selectedWeapon;
 
         if (Input.GetAxis("Mouse ScrollWheel") > 0f)
@@ -54,6 +56,8 @@ public class GunSwitcher : MonoBehaviour
 
     private void NumberWeaponChange()
     {
+        if (gun.IsAiming) return;
+        
         int previousSelectedWeapon = selectedWeapon;
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
