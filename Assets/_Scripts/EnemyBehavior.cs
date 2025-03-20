@@ -288,7 +288,7 @@ public class EnemyBehavior : MonoBehaviour
         // change which projectile enemy is shooting based on the gun it is shooting (different damage)
         Rigidbody projectileRB = Instantiate(projectile, gunPoint.position, Quaternion.identity).GetComponent<Rigidbody>();
         projectileRB.AddForce(transform.forward * forwardShootForce, ForceMode.Impulse);
-        projectileRB.AddForce(transform.up * upwardsShootForce, ForceMode.Impulse);
+        //projectileRB.AddForce(transform.up * upwardsShootForce, ForceMode.Impulse);
     }
 
     private void ResetAttack()
