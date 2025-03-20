@@ -36,9 +36,7 @@ public class UIManager : MonoBehaviour
 
         interactionText.gameObject.SetActive(false);
 
-        mouseMovement.MouseSensitivity = sensitivitySlider.value;
-
-        sensitivitySlider.onValueChanged.AddListener(UpdateSliderValue);
+        LoadSensitivity();
     }
 
     private void Update()
@@ -83,7 +81,24 @@ public class UIManager : MonoBehaviour
 
     private void UpdateSliderValue(float newValue)
     {
-        mouseMovement.MouseSensitivity = newValue;
+        float roundedValue = Mathf.Round(newValue * 10f) / 10f;
+
+        mouseMovement.MouseSensitivity = roundedValue;
+        sensitivitySlider.value = roundedValue;
+        PlayerPrefs.SetFloat("MouseSensitivity", roundedValue);
+        PlayerPrefs.Save();
+    }
+
+    private void LoadSensitivity()
+    {
+        // Load saved sensitivity or use default 1f
+        float savedSensitivity = PlayerPrefs.GetFloat("MouseSensitivity", 1f);
+        // Apply it to the slider
+        sensitivitySlider.value = savedSensitivity;
+        // Apply it to the actual sensitivity variable;
+        mouseMovement.MouseSensitivity = savedSensitivity;
+        // Ensure changer are applied when the player interacts with the slider
+        sensitivitySlider.onValueChanged.AddListener(UpdateSliderValue);
     }
 
     private void UpdateKeyUI(int keyCount)
