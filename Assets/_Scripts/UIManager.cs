@@ -37,6 +37,7 @@ public class UIManager : MonoBehaviour
         interactionText.gameObject.SetActive(false);
 
         LoadSensitivity();
+        ResumeGame();
     }
 
     private void Update()

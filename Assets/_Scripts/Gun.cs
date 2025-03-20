@@ -9,7 +9,7 @@ public class Gun : MonoBehaviour
     [SerializeField] private float damage = 10f;
     [SerializeField] private float range = 100f;
     [SerializeField] private float fireRate = 10f;
-    [SerializeField] private float impactForce = 100f;
+    //[SerializeField] private float impactForce = 100f;
     [SerializeField] private float reloadTime = 2f;
     [SerializeField] private bool isAutomatic = false;
     [SerializeField] private LayerMask shootMask;
@@ -122,7 +122,12 @@ public class Gun : MonoBehaviour
         if (currentAmmo < maxAmmo)
         {
             if (Input.GetKeyDown(KeyCode.R) && currentReserveAmmo > 0)
+            {
                 StartCoroutine(ReloadRoutine());
+                // Play correct sound based on what gun it is
+                AudioManager.Instance.PlaySound("Reload");
+            }
+                
         }
     }
 
@@ -136,6 +141,8 @@ public class Gun : MonoBehaviour
                 nextShootTime = Time.time + 1f / fireRate; // the bigger the fire rate the less time between shots
                 Shoot();
             }
+            else if (Input.GetButtonDown("Fire1") && currentAmmo == 0)
+                AudioManager.Instance.PlaySound("NoAmmo");
         }
         else
         {
@@ -144,6 +151,8 @@ public class Gun : MonoBehaviour
                 nextShootTime = Time.time + 1f / fireRate; // the bigger the fire rate the less time between shots
                 Shoot();
             }
+            else if (Input.GetButtonDown("Fire1") && currentAmmo == 0)
+                AudioManager.Instance.PlaySound("NoAmmo");
         }
     }
 
@@ -183,6 +192,8 @@ public class Gun : MonoBehaviour
     {
         if (isReloading) return;
 
+        // Shoot sound based on which gun it is
+        AudioManager.Instance.PlaySound("Shoot");
         muzzleFlashFX.Play();
         recoilScript.RecoilOnShoot();
         currentAmmo--;

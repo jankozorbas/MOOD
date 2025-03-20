@@ -797,6 +797,71 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &752911015
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 752911017}
+  - component: {fileID: 752911016}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &752911016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 752911015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a022fb343dada2429a165b8b2a83365, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - clip: {fileID: 8300000, guid: fc1a9dadffeb3b247ac4c5bf0e2ef266, type: 3}
+    name: Placeholder
+    loop: 1
+    volume: 1
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: f37155778a0350a4c933dc099e10bbbd, type: 3}
+    name: NoAmmo
+    loop: 0
+    volume: 0.3
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 8b82fcaa43ad11747bb91ffcb7748d33, type: 3}
+    name: Shoot
+    loop: 0
+    volume: 0.8
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 96b91bb8cc714e34e9583ab409664abb, type: 3}
+    name: Reload
+    loop: 0
+    volume: 0.4
+    source: {fileID: 0}
+--- !u!4 &752911017
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 752911015}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &801823820
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2069,6 +2134,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 134336527}
+  - {fileID: 752911017}
   - {fileID: 5795324516526900273}
   - {fileID: 7689292379392314723}
   - {fileID: 1431855278}

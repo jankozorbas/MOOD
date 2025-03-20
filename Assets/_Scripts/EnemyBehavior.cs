@@ -56,7 +56,7 @@ public class EnemyBehavior : MonoBehaviour
     [Space(10)]
     [SerializeField] private float timeBetweenAttacks;
     [SerializeField] private float forwardShootForce = 32f;
-    [SerializeField] private float upwardsShootForce = 2f;
+    //[SerializeField] private float upwardsShootForce = 2f;
     [Space(10)]
 
     [Header("FX")]
@@ -69,7 +69,7 @@ public class EnemyBehavior : MonoBehaviour
     private bool isPlayerInAttackRange;
     private float stateTransitionCooldown = 5f;
 
-    private bool canAttack = true;
+    //private bool canAttack = true;
     private bool isDead = false;
     private bool isPatrolling = true;
     private bool isChasing = false;
