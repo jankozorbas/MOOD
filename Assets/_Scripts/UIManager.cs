@@ -81,8 +81,11 @@ public class UIManager : MonoBehaviour
 
     private void UpdateSliderValue(float newValue)
     {
-        mouseMovement.MouseSensitivity = newValue;
-        PlayerPrefs.SetFloat("MouseSensitivity", newValue);
+        float roundedValue = Mathf.Round(newValue * 10f) / 10f;
+
+        mouseMovement.MouseSensitivity = roundedValue;
+        sensitivitySlider.value = roundedValue;
+        PlayerPrefs.SetFloat("MouseSensitivity", roundedValue);
         PlayerPrefs.Save();
     }
 
