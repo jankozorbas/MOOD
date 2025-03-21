@@ -51,6 +51,9 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
+        // Change when UI Sounds are added
+        if (UIManager.Instance.IsPaused) return;
+
         switch (s.soundType)
         {
             case SoundType.SFX:

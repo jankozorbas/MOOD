@@ -20,6 +20,7 @@ public class UIManager : MonoBehaviour
     private bool isPaused = false;
 
     public TMP_Text interactionText;
+    public bool IsPaused => isPaused;
 
     private void Awake()
     {
