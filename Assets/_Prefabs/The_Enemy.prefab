@@ -388,7 +388,6 @@ MonoBehaviour:
   timeBetweenAttacks: 0.8
   forwardShootForce: 32
   hitParticlesPrefab: {fileID: 1000012909287652, guid: abb9f519b142e304d9c45b56afa768bc, type: 3}
-  bloodParticlesPrefab: {fileID: 1000010675638318, guid: a3768c8a9d1b90d4bb0eb0e4bdbe730c, type: 3}
 --- !u!1 &6717644173300159299
 GameObject:
   m_ObjectHideFlags: 0
