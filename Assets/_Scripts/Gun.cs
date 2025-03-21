@@ -125,7 +125,6 @@ public class Gun : MonoBehaviour
             {
                 StartCoroutine(ReloadRoutine());
                 // Play correct sound based on what gun it is
-                AudioManager.Instance.PlaySound("Reload");
             }
                 
         }
@@ -168,6 +167,7 @@ public class Gun : MonoBehaviour
         isReloading = true;
         animator.enabled = true;
         animator.SetBool("isReloading", true);
+        AudioManager.Instance.PlaySound("Reload");
 
         yield return new WaitForSeconds(reloadTime - .25f);
 

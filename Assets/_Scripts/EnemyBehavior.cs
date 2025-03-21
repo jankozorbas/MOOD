@@ -62,7 +62,7 @@ public class EnemyBehavior : MonoBehaviour
     [Header("FX")]
     [Space(10)]
     [SerializeField] private GameObject hitParticlesPrefab;
-    [SerializeField] private GameObject bloodParticlesPrefab;
+    //[SerializeField] private GameObject bloodParticlesPrefab;
 
     private bool hasAttacked;
     private bool isPlayerInSightRange;
@@ -336,8 +336,8 @@ public class EnemyBehavior : MonoBehaviour
         agent.isStopped = true;
         rb.isKinematic = true;
         GetComponent<CapsuleCollider>().enabled = false;
-        GameObject bloodParticlesObj = Instantiate(bloodParticlesPrefab, transform.position, Quaternion.identity);
-        Destroy(bloodParticlesObj, 5f);
+        //GameObject bloodParticlesObj = Instantiate(bloodParticlesPrefab, transform.position, Quaternion.identity);
+        //Destroy(bloodParticlesObj, 5f);
         Destroy(gameObject, 5f);
     }
 
