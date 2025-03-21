@@ -937,10 +937,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelLayout
       objectReference: {fileID: 0}
-    - target: {fileID: 4802971398781073653, guid: 46639ad1cdc657647b05d221cc213b36, type: 3}
-      propertyPath: m_NavMeshData
-      value: 
-      objectReference: {fileID: 23800000, guid: cc92dfc38c17c8a4c88238f4679ced51, type: 2}
     - target: {fileID: 6149663478618231666, guid: 46639ad1cdc657647b05d221cc213b36, type: 3}
       propertyPath: m_IsActive
       value: 1
