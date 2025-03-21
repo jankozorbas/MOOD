@@ -807,6 +807,7 @@ GameObject:
   m_Component:
   - component: {fileID: 752911017}
   - component: {fileID: 752911016}
+  - component: {fileID: 752911018}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -837,13 +838,23 @@ MonoBehaviour:
     loop: 0
     volume: 0.3
     source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: e5e680c9c3793a8439bec1cc696135c7, type: 3}
+    name: ShootPistol
+    loop: 0
+    volume: 0.8
+    source: {fileID: 0}
   - clip: {fileID: 8300000, guid: 8b82fcaa43ad11747bb91ffcb7748d33, type: 3}
-    name: Shoot
+    name: ShootRifle
     loop: 0
     volume: 0.8
     source: {fileID: 0}
   - clip: {fileID: 8300000, guid: 96b91bb8cc714e34e9583ab409664abb, type: 3}
-    name: Reload
+    name: ReloadPistol
+    loop: 0
+    volume: 0.4
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 0a54db0a8e73c7942ba420cc013507ac, type: 3}
+    name: ReloadRifle
     loop: 0
     volume: 0.4
     source: {fileID: 0}
@@ -862,6 +873,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &752911018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 752911015}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8b387e97bab6bb4382321e14b56a398, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &801823820
 PrefabInstance:
   m_ObjectHideFlags: 0

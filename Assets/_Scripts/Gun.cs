@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
+    public enum GunType { Pistol, Rifle }
+
     [Header("Gun Settings")]
     [Space(10)]
     [SerializeField] private float damage = 10f;
@@ -13,6 +15,7 @@ public class Gun : MonoBehaviour
     [SerializeField] private float reloadTime = 2f;
     [SerializeField] private bool isAutomatic = false;
     [SerializeField] private LayerMask shootMask;
+    public GunType gunType;
 
     public int startAmmo = 30;
     public int currentAmmo;
@@ -167,7 +170,16 @@ public class Gun : MonoBehaviour
         isReloading = true;
         animator.enabled = true;
         animator.SetBool("isReloading", true);
-        AudioManager.Instance.PlaySound("Reload");
+
+        switch (gunType)
+        {
+            case GunType.Pistol:
+                AudioManager.Instance.PlaySound("ReloadPistol");
+                break;
+            case GunType.Rifle:
+                AudioManager.Instance.PlaySound("ReloadRifle");
+                break;
+        }
 
         yield return new WaitForSeconds(reloadTime - .25f);
 
@@ -192,8 +204,16 @@ public class Gun : MonoBehaviour
     {
         if (isReloading) return;
 
-        // Shoot sound based on which gun it is
-        AudioManager.Instance.PlaySound("Shoot");
+        switch (gunType)
+        {
+            case GunType.Pistol:
+                AudioManager.Instance.PlaySound("ShootPistol");
+                break;
+            case GunType.Rifle:
+                AudioManager.Instance.PlaySound("ShootRifle");
+                break;
+        }
+
         muzzleFlashFX.Play();
         recoilScript.RecoilOnShoot();
         currentAmmo--;

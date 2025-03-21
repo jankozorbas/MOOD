@@ -378,18 +378,43 @@ MonoBehaviour:
   damage: 10
   range: 100
   fireRate: 10
-  impactForce: 100
-  maxAmmo: 30
   reloadTime: 2
   isAutomatic: 1
+  shootMask:
+    serializedVersion: 2
+    m_Bits: 0
+  gunType: 1
+  startAmmo: 30
+  currentAmmo: 0
+  maxAmmo: 30
+  maxCurrentAmmo: 15
+  maxReserveAmmo: 90
+  currentReserveAmmo: 30
   muzzleFlashFX: {fileID: 2273599714487324385}
   impactFX: {fileID: 7458544018217506191, guid: 716e7bd78d41c5e4aa026e347c5fbc70, type: 3}
+  crosshairUI: {fileID: 0}
   snappiness: 0
   returnSpeed: 0
   recoilHipX: 0
   recoilHipY: 0
   recoilHipZ: 0
-  currentAmmo: 0
+  adsRecoilX: -1
+  adsRecoilY: -1
+  adsRecoilZ: 0.35
+  recoilX: 0
+  recoilY: 0
+  recoilZ: 0
+  aimDistanceX: -0.2
+  aimDistanceY: -0.1
+  aimDistanceZ: -0.3
+  normalFOV: 60
+  aimFOV: 30
+  aimSpeed: 8
+  fovSpeed: 5
+  aimSmoothing: 0.3
+  aimSmoothRotation: 0.3
+  normalSmoothing: 10
+  normalSmoothRotation: 12
 --- !u!4 &7560870288561692549 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8227aa77bbe245f46ae7c09bc75821a1, type: 3}

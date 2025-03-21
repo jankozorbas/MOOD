@@ -5,85 +5,70 @@ using UnityEngine;
 
 public class GunSwitcher : MonoBehaviour
 {
-    private Gun gun;
+    private Gun currentGun;
     private int selectedWeapon = 0;
 
     public static Action<int, int> OnWeaponChanged;
+    public static Action<Gun> OnGunSwitched;
+
+    public Gun CurrentGun => currentGun;
 
     private void Awake()
     {
-        gun = FindObjectOfType<Gun>();
-    }
-
-    private void Start()
-    {
-        SelectWeapon();
+        if (transform.childCount > 0) SelectWeapon();
+        else Debug.LogWarning("GunSwitcher has no weapons assigned!");
     }
 
     private void Update()
     {
+        if (currentGun != null && currentGun.IsAiming) return;
+
         ScrollWeapons();
         NumberWeaponChange();
     }
 
     private void ScrollWeapons()
-    {
-        if (gun.IsAiming) return;
-        
+    {   
         int previousSelectedWeapon = selectedWeapon;
 
-        if (Input.GetAxis("Mouse ScrollWheel") > 0f)
-        {
-            if (selectedWeapon >= transform.childCount - 1)
-                selectedWeapon = 0;
-            else
-                selectedWeapon++;
-        }
-        if (Input.GetAxis("Mouse ScrollWheel") < 0f)
-        {
-            if (selectedWeapon <= 0)
-                selectedWeapon = transform.childCount - 1;
-            else
-                selectedWeapon--;
-        }
+        float scroll = Input.GetAxis("Mouse ScrollWheel");
 
-        if (previousSelectedWeapon != selectedWeapon) 
-            SelectWeapon();
+        if (scroll > 0f) selectedWeapon = (selectedWeapon + 1) % transform.childCount;
+        else if (scroll < 0f) selectedWeapon = (selectedWeapon - 1 + transform.childCount) % transform.childCount;
 
-        gun = FindObjectOfType<Gun>();
-        OnWeaponChanged?.Invoke(gun.currentAmmo, gun.currentReserveAmmo);
+        if (previousSelectedWeapon != selectedWeapon) SelectWeapon();
     }
 
     private void NumberWeaponChange()
     {
-        if (gun.IsAiming) return;
-        
         int previousSelectedWeapon = selectedWeapon;
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-            selectedWeapon = 0;
-        if (Input.GetKeyDown(KeyCode.Alpha2) && transform.childCount >= 2)
-            selectedWeapon = 1;
+        if (Input.GetKeyDown(KeyCode.Alpha1) && transform.childCount > 0) selectedWeapon = 0;
+        if (Input.GetKeyDown(KeyCode.Alpha2) && transform.childCount > 1) selectedWeapon = 1;
 
         if (previousSelectedWeapon != selectedWeapon)
+        {
             SelectWeapon();
-
-        gun = FindObjectOfType<Gun>();
-        OnWeaponChanged?.Invoke(gun.currentAmmo, gun.currentReserveAmmo);
+        }
     }
 
     private void SelectWeapon()
     {
-        int i = 0;
-
-        foreach(Transform weapon in transform)
+        for (int i = 0; i < transform.childCount; i++)
         {
-            if (i == selectedWeapon)
-                weapon.gameObject.SetActive(true);
-            else
-                weapon.gameObject.SetActive(false);
-
-            i++;
+            Transform weapon = transform.GetChild(i);
+            weapon.gameObject.SetActive(i == selectedWeapon);
         }
+
+        currentGun = transform.GetChild(selectedWeapon).GetComponent<Gun>();
+
+        if (currentGun == null)
+        {
+            Debug.LogWarning("Selected weapon does not have a Gun component!");
+            return;
+        }
+
+        OnWeaponChanged?.Invoke(currentGun.currentAmmo, currentGun.currentReserveAmmo);
+        OnGunSwitched?.Invoke(currentGun);
     }
 }
