@@ -113,9 +113,12 @@ public class EnemyBehavior : MonoBehaviour
         if (isPlayerInSightRange)
         {
             Vector3 directionToPlayer = (player.position - transform.position).normalized;
+            Vector3 raycastOffset = new Vector3(0f, .5f, 0f);
 
-            if (Physics.Raycast(transform.position, directionToPlayer, out RaycastHit hit, sightRange, layerMask))
+            if (Physics.Raycast(transform.position - raycastOffset, directionToPlayer, out RaycastHit hit, sightRange, layerMask))
             {
+                Debug.DrawLine(transform.position, hit.point, Color.magenta);
+                
                 if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Player"))
                     hasLineOfSight = true;
             }
