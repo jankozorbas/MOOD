@@ -981,6 +981,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelLayout
       objectReference: {fileID: 0}
+    - target: {fileID: 4095367928985098164, guid: 46639ad1cdc657647b05d221cc213b36, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4802971398781073653, guid: 46639ad1cdc657647b05d221cc213b36, type: 3}
+      propertyPath: m_VoxelSize
+      value: 0.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 4802971398781073653, guid: 46639ad1cdc657647b05d221cc213b36, type: 3}
+      propertyPath: m_NavMeshData
+      value: 
+      objectReference: {fileID: 23800000, guid: 49920de1d7598bf459f0a311fbb261d2, type: 2}
     - target: {fileID: 6149663478618231666, guid: 46639ad1cdc657647b05d221cc213b36, type: 3}
       propertyPath: m_IsActive
       value: 1
