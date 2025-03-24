@@ -13,6 +13,12 @@ public class Sound
     [Range(0f, 1f)]
     public float volume;
 
+    [Header("3D settings")]
+    public bool is3D = false;
+    public float spatialBlend = 1f;
+    public float minDistance = .2f;
+    public float maxDistance = 500f;
+
     [HideInInspector]
     public AudioSource source;
 }

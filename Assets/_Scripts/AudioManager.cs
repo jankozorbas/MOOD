@@ -38,6 +38,11 @@ public class AudioManager : MonoBehaviour
             s.source.clip = s.clip;
             s.source.volume = s.volume;
             s.source.loop = s.loop;
+
+            s.source.spatialBlend = s.is3D ? 1f : 0f;
+            s.source.minDistance = s.minDistance;
+            s.source.maxDistance = s.maxDistance;
+            s.source.rolloffMode = AudioRolloffMode.Linear;
         }
     }
 
@@ -65,6 +70,36 @@ public class AudioManager : MonoBehaviour
             default:
                 return;
         }
+    }
+
+    public void PlaySoundAtPosition(string name, Vector3 position)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        if (s == null)
+        {
+            Debug.LogWarning("Sound '" + name + "' not found.");
+            return;
+        }
+
+        if (!s.is3D)
+        {
+            Debug.LogWarning("Sound '" + name + "' is not a 3D sound.");
+            return;
+        }
+
+        GameObject tempAudioObject = new GameObject($"TempAudio_{name}");
+        tempAudioObject.transform.position = position;
+        AudioSource tempSource = tempAudioObject.AddComponent<AudioSource>();
+
+        tempSource.clip = s.clip;
+        tempSource.volume = s.volume;
+        tempSource.spatialBlend = 1f;
+        tempSource.minDistance = s.minDistance;
+        tempSource.maxDistance = s.maxDistance;
+        tempSource.rolloffMode = AudioRolloffMode.Linear;
+
+        tempSource.Play();
+        Destroy(tempAudioObject, s.clip.length);
     }
 
     public void StopSound(string name)

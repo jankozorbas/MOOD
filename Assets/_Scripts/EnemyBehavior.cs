@@ -285,7 +285,7 @@ public class EnemyBehavior : MonoBehaviour
 
     private void Attack()
     {
-        AudioManager.Instance.PlaySound("EnemyShoot");
+        AudioManager.Instance.PlaySoundAtPosition("EnemyShoot", transform.position);
         Rigidbody projectileRB = Instantiate(projectile, gunPoint.position, Quaternion.identity).GetComponent<Rigidbody>();
         projectileRB.AddForce(transform.forward * forwardShootForce, ForceMode.Impulse);
         //projectileRB.AddForce(transform.up * upwardsShootForce, ForceMode.Impulse);
