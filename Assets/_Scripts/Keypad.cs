@@ -69,7 +69,7 @@ public class Keypad : MonoBehaviour
             openRotations[gate] = Quaternion.Euler(gate.eulerAngles.x + adjustedAngle, gate.eulerAngles.y, gate.eulerAngles.z);
         }
 
-        yield return new WaitForSeconds(1.3f);
+        yield return new WaitForSeconds(1f);
         AudioManager.Instance.PlaySound("OpenGate");
 
         while (elapsedTime < openDuration)
