@@ -77,6 +77,8 @@ public class PlayerBehavior : MonoBehaviour
     private bool messageDisplayed = false;
     private bool canMove = true;
     private bool isDead = false;
+    private float footstepInterval = 0.5f;
+    private Coroutine footstepCoroutine;
 
     public static Action<int> OnDamageTaken;
 
@@ -113,6 +115,36 @@ public class PlayerBehavior : MonoBehaviour
         Crouch();
         CalculateStance();
         Interact();
+        HandleFootsteps();
+    }
+
+    private void HandleFootsteps()
+    {
+        if (isGrounded && Input.GetAxisRaw("Horizontal") != 0f || Input.GetAxisRaw("Vertical") != 0f)
+        {
+            float newInterval = playerStance == PlayerStance.Crouching ? .55f : .375f;
+
+            if (footstepCoroutine == null || footstepInterval != newInterval)
+            {
+                footstepInterval = newInterval;
+                if (footstepCoroutine != null) StopCoroutine(footstepCoroutine);
+                footstepCoroutine = StartCoroutine(PlayFootsteps());
+            }
+        }
+        else if (footstepCoroutine != null)
+        {
+            StopCoroutine(footstepCoroutine);
+            footstepCoroutine = null;
+        }
+    }
+
+    private IEnumerator PlayFootsteps()
+    {
+        while (true)
+        {
+            AudioManager.Instance.PlayFootstepSounds();
+            yield return new WaitForSeconds(footstepInterval);
+        }
     }
 
     private void CheckIsGrounded()

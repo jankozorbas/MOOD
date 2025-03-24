@@ -102,6 +102,13 @@ public class AudioManager : MonoBehaviour
         Destroy(tempAudioObject, s.clip.length);
     }
 
+    public void PlayFootstepSounds()
+    {
+        string[] footstepSounds = { "Footstep_01", "Footstep_02", "Footstep_03", "Footstep_04", "Footstep_05" };
+        string randomFootstep = footstepSounds[UnityEngine.Random.Range(0, footstepSounds.Length)];
+        PlaySound(randomFootstep);
+    }
+
     public void StopSound(string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
