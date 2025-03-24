@@ -401,6 +401,7 @@ public class PlayerBehavior : MonoBehaviour
     private void CollectKey()
     {
         GameManager.Instance.AddKey();
+        AudioManager.Instance.PlaySound("KeycardPickup");
     }
 
     private bool CollectHealth()
@@ -421,6 +422,7 @@ public class PlayerBehavior : MonoBehaviour
 
         int ammoAmount = 9;
         gun.AddAmmo(ammoAmount);
+        AudioManager.Instance.PlaySound("AmmoPickup");
         return true;
     }
 

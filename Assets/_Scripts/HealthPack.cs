@@ -22,5 +22,6 @@ public class HealthPack : MonoBehaviour
         int healthPackIncrease = UnityEngine.Random.Range(minHealthIncreaseAmount, maxHealthIncreaseAmount);
         playerBehavior.playerHealth = Mathf.Clamp(playerBehavior.playerHealth + healthPackIncrease, 0, playerBehavior.maxHealth);
         OnHealthPackPickedUp?.Invoke(playerBehavior.playerHealth);
+        AudioManager.Instance.PlaySound("HealthPickup");
     }
 }

@@ -93,6 +93,7 @@ public class GameManager : MonoBehaviour
         // Reset the game after 5 seconds
         Invoke("ReloadScene", 5f);
         // Later Voice Over will be added and sound effects of stopping the bomb etc.
+        AudioManager.Instance.PlaySound("Disarm");
         Debug.Log("You Win.");
     }
 
