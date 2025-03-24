@@ -39,11 +39,13 @@ public class Keypad : MonoBehaviour
                 isOpen = true;
                 keypadLight.color = openColor;
                 Debug.Log("Opened");
+                AudioManager.Instance.PlaySound("KeypadOpen");
             }
             else
             {
                 //UI KEY NEEDED
                 Debug.Log("Key needed");
+                AudioManager.Instance.PlaySound("KeypadLocked");
             }
         }
     }
@@ -66,6 +68,9 @@ public class Keypad : MonoBehaviour
             closedRotations[gate] = gate.rotation;
             openRotations[gate] = Quaternion.Euler(gate.eulerAngles.x + adjustedAngle, gate.eulerAngles.y, gate.eulerAngles.z);
         }
+
+        yield return new WaitForSeconds(1.3f);
+        AudioManager.Instance.PlaySound("OpenGate");
 
         while (elapsedTime < openDuration)
         {

@@ -241,6 +241,7 @@ public class Gun : MonoBehaviour
                 hit.rigidbody.AddForce(-hit.normal * impactForce);*/
             
             GameObject impactObj = Instantiate(impactFX, hit.point, Quaternion.LookRotation(hit.normal));
+            //AudioManager.Instance.PlaySoundAtPosition("Impact", hit.point);
             Destroy(impactObj, 1f);
         }
     }

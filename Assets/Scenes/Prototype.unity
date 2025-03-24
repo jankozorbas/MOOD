@@ -953,7 +953,7 @@ MonoBehaviour:
     maxDistance: 20
     source: {fileID: 0}
   - soundType: 1
-    clip: {fileID: 8300000, guid: f294edc03926c204d8b5ce788e27b6ae, type: 3}
+    clip: {fileID: 8300000, guid: 73b0e3a8c97f4f640a58e34d901d2cbd, type: 3}
     name: AmmoPickup
     loop: 0
     volume: 0.6
@@ -963,7 +963,7 @@ MonoBehaviour:
     maxDistance: 20
     source: {fileID: 0}
   - soundType: 1
-    clip: {fileID: 8300000, guid: 75742d962d753124ca6f8712368c3f69, type: 3}
+    clip: {fileID: 8300000, guid: d21457c56cd621d48996659e307410a2, type: 3}
     name: HealthPickup
     loop: 0
     volume: 0.6
@@ -973,7 +973,7 @@ MonoBehaviour:
     maxDistance: 20
     source: {fileID: 0}
   - soundType: 1
-    clip: {fileID: 8300000, guid: 1e430333b97feb9419fb30e79ec41240, type: 3}
+    clip: {fileID: 8300000, guid: 3b0bb442b5a26fe44bbb07ec2fb57d79, type: 3}
     name: KeycardPickup
     loop: 0
     volume: 0.6
@@ -987,6 +987,36 @@ MonoBehaviour:
     name: Disarm
     loop: 0
     volume: 0.3
+    is3D: 0
+    spatialBlend: 0
+    minDistance: 6
+    maxDistance: 20
+    source: {fileID: 0}
+  - soundType: 1
+    clip: {fileID: 8300000, guid: c06b8784865c14d438e0eae66a0756f7, type: 3}
+    name: KeypadOpen
+    loop: 0
+    volume: 0.7
+    is3D: 0
+    spatialBlend: 0
+    minDistance: 6
+    maxDistance: 20
+    source: {fileID: 0}
+  - soundType: 1
+    clip: {fileID: 8300000, guid: aaa5d716c18058c4f83a3e4712fe651b, type: 3}
+    name: KeypadLocked
+    loop: 0
+    volume: 0.7
+    is3D: 0
+    spatialBlend: 0
+    minDistance: 6
+    maxDistance: 20
+    source: {fileID: 0}
+  - soundType: 1
+    clip: {fileID: 8300000, guid: 7a0d2149d91cd0341a39ae4a7db63f7b, type: 3}
+    name: OpenGate
+    loop: 0
+    volume: 0.7
     is3D: 0
     spatialBlend: 0
     minDistance: 6
