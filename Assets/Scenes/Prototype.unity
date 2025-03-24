@@ -833,10 +833,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - soundType: 0
-    clip: {fileID: 8300000, guid: fc1a9dadffeb3b247ac4c5bf0e2ef266, type: 3}
-    name: Placeholder
+    clip: {fileID: 8300000, guid: 3a50ce434cd9f2e4b9215873049ccc68, type: 3}
+    name: Ambience
     loop: 1
-    volume: 1
+    volume: 0.1
     is3D: 0
     spatialBlend: 0
     minDistance: 0.2

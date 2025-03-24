@@ -26,7 +26,7 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        PlaySound("Placeholder");
+        PlaySound("Ambience");
     }
 
     private void InitializeSounds()
