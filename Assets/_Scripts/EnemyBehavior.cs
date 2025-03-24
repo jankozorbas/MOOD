@@ -104,15 +104,33 @@ public class EnemyBehavior : MonoBehaviour
         isPlayerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         isPlayerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
+        bool hasLineOfSight = false;
+        int ignoreLayers = LayerMask.GetMask("Fence"); 
+        int detectionLayers = LayerMask.GetMask("Player", "Ground");
+        int layerMask = detectionLayers & ~ignoreLayers; // Exclude fences from detection
+
+
+        if (isPlayerInSightRange)
+        {
+            Vector3 directionToPlayer = (player.position - transform.position).normalized;
+
+            if (Physics.Raycast(transform.position, directionToPlayer, out RaycastHit hit, sightRange, layerMask))
+            {
+                if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Player"))
+                    hasLineOfSight = true;
+            }
+                
+        }
+
         switch (currentState)
         {
             case EnemyState.Patrolling:
-                if (isPlayerInSightRange) ChangeState(EnemyState.Chasing);
+                if (isPlayerInSightRange && hasLineOfSight) ChangeState(EnemyState.Chasing);
                 Patrolling();
                 break;
 
             case EnemyState.Chasing:
-                if (isPlayerInAttackRange) ChangeState(EnemyState.Attacking);
+                if (isPlayerInAttackRange && hasLineOfSight) ChangeState(EnemyState.Attacking);
                 else if (!isPlayerInSightRange)
                 {
                     stateTransitionCooldown -= Time.deltaTime;
@@ -129,12 +147,12 @@ public class EnemyBehavior : MonoBehaviour
                 break;
 
             case EnemyState.Attacking:
-                if (!isPlayerInAttackRange) ChangeState(EnemyState.Chasing);
+                if (!isPlayerInAttackRange || !hasLineOfSight) ChangeState(EnemyState.Chasing);
                 Attacking();
                 break;
 
             case EnemyState.Alerted:
-                if (isPlayerInSightRange) ChangeState(EnemyState.Chasing);
+                if (isPlayerInSightRange && hasLineOfSight) ChangeState(EnemyState.Chasing);
                 break;
 
             case EnemyState.Dead:
