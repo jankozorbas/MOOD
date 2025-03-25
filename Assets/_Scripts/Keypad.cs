@@ -52,11 +52,6 @@ public class Keypad : MonoBehaviour
 
     private IEnumerator OpenGate()
     {
-        foreach (Transform gate in gatePivots)
-        {
-            gate.GetComponentInChildren<BoxCollider>().enabled = false;
-        }
-        
         float elapsedTime = 0f;
         Dictionary<Transform, Quaternion> closedRotations = new();
         Dictionary<Transform, Quaternion> openRotations = new();
@@ -71,6 +66,11 @@ public class Keypad : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
         AudioManager.Instance.PlaySound("OpenGate");
+
+        foreach (Transform gate in gatePivots)
+        {
+            gate.GetComponentInChildren<BoxCollider>().enabled = false;
+        }
 
         while (elapsedTime < openDuration)
         {
