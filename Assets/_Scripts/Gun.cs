@@ -256,10 +256,10 @@ public class Gun : MonoBehaviour
 
     private void AimDownSight()
     {
-        if (Input.GetMouseButton(1)) isAiming = true;
-        else isAiming = false;
+        /*if (Input.GetMouseButton(1)) isAiming = true;
+        else isAiming = false;*/
 
-        if (isAiming)
+        if (Input.GetMouseButton(1))
         {
             // Set the correct speed
             if (playerBehavior.PlayerStanceGetter == PlayerBehavior.PlayerStance.Standing)
@@ -280,7 +280,7 @@ public class Gun : MonoBehaviour
             // Disable the crosshair
             crosshairUI.gameObject.SetActive(false);
 
-            MoveGunDuringAim();
+            StartCoroutine(MoveGunDuringAim());
             AdjustFOV(aimFOV);
         }
         else
@@ -304,28 +304,42 @@ public class Gun : MonoBehaviour
             // Enable the crosshair
             crosshairUI.gameObject.SetActive(true);
 
-            MoveGunBack();
+            StartCoroutine(MoveGunBack());
             AdjustFOV(normalFOV);
         }
     }
 
-    private void MoveGunDuringAim()
+    private IEnumerator MoveGunDuringAim()
     {
+        isAiming = true;
+
         Vector3 aimDistance = new Vector3(aimDistanceX, aimDistanceY, aimDistanceZ);
         Vector3 targetPosition = originalPosition + aimDistance;
 
-        transform.localPosition = Vector3.Lerp(transform.localPosition, targetPosition, Time.deltaTime * aimSpeed);
+        while (Vector3.Distance(transform.localPosition, targetPosition) > 0.01f) 
+        {
+            transform.localPosition = Vector3.Lerp(transform.localPosition, targetPosition, Time.deltaTime * aimSpeed);
+            yield return null;
+        }
 
+        transform.localPosition = targetPosition;
         // fixes the weird positioning of the gun if you switch the weapon before it finishes lerping
-        if (Vector3.Distance(transform.localPosition, targetPosition) < 0.01f) gunSwitcher.enabled = false;
+        //if (Vector3.Distance(transform.localPosition, targetPosition) < 0.01f) gunSwitcher.enabled = false;
     }
 
-    private void MoveGunBack()
+    private IEnumerator MoveGunBack()
     {
-        transform.localPosition = Vector3.Lerp(transform.localPosition, originalPosition, Time.deltaTime * aimSpeed);
+        while (Vector3.Distance(transform.localPosition, originalPosition) > 0.01f) // Stop when close enough
+        {
+            transform.localPosition = Vector3.Lerp(transform.localPosition, originalPosition, Time.deltaTime * aimSpeed);
+            yield return null; // Wait for the next frame
+        }
+
+        transform.localPosition = originalPosition;
+        isAiming = false;
 
         // fixes the weird positioning of the gun if you switch the weapon before it finishes lerping
-        if (Vector3.Distance(transform.localPosition, originalPosition) < 0.01f) gunSwitcher.enabled = true;
+        //if (Vector3.Distance(transform.localPosition, originalPosition) < 0.01f) gunSwitcher.enabled = true;
     }
 
     private void AdjustFOV(float targetFOV)
