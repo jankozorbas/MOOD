@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using static PlayerBehavior;
 
 public class EnemyBehavior : MonoBehaviour
 {
@@ -74,6 +75,8 @@ public class EnemyBehavior : MonoBehaviour
     private bool isPatrolling = true;
     private bool isChasing = false;
     private float speedMultiplier = 1f;
+    private Coroutine footstepCoroutine;
+    private float footstepInterval = .5f;
 
     public bool IsDead => isDead;
 
@@ -88,6 +91,7 @@ public class EnemyBehavior : MonoBehaviour
     private void Update()
     {
         SetState();
+        HandleFootsteps();
     }
 
     void ChangeState(EnemyState newState)
@@ -206,6 +210,38 @@ public class EnemyBehavior : MonoBehaviour
         
         if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround)) walkPointSet = true;
     }*/
+
+    private void HandleFootsteps()
+    {
+        float newInterval = .55f;
+
+        if (!agent.isStopped)
+        {
+            if (currentState == EnemyState.Chasing) newInterval = .375f;
+            else if (currentState == EnemyState.Patrolling) newInterval = .55f;
+
+            if (footstepCoroutine == null || footstepInterval != newInterval)
+            {
+                footstepInterval = newInterval;
+                if (footstepCoroutine != null) StopCoroutine(footstepCoroutine);
+                footstepCoroutine = StartCoroutine(PlayEnemyFootsteps());
+            }
+        }
+        else if (footstepCoroutine != null)
+        {
+            StopCoroutine(footstepCoroutine);
+            footstepCoroutine = null;
+        }
+    }
+
+    private IEnumerator PlayEnemyFootsteps()
+    {
+        while (true)
+        {
+            AudioManager.Instance.PlayEnemyFootstepSounds(transform.position + new Vector3(0f, -.5f, 0f));
+            yield return new WaitForSeconds(footstepInterval);
+        }
+    }
 
     private void Patrolling()
     {

@@ -1024,6 +1024,36 @@ MonoBehaviour:
     minDistance: 6
     maxDistance: 20
     source: {fileID: 0}
+  - soundType: 1
+    clip: {fileID: 8300000, guid: 7131d701ae015a54aa3d856feccd513f, type: 3}
+    name: EnemyFootstep_01
+    loop: 0
+    volume: 0.7
+    is3D: 1
+    spatialBlend: 1
+    minDistance: 2
+    maxDistance: 17
+    source: {fileID: 0}
+  - soundType: 1
+    clip: {fileID: 8300000, guid: 942019cf9ecd5854ebeb343b12b7f779, type: 3}
+    name: EnemyFootstep_02
+    loop: 0
+    volume: 0.7
+    is3D: 1
+    spatialBlend: 1
+    minDistance: 2
+    maxDistance: 17
+    source: {fileID: 0}
+  - soundType: 1
+    clip: {fileID: 8300000, guid: 65d9836027675574b8d070c5718f99c7, type: 3}
+    name: EnemyFootstep_03
+    loop: 0
+    volume: 0.7
+    is3D: 1
+    spatialBlend: 1
+    minDistance: 2
+    maxDistance: 17
+    source: {fileID: 0}
 --- !u!4 &752911017
 Transform:
   m_ObjectHideFlags: 0

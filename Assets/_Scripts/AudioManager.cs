@@ -109,6 +109,13 @@ public class AudioManager : MonoBehaviour
         PlaySound(randomFootstep);
     }
 
+    public void PlayEnemyFootstepSounds(Vector3 position)
+    {
+        string[] footstepSounds = { "EnemyFootstep_01", "EnemyFootstep_02", "EnemyFootstep_03" };
+        string randomFootstep = footstepSounds[UnityEngine.Random.Range(0, footstepSounds.Length)];
+        PlaySoundAtPosition(randomFootstep, position);
+    }
+
     public void StopSound(string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
