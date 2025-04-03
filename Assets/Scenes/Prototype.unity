@@ -965,10 +965,10 @@ MonoBehaviour:
     maxDistance: 20
     source: {fileID: 0}
   - soundType: 1
-    clip: {fileID: 8300000, guid: d21457c56cd621d48996659e307410a2, type: 3}
+    clip: {fileID: 8300000, guid: 693189ddf491f5f4781ad4e47122a7e6, type: 3}
     name: HealthPickup
     loop: 0
-    volume: 0.6
+    volume: 1
     is3D: 0
     spatialBlend: 0
     minDistance: 6

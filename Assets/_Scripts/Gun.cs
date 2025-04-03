@@ -109,13 +109,20 @@ public class Gun : MonoBehaviour
     {
         currentAmmo = startAmmo; // change this with the ammo you want to start the game with
         OnAmmoChanged?.Invoke(currentAmmo, currentReserveAmmo);
+
+        recoilX = recoilHipX;
+        recoilY = recoilHipY;
+        recoilZ = recoilHipZ;
+
+        gunMovement.Smoothing = normalSmoothing;
+        gunMovement.SmoothRotation = normalSmoothRotation;
     }
 
     private void Update()
     {
         Reloading();
         Shooting();
-        AimDownSight();
+        //AimDownSight();
     }
 
     private void Reloading()
@@ -254,10 +261,10 @@ public class Gun : MonoBehaviour
 
     public int GetAmmoCount() { return currentAmmo; }
 
-    private void AimDownSight()
+    /*private void AimDownSight()
     {
-        /*if (Input.GetMouseButton(1)) isAiming = true;
-        else isAiming = false;*/
+        //if (Input.GetMouseButton(1)) isAiming = true;
+        //else isAiming = false;
 
         if (Input.GetMouseButton(1))
         {
@@ -307,9 +314,9 @@ public class Gun : MonoBehaviour
             StartCoroutine(MoveGunBack());
             AdjustFOV(normalFOV);
         }
-    }
+    }*/
 
-    private IEnumerator MoveGunDuringAim()
+    /*private IEnumerator MoveGunDuringAim()
     {
         isAiming = true;
 
@@ -345,5 +352,5 @@ public class Gun : MonoBehaviour
     private void AdjustFOV(float targetFOV)
     {
         mainCamera.fieldOfView = Mathf.Lerp(mainCamera.fieldOfView, targetFOV, Time.deltaTime * fovSpeed);
-    }
+    }*/
 }
