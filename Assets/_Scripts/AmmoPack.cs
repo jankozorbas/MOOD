@@ -17,7 +17,7 @@ public class AmmoPack : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Gun gun = other.GetComponentInChildren<Gun>();
+        Gun gun = FindObjectOfType<GunSwitcher>().GetComponent<GunSwitcher>().CurrentGun;
 
         if (playerBehavior != null)
         {
