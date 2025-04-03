@@ -44,6 +44,11 @@ public class GunMovement : MonoBehaviour
     private Vector2 moveInput;
     private Vector2 mouseInput;
 
+    [SerializeField] private float recoilBackDistance = 0.03f;
+    [SerializeField] private float recoilRecoverySpeed = 5f;
+    private Vector3 originalPosition;
+    //private Vector3 recoilPosition;
+
     public float Smoothing { get { return smoothing; } set { smoothing = value; } }
 
     public float SmoothRotation { get { return smoothRotation; } set { smoothRotation = value; } }
@@ -53,8 +58,15 @@ public class GunMovement : MonoBehaviour
         playerBehavior = FindObjectOfType<PlayerBehavior>();
     }
 
+    private void Start()
+    {
+        originalPosition = transform.localPosition;
+    }
+
     private void Update()
     {
+        transform.localPosition = Vector3.Lerp(transform.localPosition, originalPosition, Time.deltaTime * recoilRecoverySpeed);
+
         GetInput();
         Swing();
         SwingRotation();
@@ -62,6 +74,11 @@ public class GunMovement : MonoBehaviour
         BobRotation();
 
         BobAndSwing();
+    }
+
+    public void ApplyGunRecoil()
+    {
+        transform.localPosition -= new Vector3(0, 0, recoilBackDistance);
     }
 
     private void GetInput()

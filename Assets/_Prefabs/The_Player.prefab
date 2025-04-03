@@ -729,6 +729,8 @@ MonoBehaviour:
   bobLimit: {x: 0.01, y: 0.01, z: 0.01}
   speedCurve: 0
   multiplier: {x: 1, y: 1, z: 1}
+  recoilBackDistance: 0.03
+  recoilRecoverySpeed: 5
 --- !u!1 &6903717140073632331
 GameObject:
   m_ObjectHideFlags: 0

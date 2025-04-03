@@ -359,12 +359,14 @@ public class PlayerBehavior : MonoBehaviour
             if (!messageDisplayed)
             {
                 UIManager.Instance.interactionText.gameObject.SetActive(true);
-                Invoke("InvokeSetActiveFalse", 3f);
+                Invoke("InvokeSetActiveFalse", 5f);
                 messageDisplayed = true;
             }
 
             if (Input.GetKeyDown(KeyCode.E))
             {
+                UIManager.Instance.HideInteractionMessage();
+
                 Collider[] colliders = Physics.OverlapSphere(interactionPoint.position, interactionRadius, interactableMask);
 
                 foreach (Collider collider in colliders)

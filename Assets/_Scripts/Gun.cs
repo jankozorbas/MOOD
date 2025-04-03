@@ -63,6 +63,7 @@ public class Gun : MonoBehaviour
     [SerializeField] private float aimSmoothRotation = .3f;
     [SerializeField] private float normalSmoothing = 10f;
     [SerializeField] private float normalSmoothRotation = 12f;
+    [Space(5)]
 
     private Vector3 originalPosition;
     private bool isAiming = false;
@@ -221,9 +222,10 @@ public class Gun : MonoBehaviour
                 break;
         }
 
+        currentAmmo--;
         muzzleFlashFX.Play();
         recoilScript.RecoilOnShoot();
-        currentAmmo--;
+        gunMovement.ApplyGunRecoil(); //animation;
 
         OnAmmoChanged?.Invoke(currentAmmo, currentReserveAmmo);
 
