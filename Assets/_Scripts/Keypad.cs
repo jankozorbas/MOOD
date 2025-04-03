@@ -96,6 +96,11 @@ public class Keypad : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = true;
+
+            if (GameManager.Instance.GetKeyCount() == 0)
+            {
+                UIManager.Instance.ShowInteractionMessage("Key card needed");
+            }
         }
     }
 
@@ -104,6 +109,7 @@ public class Keypad : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
+            UIManager.Instance.HideInteractionMessage();
         }
     }
 }

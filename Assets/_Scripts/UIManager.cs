@@ -20,6 +20,7 @@ public class UIManager : MonoBehaviour
     private bool isPaused = false;
 
     public TMP_Text interactionText;
+
     public bool IsPaused => isPaused;
 
     private void Awake()
@@ -48,6 +49,17 @@ public class UIManager : MonoBehaviour
             if (!isPaused) PauseGame();
             else ResumeGame();
         }
+    }
+
+    public void ShowInteractionMessage(string message)
+    {
+        interactionText.text = message;
+        interactionText.gameObject.SetActive(true);
+    }
+
+    public void HideInteractionMessage()
+    {
+        interactionText.gameObject.SetActive(false);
     }
 
     private void PauseGame()

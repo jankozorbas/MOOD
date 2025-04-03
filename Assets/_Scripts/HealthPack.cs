@@ -17,6 +17,25 @@ public class HealthPack : MonoBehaviour
         playerBehavior = FindObjectOfType<PlayerBehavior>().GetComponent<PlayerBehavior>();
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (playerBehavior != null)
+        {
+            if (playerBehavior.playerHealth == playerBehavior.maxHealth)
+            {
+                UIManager.Instance.ShowInteractionMessage("Max health reached");
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (playerBehavior != null)
+        {
+            UIManager.Instance.HideInteractionMessage();
+        }
+    }
+
     public void RegenerateHealth()
     {
         int healthPackIncrease = UnityEngine.Random.Range(minHealthIncreaseAmount, maxHealthIncreaseAmount);
