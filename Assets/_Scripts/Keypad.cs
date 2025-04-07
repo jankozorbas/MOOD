@@ -97,7 +97,7 @@ public class Keypad : MonoBehaviour
         {
             playerInRange = true;
 
-            if (GameManager.Instance.GetKeyCount() == 0)
+            if (GameManager.Instance.GetKeyCount() == 0 && !isOpen)
             {
                 UIManager.Instance.ShowInteractionMessage("Key card needed");
             }

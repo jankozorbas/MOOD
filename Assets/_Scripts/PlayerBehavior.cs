@@ -92,6 +92,8 @@ public class PlayerBehavior : MonoBehaviour
 
     public float SpeedMultiplier => speedMultiplier;
 
+    public bool IsDead => isDead;
+
     public PlayerStance PlayerStanceGetter => playerStance;
 
     private void Awake()

@@ -20,11 +20,13 @@ public class EnemyBehavior : MonoBehaviour
     [SerializeField] private LayerMask whatIsPlayer;
     [SerializeField] private GameObject projectile;
     [SerializeField] private Transform gunPoint;
+    [SerializeField] private GameObject enemyIcon;
     
     private NavMeshAgent agent;
     private Transform player;
     private Animator animator;
     private Rigidbody rb;
+    private PlayerBehavior playerBehavior;
 
     [Header("Stats")]
     [Space(10)]
@@ -83,6 +85,7 @@ public class EnemyBehavior : MonoBehaviour
     private void Awake()
     {
         player = FindObjectOfType<PlayerBehavior>().transform;
+        playerBehavior = player.GetComponent<PlayerBehavior>();
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody>();
@@ -104,6 +107,8 @@ public class EnemyBehavior : MonoBehaviour
     private void SetState()
     {
         if (currentState == EnemyState.Dead) return;
+        if (UIManager.Instance.IsPaused) return;
+        if (playerBehavior.IsDead) return;
 
         isPlayerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         isPlayerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
@@ -213,6 +218,8 @@ public class EnemyBehavior : MonoBehaviour
 
     private void HandleFootsteps()
     {
+        if (playerBehavior.IsDead) return;
+        
         float newInterval = .55f;
 
         if (!agent.isStopped)
@@ -224,6 +231,7 @@ public class EnemyBehavior : MonoBehaviour
             {
                 footstepInterval = newInterval;
                 if (footstepCoroutine != null) StopCoroutine(footstepCoroutine);
+                if (currentState == EnemyState.Attacking) return;
                 footstepCoroutine = StartCoroutine(PlayEnemyFootsteps());
             }
         }
@@ -336,6 +344,7 @@ public class EnemyBehavior : MonoBehaviour
             Attack();
 
             hasAttacked = true;
+            timeBetweenAttacks = Random.Range(.5f, 1f);
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
     }
@@ -344,6 +353,8 @@ public class EnemyBehavior : MonoBehaviour
     {
         AudioManager.Instance.PlaySoundAtPosition("EnemyShoot", transform.position);
         Rigidbody projectileRB = Instantiate(projectile, gunPoint.position, Quaternion.identity).GetComponent<Rigidbody>();
+        projectileRB.isKinematic = false;
+        projectileRB.collisionDetectionMode = CollisionDetectionMode.Continuous;
         projectileRB.AddForce(transform.forward * forwardShootForce, ForceMode.Impulse);
         //projectileRB.AddForce(transform.up * upwardsShootForce, ForceMode.Impulse);
     }
@@ -393,6 +404,7 @@ public class EnemyBehavior : MonoBehaviour
         agent.isStopped = true;
         rb.isKinematic = true;
         GetComponent<CapsuleCollider>().enabled = false;
+        enemyIcon.SetActive(false);
         //GameObject bloodParticlesObj = Instantiate(bloodParticlesPrefab, transform.position, Quaternion.identity);
         //Destroy(bloodParticlesObj, 5f);
         Destroy(gameObject, 5f);

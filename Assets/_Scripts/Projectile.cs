@@ -12,7 +12,23 @@ public class Projectile : MonoBehaviour
         playerBehavior = FindObjectOfType<PlayerBehavior>();
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            if (playerBehavior.playerHealth > 0)
+            {
+                playerBehavior.TakeDamage(Random.Range(minDamage, maxDamage));
+                Destroy(gameObject);
+            }
+        }
+        else if (other != null)
+            Destroy(gameObject);
+        else
+            Destroy(gameObject, 3f);
+    }
+
+    /*private void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.CompareTag("Player"))
         {
@@ -26,5 +42,5 @@ public class Projectile : MonoBehaviour
             Destroy(gameObject);
         else 
             Destroy(gameObject, 3f);
-    }
+    }*/
 }

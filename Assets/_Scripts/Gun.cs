@@ -143,6 +143,9 @@ public class Gun : MonoBehaviour
 
     private void Shooting()
     {
+        if (UIManager.Instance.IsPaused) return;
+        if (playerBehavior.IsDead) return;
+
         // SHOOTING BEHAVIOR BASED ON IF THE GUN IS AUTOMATIC OR SEMI AUTOMATIC
         if (isAutomatic)
         {

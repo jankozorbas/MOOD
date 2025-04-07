@@ -244,7 +244,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: you won!
+  m_text: Successfully disarmed the nuke! Good job, soldier!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7a5da409bdbd25040a5fe917c6ff733f, type: 2}
   m_sharedMaterial: {fileID: -8134100675607192227, guid: 7a5da409bdbd25040a5fe917c6ff733f, type: 2}
@@ -378,7 +378,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: you lost :(
+  m_text: Mission failed!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7a5da409bdbd25040a5fe917c6ff733f, type: 2}
   m_sharedMaterial: {fileID: -8134100675607192227, guid: 7a5da409bdbd25040a5fe917c6ff733f, type: 2}
