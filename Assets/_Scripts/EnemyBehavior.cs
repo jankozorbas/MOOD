@@ -356,6 +356,7 @@ public class EnemyBehavior : MonoBehaviour
         projectileRB.isKinematic = false;
         projectileRB.collisionDetectionMode = CollisionDetectionMode.Continuous;
         projectileRB.AddForce(transform.forward * forwardShootForce, ForceMode.Impulse);
+        Destroy(projectileRB.gameObject, 2f);
         //projectileRB.AddForce(transform.up * upwardsShootForce, ForceMode.Impulse);
     }
 

@@ -22,10 +22,8 @@ public class Projectile : MonoBehaviour
                 Destroy(gameObject);
             }
         }
-        else if (other != null)
-            Destroy(gameObject);
         else
-            Destroy(gameObject, 3f);
+            Destroy(gameObject);
     }
 
     /*private void OnCollisionEnter(Collision collision)
