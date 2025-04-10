@@ -4456,10 +4456,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fade Canvas
       objectReference: {fileID: 0}
-    - target: {fileID: 26943152993855688, guid: c1d5975d79b762343bdae9a656b28745, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 934621252017190594, guid: c1d5975d79b762343bdae9a656b28745, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -4652,6 +4648,46 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1438742043634661416, guid: 991021db0e0d8614d95a4f720a62379c, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1438742043634661416, guid: 991021db0e0d8614d95a4f720a62379c, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1438742043634661416, guid: 991021db0e0d8614d95a4f720a62379c, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1438742043634661416, guid: 991021db0e0d8614d95a4f720a62379c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1438742043634661416, guid: 991021db0e0d8614d95a4f720a62379c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1438742043634661416, guid: 991021db0e0d8614d95a4f720a62379c, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1438742043634661416, guid: 991021db0e0d8614d95a4f720a62379c, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 1438742043634661416, guid: 991021db0e0d8614d95a4f720a62379c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 3036289571029480440, guid: 991021db0e0d8614d95a4f720a62379c, type: 3}
+      propertyPath: m_fontColor.a
+      value: 0.972549
+      objectReference: {fileID: 0}
+    - target: {fileID: 3036289571029480440, guid: 991021db0e0d8614d95a4f720a62379c, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4162301439
+      objectReference: {fileID: 0}
     - target: {fileID: 3805683099795294294, guid: 991021db0e0d8614d95a4f720a62379c, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -4732,9 +4768,45 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4018813290544908601, guid: 991021db0e0d8614d95a4f720a62379c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5771538267285006698, guid: 991021db0e0d8614d95a4f720a62379c, type: 3}
       propertyPath: m_Name
       value: UI Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 7402465903485481283, guid: 991021db0e0d8614d95a4f720a62379c, type: 3}
+      propertyPath: m_margin.z
+      value: -48.404205
+      objectReference: {fileID: 0}
+    - target: {fileID: 7631926380546739308, guid: 991021db0e0d8614d95a4f720a62379c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8023892982212479261, guid: 991021db0e0d8614d95a4f720a62379c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8614475799864645437, guid: 991021db0e0d8614d95a4f720a62379c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8614475799864645437, guid: 991021db0e0d8614d95a4f720a62379c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8614475799864645437, guid: 991021db0e0d8614d95a4f720a62379c, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8614475799864645437, guid: 991021db0e0d8614d95a4f720a62379c, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 8614475799864645437, guid: 991021db0e0d8614d95a4f720a62379c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 75
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
