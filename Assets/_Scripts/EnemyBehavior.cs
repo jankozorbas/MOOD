@@ -60,6 +60,7 @@ public class EnemyBehavior : MonoBehaviour
     [SerializeField] private float timeBetweenAttacks;
     [SerializeField] private float forwardShootForce = 32f;
     //[SerializeField] private float upwardsShootForce = 2f;
+    [SerializeField] private GameObject muzzleFlashFX;
     [Space(10)]
 
     [Header("FX")]
@@ -352,6 +353,8 @@ public class EnemyBehavior : MonoBehaviour
     private void Attack()
     {
         AudioManager.Instance.PlaySoundAtPosition("EnemyShoot", transform.position);
+        GameObject muzzleFX = Instantiate(muzzleFlashFX, gunPoint.position, Quaternion.identity);
+        Destroy(muzzleFX, 1f);
         Rigidbody projectileRB = Instantiate(projectile, gunPoint.position, Quaternion.identity).GetComponent<Rigidbody>();
         projectileRB.isKinematic = false;
         projectileRB.collisionDetectionMode = CollisionDetectionMode.Continuous;

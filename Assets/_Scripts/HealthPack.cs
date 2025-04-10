@@ -19,7 +19,7 @@ public class HealthPack : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (playerBehavior != null)
+        if (other.CompareTag("Player"))
         {
             if (playerBehavior.playerHealth == playerBehavior.maxHealth)
             {
@@ -30,7 +30,7 @@ public class HealthPack : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (playerBehavior != null)
+        if (other.CompareTag("Player"))
         {
             UIManager.Instance.HideInteractionMessage();
         }
