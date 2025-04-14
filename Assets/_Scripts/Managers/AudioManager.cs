@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using System.Collections;
 using static Sound;
 
 public class AudioManager : MonoBehaviour
@@ -43,6 +44,7 @@ public class AudioManager : MonoBehaviour
             s.source.minDistance = s.minDistance;
             s.source.maxDistance = s.maxDistance;
             s.source.rolloffMode = AudioRolloffMode.Linear;
+            s.source.dopplerLevel = 0f;
         }
     }
 
@@ -72,19 +74,19 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void PlaySoundAtPosition(string name, Vector3 position)
+    public AudioSource PlaySoundAtPosition(string name, Vector3 position)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
         if (s == null)
         {
             Debug.LogWarning("Sound '" + name + "' not found.");
-            return;
+            return null;
         }
 
         if (!s.is3D)
         {
             Debug.LogWarning("Sound '" + name + "' is not a 3D sound.");
-            return;
+            return null;
         }
 
         GameObject tempAudioObject = new GameObject($"TempAudio_{name}");
@@ -97,9 +99,38 @@ public class AudioManager : MonoBehaviour
         tempSource.minDistance = s.minDistance;
         tempSource.maxDistance = s.maxDistance;
         tempSource.rolloffMode = AudioRolloffMode.Linear;
+        tempSource.dopplerLevel = 0f;
+        tempSource.loop = s.loop;
 
         tempSource.Play();
-        Destroy(tempAudioObject, s.clip.length);
+
+        if (!s.loop)
+        {
+            Destroy(tempAudioObject, s.clip.length);
+        }
+
+        return tempSource;
+    }
+
+    public void FadeOutAndDestroy(AudioSource source, float fadeDuration)
+    {
+        StartCoroutine(FadeOutAndDestroyCoroutine(source, fadeDuration));
+    }
+
+    private IEnumerator FadeOutAndDestroyCoroutine(AudioSource source, float duration)
+    {
+        float startVolume = source.volume;
+        float time = 0f;
+
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            source.volume = Mathf.Lerp(startVolume, 0f, time / duration);
+            yield return null;
+        }
+
+        source.Stop();
+        Destroy(source.gameObject);
     }
 
     public void PlayFootstepSounds()

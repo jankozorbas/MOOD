@@ -347,14 +347,17 @@ public class PlayerBehavior : MonoBehaviour
         return isInteractable;
     }
 
-    private void InvokeSetActiveFalse()
-    {
-        UIManager.Instance.interactionText.gameObject.SetActive(false);
-    }
-
     private void Interact()
     {
-        if (!CheckForInteractables()) return;
+        if (!CheckForInteractables())
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                AudioManager.Instance.PlaySound("DefaultInteraction");
+            }
+
+            else return;
+        }
 
         else
         {
@@ -374,7 +377,17 @@ public class PlayerBehavior : MonoBehaviour
                     if (collider.gameObject.CompareTag("Key"))
                     {
                         CollectKey();
-                        Destroy(collider.gameObject);
+
+                        Key keySound = collider.GetComponent<Key>();
+
+                        if (keySound != null)
+                        {
+                            keySound.StopSoundEmitter();
+                        }
+
+                        keySound.GetComponent<Renderer>().enabled = false;
+                        keySound.GetComponent<Collider>().enabled = false;
+                        Destroy(collider.gameObject, .6f);
                         break;
                     }
                     else if (collider.gameObject.CompareTag("Ammo"))
@@ -400,10 +413,15 @@ public class PlayerBehavior : MonoBehaviour
         }
     }
 
+    private void InvokeSetActiveFalse()
+    {
+        UIManager.Instance.interactionText.gameObject.SetActive(false);
+    }
+
     private void CollectKey()
     {
         GameManager.Instance.AddKey();
-        AudioManager.Instance.PlaySound("KeycardPickup");
+        AudioManager.Instance.PlaySound("KeycardPickup");    
     }
 
     private bool CollectHealth()

@@ -221,9 +221,14 @@ public class Gun : MonoBehaviour
         {
             case GunType.Pistol:
                 AudioManager.Instance.PlaySound("ShootPistol");
+                if (currentAmmo <= 5f) AudioManager.Instance.PlaySound("LowAmmo");
+
                 break;
+
             case GunType.Rifle:
                 AudioManager.Instance.PlaySound("ShootRifle");
+                if (currentAmmo <= 5f) AudioManager.Instance.PlaySound("LowAmmo");
+
                 break;
         }
 
