@@ -4,26 +4,10 @@ using UnityEngine;
 
 public class SubtitleManager : MonoBehaviour
 {
-    public static SubtitleManager Instance;
-
     [SerializeField] private TMP_Text subtitleText;
     [SerializeField] private float displayTime = 3f;
 
     private Coroutine subtitleCoroutine;
-
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
-    }
 
     public void ShowSubtitle(string subText, float duration)
     {

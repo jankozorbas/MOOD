@@ -7,7 +7,18 @@ public class VoicelineTrigger : MonoBehaviour
     [SerializeField] private float subtitleDuration;
     [SerializeField] private bool triggerOnce = true;
 
+    private SubtitleManager subtitleManager;
     private bool hasTriggered = false;
+
+    private void Awake()
+    {
+        subtitleManager = FindObjectOfType<SubtitleManager>();
+    }
+
+    private void Start()
+    {
+        hasTriggered = false;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -18,6 +29,6 @@ public class VoicelineTrigger : MonoBehaviour
         hasTriggered = true;
 
         AudioManager.Instance.PlaySound(voiceLineName);
-        SubtitleManager.Instance.ShowSubtitle(subtitleText, subtitleDuration);
+        subtitleManager.ShowSubtitle(subtitleText, subtitleDuration);
     }
 }

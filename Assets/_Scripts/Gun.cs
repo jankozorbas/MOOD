@@ -15,6 +15,7 @@ public class Gun : MonoBehaviour
     [SerializeField] private float reloadTime = 2f;
     [SerializeField] private bool isAutomatic = false;
     [SerializeField] private LayerMask shootMask;
+    [SerializeField] private float enemyPingSoundCooldown = 3f;
     public GunType gunType;
 
     public int startAmmo = 30;
@@ -76,6 +77,7 @@ public class Gun : MonoBehaviour
     private PlayerBehavior playerBehavior;
     private float nextShootTime = 0f;
     private bool isReloading = false;
+    private float soundCooldownTimer = 0f;
 
     public static event Action<int, int> OnAmmoChanged;
 
@@ -123,7 +125,7 @@ public class Gun : MonoBehaviour
     {
         Reloading();
         Shooting();
-        //AimDownSight();
+        PingEnemy();
     }
 
     private void Reloading()
@@ -236,8 +238,6 @@ public class Gun : MonoBehaviour
 
         if (Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hit, range, shootMask))
         {
-            Debug.Log(hit.transform.name);
-
             if (hit.collider.CompareTag("Enemy"))
             {
                 EnemyBehavior enemy = hit.transform.gameObject.GetComponent<EnemyBehavior>();
@@ -265,6 +265,32 @@ public class Gun : MonoBehaviour
     }
 
     public int GetAmmoCount() { return currentAmmo; }
+
+    public bool IsEnemyInSight()
+    {
+        RaycastHit hit;
+
+        if (Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hit, 300f))
+            if (hit.collider.CompareTag("Enemy")) return true;
+
+        return false;
+    }
+
+    private void PingEnemy()
+    {
+        if (playerBehavior.IsDead) return;
+
+        if (IsEnemyInSight())
+        {
+            if (soundCooldownTimer <= 0f)
+            {
+                AudioManager.Instance.PlaySound("EnemyPing");
+                soundCooldownTimer = enemyPingSoundCooldown;
+            }
+        }
+
+        soundCooldownTimer -= Time.deltaTime;
+    }
 
     /*private void AimDownSight()
     {

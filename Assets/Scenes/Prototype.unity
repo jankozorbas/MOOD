@@ -1381,6 +1381,16 @@ MonoBehaviour:
     minDistance: 2
     maxDistance: 17
     source: {fileID: 0}
+  - soundType: 1
+    clip: {fileID: 8300000, guid: c1b8782e92948af4580be9579eb11cd0, type: 3}
+    name: EnemyPing
+    loop: 0
+    volume: 0.9
+    is3D: 0
+    spatialBlend: 1
+    minDistance: 2
+    maxDistance: 17
+    source: {fileID: 0}
 --- !u!4 &752911017
 Transform:
   m_ObjectHideFlags: 0
