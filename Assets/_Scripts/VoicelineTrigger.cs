@@ -3,6 +3,8 @@ using UnityEngine;
 public class VoicelineTrigger : MonoBehaviour
 {
     [SerializeField] private string voiceLineName;
+    [SerializeField] private string subtitleText;
+    [SerializeField] private float subtitleDuration;
     [SerializeField] private bool triggerOnce = true;
 
     private bool hasTriggered = false;
@@ -16,5 +18,6 @@ public class VoicelineTrigger : MonoBehaviour
         hasTriggered = true;
 
         AudioManager.Instance.PlaySound(voiceLineName);
+        SubtitleManager.Instance.ShowSubtitle(subtitleText, subtitleDuration);
     }
 }
