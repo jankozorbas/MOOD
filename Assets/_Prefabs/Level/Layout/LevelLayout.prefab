@@ -567,6 +567,7 @@ GameObject:
   - component: {fileID: 2913840969431718766}
   - component: {fileID: 7897096627843928202}
   - component: {fileID: 8331033131002993928}
+  - component: {fileID: 7283668765462550325}
   m_Layer: 0
   m_Name: Road_block_v1
   m_TagString: Untagged
@@ -582,13 +583,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 481932822790817309}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: 0.025808908, w: 0.9996669}
+  m_LocalRotation: {x: -0.003880711, y: -0.15031312, z: 0.025515493, w: 0.9883015}
   m_LocalPosition: {x: -3.322, y: 0.706, z: -7.375}
   m_LocalScale: {x: 1.7000004, y: 1.5000005, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6744384302793858601}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 2.958}
+  m_LocalEulerAnglesHint: {x: 0, y: -17.296, z: 2.958}
 --- !u!33 &7897096627843928202
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -639,6 +640,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &7283668765462550325
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 481932822790817309}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.3482864, y: 1.1323363, z: 0.89421904}
+  m_Center: {x: -1.2052342e-10, y: 0.029854804, z: 0.00000017881393}
 --- !u!1 &501964747778661653
 GameObject:
   m_ObjectHideFlags: 0
@@ -2536,6 +2558,57 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.0972501, y: 1.0402856, z: 1}
   m_Center: {x: 0.04862581, y: 0.02014285, z: 0}
+--- !u!1 &1811032430324869805
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2534277615029691221}
+  - component: {fileID: 5123143460338333977}
+  m_Layer: 3
+  m_Name: Jump
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2534277615029691221
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1811032430324869805}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.58, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8955800836760542072}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5123143460338333977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1811032430324869805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8caf6a63e30cd154e8e646eaee88823b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorialText: {fileID: 0}
+  checkPosition: {fileID: 2534277615029691221}
+  boxSize: {x: 2, y: 6, z: 4}
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  displayTime: 1
 --- !u!1 &1817277748730057818
 GameObject:
   m_ObjectHideFlags: 0
@@ -4056,6 +4129,7 @@ Transform:
   - {fileID: 6399393721925907216}
   - {fileID: 1028983208920434295}
   - {fileID: 2860796332523150223}
+  - {fileID: 8955800836760542072}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4071518751546785838
@@ -6427,6 +6501,39 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.87643135, y: 5.2680545, z: 1}
   m_Center: {x: 0.061784327, y: 2.1340268, z: 1.0170113e-17}
+--- !u!1 &5529769299629317719
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8955800836760542072}
+  m_Layer: 0
+  m_Name: TriggerSpots
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8955800836760542072
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5529769299629317719}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4514898865658491374}
+  - {fileID: 2534277615029691221}
+  m_Father: {fileID: 2209807082575578662}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5531943010123849672
 GameObject:
   m_ObjectHideFlags: 0
@@ -6910,6 +7017,7 @@ GameObject:
   - component: {fileID: 3067148366900161369}
   - component: {fileID: 3112876456264567125}
   - component: {fileID: 4824954974081015768}
+  - component: {fileID: 5376907892874478574}
   m_Layer: 0
   m_Name: Road_block_v1 (1)
   m_TagString: Untagged
@@ -6925,13 +7033,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5679873706482383365}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0.025810596, w: 0.99966687}
+  m_LocalRotation: {x: -0.0022470115, y: 0.0870287, z: -0.025712613, w: 0.9958714}
   m_LocalPosition: {x: -7.483, y: 0.706, z: -7.375}
   m_LocalScale: {x: 1.7000002, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6744384302793858601}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -2.958}
+  m_LocalEulerAnglesHint: {x: 0, y: 9.989, z: -2.958}
 --- !u!33 &3112876456264567125
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -6982,6 +7090,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &5376907892874478574
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5679873706482383365}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.3482862, y: 1.1149324, z: 0.89421904}
+  m_Center: {x: -2.7992234e-11, y: 0.021152696, z: 0.00000017881393}
 --- !u!1 &5723272357659357272
 GameObject:
   m_ObjectHideFlags: 0
@@ -8312,6 +8441,57 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 28.423704, y: 9.861763, z: 1}
   m_Center: {x: 2.4322371, y: 4.0028477, z: 0.000032564432}
+--- !u!1 &7143120735479626467
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4514898865658491374}
+  - component: {fileID: 295329726880379088}
+  m_Layer: 0
+  m_Name: Crouch
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4514898865658491374
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7143120735479626467}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 13.594, y: 0.162, z: -1.77}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8955800836760542072}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &295329726880379088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7143120735479626467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8caf6a63e30cd154e8e646eaee88823b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorialText: {fileID: 0}
+  checkPosition: {fileID: 4514898865658491374}
+  boxSize: {x: 2, y: 6, z: 3}
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  displayTime: 1
 --- !u!1 &7308284095433668180
 GameObject:
   m_ObjectHideFlags: 0
