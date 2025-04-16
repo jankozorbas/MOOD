@@ -385,7 +385,7 @@ public class PlayerBehavior : MonoBehaviour
                             keySound.StopSoundEmitter();
                         }
 
-                        keySound.GetComponent<Renderer>().enabled = false;
+                        //keySound.GetComponentInChildren<Renderer>().enabled = false;
                         keySound.GetComponent<Collider>().enabled = false;
                         Destroy(collider.gameObject, .6f);
                         break;

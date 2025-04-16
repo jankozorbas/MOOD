@@ -807,6 +807,85 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &443182420
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1245431342}
+    m_Modifications:
+    - target: {fileID: 1307543781903416955, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_Name
+      value: Remember Ammo Trigger
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648885658595392599, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -14.41
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648885658595392599, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648885658595392599, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648885658595392599, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9848078
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648885658595392599, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648885658595392599, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.17364816
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648885658595392599, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648885658595392599, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648885658595392599, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648885658595392599, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172148850633834765, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_Size.x
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8640696598126913448, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: subtitleText
+      value: remember, you don't have a lot of bullets, so try to hit your shots.
+        there should be ammo scattered around.
+      objectReference: {fileID: 0}
+    - target: {fileID: 8640696598126913448, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: voiceLineName
+      value: VO_RememberAmmo
+      objectReference: {fileID: 0}
+    - target: {fileID: 8640696598126913448, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: subtitleDuration
+      value: 5.5
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4a4a146a126507445a65867467415774, type: 3}
+--- !u!4 &443182421 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2648885658595392599, guid: 4a4a146a126507445a65867467415774, type: 3}
+  m_PrefabInstance: {fileID: 443182420}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &480513794 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2209807082575578662, guid: 46639ad1cdc657647b05d221cc213b36, type: 3}
@@ -914,6 +993,54 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3100221338363456479, guid: 366ff49cc80d3b048b26b5ae0df824f6, type: 3}
   m_PrefabInstance: {fileID: 551685086}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &577896751
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 577896752}
+  - component: {fileID: 577896753}
+  m_Layer: 0
+  m_Name: Intro Voice Line
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &577896752
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 577896751}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 480513794}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &577896753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 577896751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83452e2d09d872e48a57059dd64b2f26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  voiceLineName: VO_Start
+  subtitleText: alright soldier, listen up, we have intel about a nuke launch. they
+    are trying to start a war. you've got five minutes to stop it.
+  subtitleDuration: 6.9
 --- !u!4 &602132900 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 381320136275147294, guid: 9f7ac38da823672479cf3c4fc1065c30, type: 3}
@@ -1372,16 +1499,6 @@ MonoBehaviour:
     maxDistance: 17
     source: {fileID: 0}
   - soundType: 1
-    clip: {fileID: 8300000, guid: 7a0d2149d91cd0341a39ae4a7db63f7b, type: 3}
-    name: Voiceline_Start
-    loop: 0
-    volume: 0.7
-    is3D: 0
-    spatialBlend: 1
-    minDistance: 2
-    maxDistance: 17
-    source: {fileID: 0}
-  - soundType: 1
     clip: {fileID: 8300000, guid: c1b8782e92948af4580be9579eb11cd0, type: 3}
     name: EnemyPing
     loop: 0
@@ -1420,6 +1537,36 @@ MonoBehaviour:
     spatialBlend: 1
     minDistance: 1
     maxDistance: 15
+    source: {fileID: 0}
+  - soundType: 1
+    clip: {fileID: 8300000, guid: 605f0da7363b34e4986c3bb1963fd743, type: 3}
+    name: VO_Start
+    loop: 0
+    volume: 0.7
+    is3D: 0
+    spatialBlend: 1
+    minDistance: 2
+    maxDistance: 17
+    source: {fileID: 0}
+  - soundType: 1
+    clip: {fileID: 8300000, guid: 00262dde50facc6429d908eace9d5f60, type: 3}
+    name: VO_EnemySpotted
+    loop: 0
+    volume: 0.7
+    is3D: 0
+    spatialBlend: 1
+    minDistance: 2
+    maxDistance: 17
+    source: {fileID: 0}
+  - soundType: 1
+    clip: {fileID: 8300000, guid: 0a5b6480960fc1549a89f2cf5eb97495, type: 3}
+    name: VO_RememberAmmo
+    loop: 0
+    volume: 0.7
+    is3D: 0
+    spatialBlend: 1
+    minDistance: 2
+    maxDistance: 17
     source: {fileID: 0}
 --- !u!4 &752911017
 Transform:
@@ -3551,6 +3698,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2209807082575578662, guid: 46639ad1cdc657647b05d221cc213b36, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1245431342}
+    - targetCorrespondingSourceObject: {fileID: 2209807082575578662, guid: 46639ad1cdc657647b05d221cc213b36, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 577896752}
     - targetCorrespondingSourceObject: {fileID: 6150305370078815348, guid: 46639ad1cdc657647b05d221cc213b36, type: 3}
       insertIndex: 3
       addedObject: {fileID: 242063299}
@@ -3756,6 +3906,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2169705600720450286}
+  - {fileID: 443182421}
   m_Father: {fileID: 480513794}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1356314821
@@ -4261,8 +4412,8 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
-  m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_wordSpacing: 10
+  m_lineSpacing: 15
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -4457,7 +4608,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1307543781903416955, guid: 4a4a146a126507445a65867467415774, type: 3}
       propertyPath: m_Name
-      value: Voiceline Trigger
+      value: Enemy Spotted Trigger
       objectReference: {fileID: 0}
     - target: {fileID: 2648885658595392599, guid: 4a4a146a126507445a65867467415774, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4501,15 +4652,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8640696598126913448, guid: 4a4a146a126507445a65867467415774, type: 3}
       propertyPath: subtitleText
-      value: 'This is a placeholder subtitle. '
+      value: you see that patrol guard? eliminate him with your rifle or pistol.
       objectReference: {fileID: 0}
     - target: {fileID: 8640696598126913448, guid: 4a4a146a126507445a65867467415774, type: 3}
       propertyPath: voiceLineName
-      value: Voiceline_Start
+      value: VO_EnemySpotted
       objectReference: {fileID: 0}
     - target: {fileID: 8640696598126913448, guid: 4a4a146a126507445a65867467415774, type: 3}
       propertyPath: subtitleDuration
-      value: 3
+      value: 3.4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

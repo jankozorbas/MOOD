@@ -1,15 +1,15 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class VoicelineTrigger : MonoBehaviour
+public class IntroVoiceLine : MonoBehaviour
 {
     [SerializeField] private string voiceLineName;
     [TextArea(5, 10)]
     [SerializeField] private string subtitleText;
-    [SerializeField] private float subtitleDuration;
-    [SerializeField] private bool triggerOnce = true;
+    [SerializeField] private float subtitleDuration = 3f;
 
     private SubtitleManager subtitleManager;
-    private bool hasTriggered = false;
 
     private void Awake()
     {
@@ -18,17 +18,6 @@ public class VoicelineTrigger : MonoBehaviour
 
     private void Start()
     {
-        hasTriggered = false;
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (!other.CompareTag("Player")) return;
-
-        if (triggerOnce && hasTriggered) return;
-
-        hasTriggered = true;
-
         AudioManager.Instance.PlaySound(voiceLineName);
         subtitleManager.ShowSubtitle(subtitleText, subtitleDuration);
     }
