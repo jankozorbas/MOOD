@@ -8,8 +8,10 @@ public class IntroVoiceLine : MonoBehaviour
     [TextArea(5, 10)]
     [SerializeField] private string subtitleText;
     [SerializeField] private float subtitleDuration = 3f;
+    [SerializeField] private bool triggerOnce = true;
 
     private SubtitleManager subtitleManager;
+    private static bool hasTriggered = false;
 
     private void Awake()
     {
@@ -18,6 +20,10 @@ public class IntroVoiceLine : MonoBehaviour
 
     private void Start()
     {
+        if (triggerOnce && hasTriggered) return;
+
+        hasTriggered = true;
+
         AudioManager.Instance.PlaySound(voiceLineName);
         subtitleManager.ShowSubtitle(subtitleText, subtitleDuration);
     }

@@ -94,7 +94,7 @@ public class GameManager : MonoBehaviour
         Invoke("ReloadScene", 5f);
         // Later Voice Over will be added and sound effects of stopping the bomb etc.
         AudioManager.Instance.PlaySound("Disarm");
-        Debug.Log("You Win.");
+        Invoke("PlayWinVO", 1f);
     }
 
     public void LoseGame()
@@ -107,7 +107,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(WinLoseText(loseTextObject, 1.2f));
         // Reset the game after 5 seconds
         Invoke("ReloadScene", 5f);
-        // Later Voice Over will be added and sound effects of stopping the bomb animation of the bomb leaving the silo etc.
+        Invoke("PlayLoseVO", 1f);
     }
 
     private void ReloadScene()
@@ -123,6 +123,7 @@ public class GameManager : MonoBehaviour
     private IEnumerator WinLoseText(GameObject winLoseText, float delay)
     {
         yield return new WaitForSeconds(delay);
+        AudioManager.Instance.PlaySound("VO_Win");
         ShowWinLoseText(winLoseText);
     }
 
@@ -151,5 +152,15 @@ public class GameManager : MonoBehaviour
 
         color.a = endAlpha;
         fadeImage.color = color;
+    }
+
+    private void PlayWinVO()
+    {
+        AudioManager.Instance.PlaySound("VO_WinGame");
+    }
+
+    private void PlayLoseVO()
+    {
+        AudioManager.Instance.PlaySound("VO_LoseGame");
     }
 }

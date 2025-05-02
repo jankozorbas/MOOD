@@ -785,6 +785,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &326417309 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2648885658595392599, guid: 4a4a146a126507445a65867467415774, type: 3}
+  m_PrefabInstance: {fileID: 736499644}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &372303028 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3096586806642033220, guid: 991021db0e0d8614d95a4f720a62379c, type: 3}
@@ -1051,6 +1056,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6150305370078815348, guid: 46639ad1cdc657647b05d221cc213b36, type: 3}
   m_PrefabInstance: {fileID: 801823820}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &670886616 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2648885658595392599, guid: 4a4a146a126507445a65867467415774, type: 3}
+  m_PrefabInstance: {fileID: 1820116841}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &680790272
 GameObject:
   m_ObjectHideFlags: 0
@@ -1247,6 +1257,80 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1001 &736499644
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1245431342}
+    m_Modifications:
+    - target: {fileID: 1307543781903416955, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_Name
+      value: Found Keycard Trigger
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648885658595392599, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -46.459
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648885658595392599, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648885658595392599, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -53.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648885658595392599, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648885658595392599, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648885658595392599, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648885658595392599, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648885658595392599, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648885658595392599, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648885658595392599, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172148850633834765, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_Size.x
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8640696598126913448, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: subtitleText
+      value: great, you found one of the keycards. it will open a garage door for
+        you. find the keypad.
+      objectReference: {fileID: 0}
+    - target: {fileID: 8640696598126913448, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: voiceLineName
+      value: VO_FoundKeycard
+      objectReference: {fileID: 0}
+    - target: {fileID: 8640696598126913448, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: subtitleDuration
+      value: 5.6
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4a4a146a126507445a65867467415774, type: 3}
 --- !u!1 &752911015
 GameObject:
   m_ObjectHideFlags: 0
@@ -1567,6 +1651,86 @@ MonoBehaviour:
     spatialBlend: 1
     minDistance: 2
     maxDistance: 17
+    source: {fileID: 0}
+  - soundType: 1
+    clip: {fileID: 8300000, guid: 6c955475a9e99874f960e62b120f2f11, type: 3}
+    name: VO_DamageTaken
+    loop: 0
+    volume: 0.7
+    is3D: 0
+    spatialBlend: 1
+    minDistance: 2
+    maxDistance: 17
+    source: {fileID: 0}
+  - soundType: 1
+    clip: {fileID: 8300000, guid: a2bcb5a180af4364fad3022963f35cf8, type: 3}
+    name: VO_FoundKeycard
+    loop: 0
+    volume: 0.7
+    is3D: 0
+    spatialBlend: 1
+    minDistance: 2
+    maxDistance: 17
+    source: {fileID: 0}
+  - soundType: 1
+    clip: {fileID: 8300000, guid: cec18f929d073a940a61aebb42207f59, type: 3}
+    name: VO_Ammo
+    loop: 0
+    volume: 0.7
+    is3D: 0
+    spatialBlend: 1
+    minDistance: 2
+    maxDistance: 17
+    source: {fileID: 0}
+  - soundType: 1
+    clip: {fileID: 8300000, guid: 34d4d1cce25b9744fbbd6bdddab273a4, type: 3}
+    name: VO_Health
+    loop: 0
+    volume: 0.7
+    is3D: 0
+    spatialBlend: 1
+    minDistance: 2
+    maxDistance: 17
+    source: {fileID: 0}
+  - soundType: 1
+    clip: {fileID: 8300000, guid: d8b4d59506566b84fb07c7b96352bcf4, type: 3}
+    name: VO_WinGame
+    loop: 0
+    volume: 0.7
+    is3D: 0
+    spatialBlend: 1
+    minDistance: 2
+    maxDistance: 17
+    source: {fileID: 0}
+  - soundType: 1
+    clip: {fileID: 8300000, guid: 4686c52b85390654dbdd306795e66484, type: 3}
+    name: VO_LoseGame
+    loop: 0
+    volume: 0.7
+    is3D: 0
+    spatialBlend: 1
+    minDistance: 2
+    maxDistance: 17
+    source: {fileID: 0}
+  - soundType: 1
+    clip: {fileID: 8300000, guid: 19491aca9fdc3114581bdf3d5ec9bb9c, type: 3}
+    name: Died
+    loop: 0
+    volume: 0.7
+    is3D: 0
+    spatialBlend: 1
+    minDistance: 2
+    maxDistance: 17
+    source: {fileID: 0}
+  - soundType: 1
+    clip: {fileID: 8300000, guid: 5121a27a08e497843afabd68d20bc795, type: 3}
+    name: EnemyDied
+    loop: 0
+    volume: 0.7
+    is3D: 1
+    spatialBlend: 1
+    minDistance: 0.2
+    maxDistance: 45
     source: {fileID: 0}
 --- !u!4 &752911017
 Transform:
@@ -3694,6 +3858,8 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 3424382247469591422, guid: 46639ad1cdc657647b05d221cc213b36, type: 3}
     - {fileID: 3167496003259208022, guid: 46639ad1cdc657647b05d221cc213b36, type: 3}
+    - {fileID: 144637344950203191, guid: 46639ad1cdc657647b05d221cc213b36, type: 3}
+    - {fileID: 2249821114046440654, guid: 46639ad1cdc657647b05d221cc213b36, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 2209807082575578662, guid: 46639ad1cdc657647b05d221cc213b36, type: 3}
       insertIndex: -1
@@ -3907,8 +4073,91 @@ Transform:
   m_Children:
   - {fileID: 2169705600720450286}
   - {fileID: 443182421}
+  - {fileID: 1252866594}
+  - {fileID: 326417309}
+  - {fileID: 1487411051}
+  - {fileID: 670886616}
   m_Father: {fileID: 480513794}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1252866593
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1245431342}
+    m_Modifications:
+    - target: {fileID: 1307543781903416955, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_Name
+      value: Damage Taken Trigger
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648885658595392599, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -25.99
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648885658595392599, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648885658595392599, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -19.57
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648885658595392599, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.8851159
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648885658595392599, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648885658595392599, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.46537074
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648885658595392599, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648885658595392599, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648885658595392599, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 55.468
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648885658595392599, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172148850633834765, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_Size.x
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8640696598126913448, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: subtitleText
+      value: careful, these guys got armor piercing bullets, so you're easy to take
+        down. there is first aid scattered around somewhere.
+      objectReference: {fileID: 0}
+    - target: {fileID: 8640696598126913448, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: voiceLineName
+      value: VO_DamageTaken
+      objectReference: {fileID: 0}
+    - target: {fileID: 8640696598126913448, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: subtitleDuration
+      value: 7.7
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4a4a146a126507445a65867467415774, type: 3}
+--- !u!4 &1252866594 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2648885658595392599, guid: 4a4a146a126507445a65867467415774, type: 3}
+  m_PrefabInstance: {fileID: 1252866593}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1356314821
 GameObject:
   m_ObjectHideFlags: 0
@@ -4147,6 +4396,75 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1824192520468053100, guid: 9f7ac38da823672479cf3c4fc1065c30, type: 3}
   m_PrefabInstance: {fileID: 1411614164}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1414225109
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1245431342}
+    m_Modifications:
+    - target: {fileID: 1307543781903416955, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_Name
+      value: Ammo Trigger
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648885658595392599, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.978
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648885658595392599, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648885658595392599, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -9.286
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648885658595392599, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648885658595392599, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648885658595392599, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648885658595392599, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648885658595392599, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648885658595392599, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648885658595392599, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8640696598126913448, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: subtitleText
+      value: that looks like an ammo pack.
+      objectReference: {fileID: 0}
+    - target: {fileID: 8640696598126913448, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: voiceLineName
+      value: VO_Ammo
+      objectReference: {fileID: 0}
+    - target: {fileID: 8640696598126913448, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: subtitleDuration
+      value: 2.6
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4a4a146a126507445a65867467415774, type: 3}
 --- !u!1 &1431855277
 GameObject:
   m_ObjectHideFlags: 0
@@ -4307,6 +4625,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2123149300667182798, guid: 9f7ac38da823672479cf3c4fc1065c30, type: 3}
   m_PrefabInstance: {fileID: 1479925199}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1487411051 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2648885658595392599, guid: 4a4a146a126507445a65867467415774, type: 3}
+  m_PrefabInstance: {fileID: 1414225109}
+  m_PrefabAsset: {fileID: 0}
 --- !u!223 &1680518105 stripped
 Canvas:
   m_CorrespondingSourceObject: {fileID: 2749423320827198397, guid: ecc790622773b1648a5218ab352451c6, type: 3}
@@ -4317,6 +4640,87 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2026198130151719904, guid: 46639ad1cdc657647b05d221cc213b36, type: 3}
   m_PrefabInstance: {fileID: 801823820}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1820116841
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1245431342}
+    m_Modifications:
+    - target: {fileID: 1307543781903416955, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_Name
+      value: Health Trigger
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648885658595392599, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.214
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648885658595392599, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648885658595392599, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -11.551
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648885658595392599, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648885658595392599, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648885658595392599, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648885658595392599, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648885658595392599, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648885658595392599, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648885658595392599, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172148850633834765, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_Size.x
+      value: 7.0356054
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172148850633834765, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_Center.x
+      value: 0.0063227415
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172148850633834765, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: m_Center.z
+      value: 2.1170715e-17
+      objectReference: {fileID: 0}
+    - target: {fileID: 8640696598126913448, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: subtitleText
+      value: that's a health pack
+      objectReference: {fileID: 0}
+    - target: {fileID: 8640696598126913448, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: voiceLineName
+      value: VO_Health
+      objectReference: {fileID: 0}
+    - target: {fileID: 8640696598126913448, guid: 4a4a146a126507445a65867467415774, type: 3}
+      propertyPath: subtitleDuration
+      value: 1.7
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4a4a146a126507445a65867467415774, type: 3}
 --- !u!1 &1933574371
 GameObject:
   m_ObjectHideFlags: 0
@@ -5051,6 +5455,14 @@ PrefabInstance:
     - target: {fileID: 934621252017190594, guid: c1d5975d79b762343bdae9a656b28745, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4215552457158243325, guid: c1d5975d79b762343bdae9a656b28745, type: 3}
+      propertyPath: m_text
+      value: "mission failed! \n\nthe nuke is launching now!"
+      objectReference: {fileID: 0}
+    - target: {fileID: 5458536642278016903, guid: c1d5975d79b762343bdae9a656b28745, type: 3}
+      propertyPath: m_text
+      value: "good job soldier!\n\n you saved a lot of lives today!"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

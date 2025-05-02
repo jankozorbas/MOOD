@@ -411,6 +411,7 @@ public class EnemyBehavior : MonoBehaviour
         enemyIcon.SetActive(false);
         //GameObject bloodParticlesObj = Instantiate(bloodParticlesPrefab, transform.position, Quaternion.identity);
         //Destroy(bloodParticlesObj, 5f);
+        AudioManager.Instance.PlaySound("EnemyDied");
         Destroy(gameObject, 5f);
     }
 

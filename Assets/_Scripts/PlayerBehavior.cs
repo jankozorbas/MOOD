@@ -338,7 +338,7 @@ public class PlayerBehavior : MonoBehaviour
     private void Die()
     {
         Lose();
-        Debug.Log("You died.");
+        AudioManager.Instance.PlaySound("Died");
     }
 
     private bool CheckForInteractables()
